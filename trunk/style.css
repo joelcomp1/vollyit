@@ -1,0 +1,1297 @@
+/* 	Design by : Roshan Ravi (roshanravi.com)
+	Designer URL : cssheaven.org
+	For custom web design works, contact me from roshanravi.com
+	For more free css templates visit cssheaven.org
+	
+	License :  All the graphics, CSS and HTML files included in this template are released under GNU-GPL License.
+*/
+
+
+@import url("fonts/droidsans.css");
+@import url("fonts/texgyre.css");
+* {padding:0; margin:0;}
+
+.clear {
+ clear:both;
+}
+.clear:after {
+ display:block; 
+ visibility:hidden; 
+ clear:both; 
+ height:0; 
+ content: "."; 
+}
+
+.clearProgram:after {
+ display:block; 
+ visibility:hidden; 
+ clear:both; 
+ height:0; 
+ content: "."; 
+}
+
+.panel,p.flip
+{
+margin:0px;
+padding:5px;
+}
+p.flip2
+{
+margin:0px;
+padding:0px 0px 0px 350px;
+}
+
+.panel
+{
+height:300px;
+display:none;
+}
+
+.slidingDiv {
+	text-align:center;
+	height:300px;
+	padding:20px;
+	margin-top:10px;
+}
+
+.slidingDiv2 {
+	text-align:center;
+	height:300px;
+	padding:20px;
+	margin-top:10px;
+}
+.slidingDiv4 {
+	text-align:center;
+	height:300px;
+	padding:20px;
+	margin-top:10px;
+}
+.show_hide {
+	display:none;
+}
+.show_hide2 {
+	display:none;
+}
+.show_hide4 {
+	display:none;
+}
+	.calendar {
+		width: 500px;
+		margin: 0 auto;
+
+		}
+
+html {background: #f0f0f0 url(images/htmlbg.jpg) repeat; width:100%; height:100%;}
+body { font-family :'DroidSansRegular', Verdana, Geneva, sans-serif; font-size:62.5%; color:#5a5143; height: 100%; }
+a, a:link, a:visited, a:active {color:#1c5f75;}
+body > #wrap {float:left; width:900px; margin: 0 auto ; min-height: 40%; margin-bottom:-50px; border: solid #190707;
+        border-width: 2px 2px 2px 2px; position: relative;}
+body > .wrapLanding {width:900px; margin: 0 auto ; min-height: 30%;  position: relative;}
+h1, h2, h3 {font-family: 'TeXGyreAdventor', Arial, sans-serif;}
+h4, h5 {font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size: 15px;}
+nav, section, header, article {display:block;}
+#mainnav {height:130px;}
+#page {width:962px; margin:auto; padding:0 20px;}
+.mainheading {background: url(images/graybgtop.gif) center bottom no-repeat; height:60px; line-height:60px; text-align:center; margin:0 0 1px 0!important; color:#251f1b!important;}
+.header {
+padding: 0 255px 0 255px;
+height: 100px;
+ vertical-align:top;
+
+}
+.templateLinks
+{
+float: left;
+width: 100px;
+min-height: 30%;
+padding: 200px 0px 0px 300px;
+text-align:left;
+
+}
+
+
+.mainImage{float:left;
+		   padding: 20px 0px 0px 10px;}
+#introcol {background:url(images/introcolsbg.jpg) no-repeat; height:211px;}
+#introcol .leftcol { width:270px; padding:25px; float:left;}
+#introcol .rightcol { width:265px; padding:25px; float:right;}
+#introcol .midcol {margin: 0 320px 0 330px; padding: 25px 20px;}
+#content p {font-size:1.2em; line-height:1.8em;}
+#introcol h3 {font-size:2.0em;  color:#d35537; text-shadow:#fff 1px 1px 1px; text-transform:uppercase; margin-bottom:15px;}
+#fourcols .col {width:300px; float:left; padding:20px 82px; margin-bottom:15px;}
+#fourcols h3 { font-size:1.6em; color:#1c5f75; margin-bottom:15px;}
+#content a {text-decoration:none;}
+a:hover, #content a:hover {color:#d35537; text-decoration:underline!important;}
+
+#mainnav h1 {float:none; padding:20px 0 0 25px; font: bold 3.2em 'TeXGyreAdventor', Arial, sans-serif; color:#d35537; text-shadow:#fff 1px 1px 1px; text-transform:uppercase;}
+#mainnav h2 {padding:0px 0 0 55px; font: 'TeXGyreAdventor', Arial, sans-serif; color:#d35537; text-shadow:#fff 1px 1px 1px; text-align:center; padding: 0 0 0 150px;}
+#mainnav h1 span {font-weight:normal!important; color:#191512!important;}
+#mainnav ul {float:right; width:550px; font:bold 1.6em 'TeXGyreAdventor', Arial, sans-serif; padding-top:25px;}
+#mainnav ul li {display:inline; text-shadow:#fff 1px 1px 1px;}
+#mainnav ul li a {text-decoration:none; display:block; float:left; margin:0 15px; padding-bottom:5px;}
+#mainnav ul li a:hover {color:#d35537; text-decoration:none!important;}
+#mainnav ul li.active a {color:#d35537; border-bottom:solid 3px #191512; text-decoration:none;}
+#mainnav buttonSet1 {float:right;}
+#mainnavuser h1 {float:left;  font: bold 3.2em 'TeXGyreAdventor', Arial, sans-serif; color:#d35537; text-shadow:#fff 1px 1px 1px; text-transform:uppercase;}
+#mainnavuser h1 span {font-weight:normal!important; color:#191512!important;}
+#mainnavuser ul {float:right; font: 'TeXGyreAdventor', Arial, sans-serif; }
+#mainnavuser ul li {display:inline; text-shadow:#fff 1px 1px 1px;}
+#mainnavuser ul li a {text-decoration:none; display:block; float:left; margin:0 15px;}
+#mainnavuser ul li a:hover {color:#d35537; text-decoration:none!important;}
+#mainnavuser ul li.active a {color:#d35537; border-bottom:solid 3px #191512; text-decoration:none;}
+#mainnavuser buttonSet1 {float:right;}
+#mainnavuser h2 {float:right;  padding:0px 0 0 55px; font: 'TeXGyreAdventor', Arial, sans-serif; color:#d35537; text-shadow:#fff 1px 1px 1px; }
+#mainnavuser h3 {float:inherit;  font: bold 3.8em 'TeXGyreAdventor', Arial, sans-serif; color:#d35537; text-shadow:#fff 1px 1px 1px; text-align:center;}
+#mainnavuser h4 {float:inherit;  font: bold 1.8em 'TeXGyreAdventor', Arial, sans-serif; color:#d35537; text-shadow:#fff 1px 1px 1px; }
+#homeheader h2 {display:block; width:450px; float:left; padding:85px 0 0 40px; color:#fff; font:normal 1.4em 'DroidSansRegular', Verdana, Geneva, sans-serif; line-height:1.8em;}
+#homeheader h2 span {display:block; font:bold 1.6em 'TeXGyreAdventor', Arial, sans-serif!important; color:#89260f; text-shadow:#f98465 1px 1px 1px; line-height:1em!important; margin-bottom:20px;}
+#bottom {width:440px;margin:0 auto;padding:15px;position:relative;z-index:10}
+.floatleft {float:left; 
+			width:538;}
+.space1of4 { }
+.indent15{padding-right:15px;padding-left:190px; float: left;}
+#credits {background:#2d2724; padding:10px; text-align:center; color:#ccc;}
+footer a, #bottom a, #credits a {color:#fff; text-decoration:none!important;}
+.normalpage {background:url(images/normalpagebg.png) center top no-repeat; padding-top:13px;}
+.normalpage .subhead {background: url(images/graybgtop.gif) center bottom no-repeat; height:60px; line-height:60px; text-align:center; margin:0 0 1px 0!important; color:#251f1b!important;}
+.subhead h2 {font-size:1.8em!important;}
+.post {padding:10px 25px; background:url(images/graybgtop.gif) center bottom no-repeat; margin-bottom:15px;}
+.post h3 {font:bold 1.8em 'TeXGyreAdventor', Arial, sans-serif; color:#d35537; margin-bottom:15px;}
+.post p {margin-bottom:15px;}
+.imageholder {float:left; width:258px;}
+.imageholder img {display:block; background:#fff; padding:5px; border:solid 1px #ccc;}
+.entry {width:640px; float:right;}
+.normalpage #fourcols h3 {color:#d35537!important;}
+#footerclear {
+   height: 80px;
+   clear: both;
+
+}
+
+#footer {
+		background-color: #BDBDBD;
+		color: #000;
+		font-size: 12px;
+		height: 50px; /* .push must be the same height as .footer */
+		position: relative;
+		bottom:0;
+		left:0;
+		width:100%;
+		text-align:center;
+		} 
+
+#content { padding-bottom:4em;  }
+.box1 {
+float:left;
+padding: 5px 0px 0px;
+        width: 320px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.orgaccountsettings {
+float:left;
+        width: 900px;
+		height: 580px;
+        border: solid #190707;
+        border-width: 1px 1px 1px 1px;
+}
+.orgaccountsettingsplan {
+float:left;
+        width: 900px;
+		height: 380px;
+        border: solid #190707;
+        border-width: 1px 1px 1px 1px;
+}
+
+.orgaccountsettingsplanOuter{
+}
+
+.emailInviteInner {
+float:left;
+padding: 5px 0px 0px;
+        width: 670px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+.box1ChangePass {
+float:left;
+}
+
+.smallbox1 {
+float:left;
+padding: 1px 0px 0px;
+        width: 320px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+}
+
+.TextBox1 {
+float:left;
+padding: 5px 0px 0px;
+        width: 320px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+.box2 {
+float:left;
+padding: 10px 0px 0px;
+        width: 320px;
+		height:108px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+.emailInviteInnerMain {
+float:left;
+padding: 10px 0px 0px;
+        min-width: 670px;
+
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.snapShotBox {
+float:left;
+padding: 10px 0px 0px;
+        width: 320px;
+		height:70px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+
+.menu {float:right;}
+.menu li { display: inline; float:right;}
+.menu li a { background: #ccf; padding: 10px; float:right; border-right: 1px solid #ccf; border-bottom: none; text-decoration: none; color: #000; font-weight: bold;}
+.menu li.active a { background: #eef; float:right;}
+.content {float:right; border: 1px solid #ccf; border-top: none; border-left: none; background: #eef; padding: 10px 20px 20px; width: 800px; }
+
+
+.programMessages{
+float:left;
+padding: 10px 0px 0px;
+        width: 320px;
+		height:160px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+		text-align: center;
+	font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.yourStaffboxContent {
+float:left;
+padding: 10px 0px 0px;
+        width: 320px;
+		height:106px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+.box3 {
+float:left;
+padding: 5px 0px 0px;
+        width: 320px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.box4 {
+float: left;
+padding: 50px 80px 0px 70px;
+font:bold 0.8em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.programNameTitle {
+text-align:center;
+font:bold 0.8em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.orgAddress {text-align:center;
+font:0.4em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+.easyAs {
+text-align:center;
+font:0.7em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.allDay {
+text-align:center;
+font:0.4em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+
+.box5 {
+float:left;
+padding: 10px 0px 0px;
+        width: 320px;
+		height: 300px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+.openPositionsAvail {
+float:left;
+padding: 0px 0px 0px;
+        width: 320px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+.nextProgramsPublished {
+float:left;
+padding: 10px 0px 0px;
+        width: 320px;
+		height: 200px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+		text-align: center;
+        background-color: #F5ECCE;
+font: 1.1em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.nextPrograms {
+float:left;
+padding: 10px 0px 0px;
+        width: 320px;
+		height: 200px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+		text-align: center;
+        background-color: #F5ECCE;
+font:1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+.box6 {
+padding: 10px 0px 0px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #BDBDBD;
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.awesomeVols {
+float:left;
+padding: 10px 0px 0px;
+width: 850px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #BDBDBD;
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.box7 {
+padding: 750px 0px 10px 800px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.box8 {
+float:left;
+padding: 20px 0px 0px;
+        width: 700px;
+        background-color: #F5ECCE;
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.contactVols {
+float:left;
+padding: 20px 0px 0px 10px;
+        width: 570px;
+        background-color: #F5ECCE;
+font:bold 1.5em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+.box9 {
+float:left;
+padding: 0px 0px 0px 20px;
+        border: solid #190707;
+		width: 445px;
+        border-width: 2px 2px 2px 2px;
+        background-color: #BDBDBD;
+font:bold 1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.box10 {
+	width: 860px;
+	height: 655px;
+	padding: 10px 0px 0px 0px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.box15 {
+	width: 680px;
+	height: 490px;
+	padding: 10px 0px 0px 0px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.box17{
+	width: 668px;
+	height: 7px;
+	padding: 0px 0px 0px 10px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+#tooltip1 { position: relative; }
+#tooltip1 a span { display: none; color: #FFFFFF; }
+#tooltip1 a:hover span { display: block; position: absolute; width: 80px; background-color: #aaa; height: 20px; left: 0px; top: 50px; color: #FFFFFF; padding: 5px; }
+#tooltip2 { position: relative; }
+#tooltip2 a span { display: none; color: #FFFFFF; }
+#tooltip2 a:hover span { display: block; position: absolute; width: 80px; background-color: #aaa; height: 20px; left: 0px; top: 50px; color: #FFFFFF; padding: 5px; }
+#tooltip3 { position: relative; }
+#tooltip3 a span { display: none; color: #FFFFFF; }
+#tooltip3 a:hover span { display: block; position: absolute; width: 80px; background-color: #aaa; height: 40px; left: 0px; top: 50px; color: #FFFFFF; padding: 5px; }
+#tooltip4 { position: relative; }
+#tooltip4 a span { display: none; color: #FFFFFF; }
+#tooltip4 a:hover span { display: block; position: absolute; width: 80px; background-color: #aaa; height: 40px; left: 0px; top: 50px; color: #FFFFFF; padding: 5px; }
+
+
+
+.box16{
+	width: 847px;
+	height: 7px;
+	padding: 0px 0px 0px 10px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+.box14{
+	width: 850px;
+	height: 20px;
+	padding: 0px 0px 0px 10px;
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
+        background-color: #F5ECCE;
+font:bold 1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.pricingPlans {
+	width: 990px;
+	height: 200px;
+	padding: 10px 0px 0px 10px;
+text-align:left;
+font:bold 1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+.pricingPlansOuterBoxSettings {
+	margin: 0px 0px 0px 0px;
+	height: 250px;
+
+}
+.pricingPlansAcctSettings {
+	width: 990px;
+	height: 100px;
+	padding: 10px 0px 0px 250px;
+text-align:left;
+font:1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.pricingPlansAcctSettingsChange{
+	width: 990px;
+	height: 100px;
+	padding: 10px 0px 0px 50px;
+text-align:left;
+font:1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+.box11 {
+float: left;
+padding: 0px 0px 0px 0px;
+}
+
+.box12 {
+float: left;
+padding: 0px 0px 0px 250px;
+}
+
+.box13 {
+float: left;
+padding: 0px 0px 0px 50px;
+}
+
+
+
+
+.boxFormatProgram
+{
+float:left;
+padding: 0px 0 0 200px;
+}
+.boxCreateProgram {
+
+}
+
+.boxFormat
+{
+float:left;
+padding: 50px 0 0 20px;
+}
+
+.formChangesPrivacy
+{
+float:left;
+padding: 50px 0 0  70px;
+}
+
+.homepageOrg
+{
+float:left;
+}
+
+.homepageVol
+{
+float:right;
+}
+
+.boxFormat2
+{
+float:left;
+padding: 0px 0 0 20px;
+}
+
+.boxFormat22
+{
+float:left;
+padding: 0px 0 0 16px;
+}
+
+
+.boxFormat3
+{
+float:left;
+padding: 10px 0 0 20px;
+}
+.emailInvite
+{
+float:left;
+padding: 0px 0 0 400px;
+}
+.emailInviteMain
+{
+float:left;
+padding: 0px 0 0 400px;
+}
+
+
+.openPositions
+{
+float:left;
+padding: 0px 0 0 20px;
+}
+.boxFormat4
+{
+float: left;
+padding: 70px 0 0 70px;
+}
+.aboutmevol
+{
+padding: 0px 0 0 70px;
+}
+.endOfSocial
+{
+float: left;
+padding: 0px 0 0 400px;
+}
+
+.shareSocial
+{
+float: left;
+padding: 50px 0 0 70px;
+}
+
+.connections3Box {
+float: left;
+padding: 0px 0 0 16px;
+}
+
+.yourStaffBox {
+float: left;
+padding: 10px 0 0 16px;
+}
+
+.yourStaffBox2 {
+float: left;
+padding: 0px 0 0 16px;
+}
+
+
+.aboutUsBox
+{
+float: left;
+padding: 0px 0 0 70px;
+}
+
+.chagnePassword
+{
+float: left;
+padding: 0px 0 0 0px;
+}
+.programCoords
+{
+float: left;
+padding: 0px 0px 0px 70px;
+}
+.programMsgs
+{
+float: left;
+padding: 10px 0 0 70px;
+}
+
+
+
+.programCoordsBox2
+{
+float: left;
+padding: 0px 0 0 70px;
+}
+
+.programMsgBox2
+{
+float: left;
+padding: 0px 0 0 70px;
+}
+
+.boxFormat5
+{
+float: left;
+padding: 0px 0 0 70px;
+}
+
+.socialInner
+{
+float: left;
+margin: 0px 600px 0px 70px;
+}
+
+.userOrganizations
+{
+float: left;
+padding: 0px 0 0 20px;
+}
+
+.volSearching
+{
+float: left;
+padding: 50px 0 0 70px;
+}
+
+.volSearchingBoarder {
+	width: 700px;
+	height: 400px;
+	padding: 10px 0px 0px 10px;
+
+font:bold 1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+.volSearchLeft {
+float:left;
+	width: 450px;
+	height: 200px;
+	padding: 10px 0px 0px 10px;
+        background-color: #A4A4A4;
+
+}
+
+.volSearchRight {
+float:left;
+	width: 200px;
+	height: 200px;
+	margin: 0px 0px 0px 15px;
+	padding: 10px 0px 0px 10px;
+        background-color: #A4A4A4;
+
+}
+
+.volSearchHead {
+font:bold 1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
+text-align:center;
+}
+
+.boxFormat6
+{
+float: left;
+padding: 10px 0 0 250px;
+}
+.boxFormat7
+{
+float:left;
+padding: 70px 0 0 20px;
+}
+.boxFormat8
+{
+padding: 900px 0 0 250px;
+}
+.boxFormat9
+{
+padding: 200px 0 0 250px;
+}
+.boxFormat10
+{
+float:left;
+padding: 0px 0 0 50px;
+}
+.boxFormat11
+{
+float:left;
+padding: 60px 0 0 70px;
+}
+.boxFormat14
+{
+float:left;
+padding: 0px 0 0 20px;
+}
+.boxFormat17
+{
+float:left;
+padding: 0px 0 0 70px;
+}
+.boxFormat13
+{
+float:left;
+padding: 0px 0 0 20px;
+}
+.boxFormat16
+{
+float:left;
+padding: 0px 0 0 0px;
+}
+
+#positions
+{
+float:left;
+padding: 0px 0px 50px 0px;
+        border: solid #190707;
+        border-width: 1px 1px 1px 1px;
+        background-color: #F5ECCE;
+}
+
+#orgHomeProgram
+{
+padding: 0px 0px 0px 0px;
+        background-color: #F5ECCE;
+font:bold 1.5em 'TeXGyreAdventor', Arial, sans-serif!important;
+		text-align:center;
+}
+
+#positionsToFill
+{
+float:left;
+padding: 0px 10px 0px 0px;
+        background-color: #F5ECCE;
+font:bold 1.0em 'TeXGyreAdventor', Arial, sans-serif!important;
+
+}
+
+
+#position {
+float:left;
+width: 320px;
+padding: 0px 10px 0px 10px;
+        background-color: #F5ECCE;
+font:bold 1.5em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+#positionOrganizatonPage{
+float:left;
+padding: 0px 10px 0px 10px;
+        background-color: #F5ECCE;
+font:bold 1.5em 'TeXGyreAdventor', Arial, sans-serif;
+}
+
+#positionProgram {
+float:left;
+padding: 0px 20px 0px 0px;
+width: 80px;
+        background-color: #F5ECCE;
+font:bold 0.7em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+#positionProgramHead {
+float:left;
+padding: 0px 10px 0px 0px;
+        background-color: #F5ECCE;
+}
+
+#positionsOpen {
+float:left;
+padding: 0px 0px 0px 0px;
+        background-color: #F5ECCE;
+font:bold 1.5em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+#programdate {
+float:left;
+padding: 0px 0px 0px 10px;
+        background-color: #F5ECCE;
+font:bold 0.9em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+#programdateOrgHome {
+        background-color: #F5ECCE;
+font:0.9em 'TeXGyreAdventor', Arial, sans-serif!important;
+text-align:center;
+}
+
+
+#programlinks {
+float:right;
+padding: 0px 10px 0px 10px;
+        background-color: #F5ECCE;
+font:bold 0.9em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+#viewProgramLink {
+float:right;
+padding: 0px 0px 0px 0px;
+}
+
+
+
+
+#programopen {
+float:left;
+padding: 0px 0px 0px 10px;
+        background-color: #F5ECCE;
+font:bold 1.1em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+#positionsOpenProgram {
+float:left;
+padding: 0px 0px 0px 30px;
+        background-color: #F5ECCE;
+
+}
+#positionsClosedProgram {
+float:left;
+padding: 0px 0px 0px 35px;
+
+        background-color: #F5ECCE;
+}
+
+
+#positionsbox {
+float:left;
+padding: 0px 0px 0px 35px;
+
+        background-color: #F5ECCE;
+}
+
+#actions {
+float:right;
+padding: 0px 0px 0px 115px;
+        background-color: #F5ECCE;
+font:bold 1.5em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+#actionsProgram{
+float:right;
+padding: 0px 0px 0px 15px;
+        background-color: #F5ECCE;
+font:bold 1.5em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.programOutStyle
+{
+float:left;
+padding: 0px 0 0 50px;
+}
+
+.programIconImage
+{
+float:left;
+padding: 0px 0 0 20px;
+}
+
+
+.programHeading
+{
+text-align:center;
+}
+
+.programType
+{
+float:left;
+
+}
+
+.yourprograms
+{
+float:left;
+padding: 60px 0 0 0px;
+}
+
+.rightLinks
+{
+float:right;
+font:'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.yourprogramsViews
+{
+float:left;
+width: 800px;
+padding: 50px 0 0 20px;
+}
+
+.publishedProgramPageVols
+{
+float:left;
+width: 800px;
+padding: 50px 0 0 0px;
+}
+
+
+.boxFormat12
+{
+float:left;
+padding: 0px 0 0 30px;
+}
+
+.thumbnail
+{
+float: left;
+width: 320px;
+height: 360px;
+padding: 50px 0 0 70px;
+font:1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+text-align:center;
+}
+
+
+
+
+.thumbnailAdmin
+{
+width: 200px;
+height: 10px;
+padding: 20px 0px 0px 700px;
+font:1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+text-align:center;
+}
+
+
+.thumbnailOrgLogoReg
+{
+width: 200px;
+height: 10px;
+padding: 0px 0px 0px 700px;
+font:1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+text-align:center;
+}
+
+.thumbnailOrg
+{
+float: left;
+width: 240px;
+height: 320px;
+padding: 50px 80px 0px 70px;
+font:1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+text-align:center;
+}
+
+.tagsStyle
+{
+width: 350px;
+font:bold 1.0em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.collabStyle
+{
+width: 350px;
+font:bold 1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.parChildStyle
+{
+width: 350px;
+font:bold 1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+
+.formToProcessChanges
+{
+float:left;
+padding: 50px 0 0 80px;
+font:bold 1.5em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+.formToProcessOrgChanges
+{
+float:left;
+padding: 50px 0 0 40px;
+text-align:left;
+font:1.5em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+
+.programCoollab
+{
+width: 350px;
+float:left;
+font:1.0em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+/* search form 
+-------------------------------------- */
+.searchform {
+	display: inline-block;
+	zoom: 1; /* ie7 hack for display:inline-block */
+	*display: inline;
+	border: solid 1px #d2d2d2;
+	padding: 3px 5px;
+	
+	-webkit-border-radius: 2em;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+
+	-webkit-box-shadow: 0 1px 0px rgba(0,0,0,.1);
+	-moz-box-shadow: 0 1px 0px rgba(0,0,0,.1);
+	box-shadow: 0 1px 0px rgba(0,0,0,.1);
+
+	background: #f1f1f1;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+	background: -moz-linear-gradient(top,  #fff,  #ededed);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed'); /* ie7 */
+	-ms-filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed'); /* ie8 */
+}
+.searchform input {
+	font: normal 10px/100% Arial, Helvetica, sans-serif;
+}
+
+
+
+
+.searchform .searchfield {
+	background: #fff;
+	padding: 6px 6px 6px 8px;
+	width: 80px;
+	border: solid 1px #bcbbbb;
+	outline: none;
+
+	-webkit-border-radius: 2em;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+
+	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
+}
+.searchform .searchbutton {
+	color: #fff;
+	border: solid 1px #494949;
+	font-size: 11px;
+	height: 20px;
+	width: 20px;
+	text-shadow: 0 1px 1px rgba(0,0,0,.6);
+
+	-webkit-border-radius: 2em;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+
+	background: #5f5f5f;
+	background: -webkit-gradient(linear, left top, left bottom, from(#9e9e9e), to(#454545));
+	background: -moz-linear-gradient(top,  #9e9e9e,  #454545);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#9e9e9e', endColorstr='#454545'); /* ie7 */
+	-ms-filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#9e9e9e', endColorstr='#454545'); /* ie8 */
+}
+
+.thumbnailprogram
+{
+float: left;
+width: 320px;
+height: 360px;
+padding: 50px 0 0 0px;
+}
+
+
+.invitelinks
+{
+float: left;
+margin: 0 0 10px 160px;
+padding: 50px 0 0 50px;
+text-align:left;
+}
+#backgroundPopupOrg, #backgroundPopupVol, #backgroundCloseImageLoad{
+display:none;
+position:fixed;
+_position:absolute; /* hack for internet explorer 6*/
+height:100%;
+width:100%;
+top:0;
+left:0;
+background:#000000;
+border:1px solid #cecece;
+z-index:1;
+}
+#popupContactOrg, #popupContactVol, #imageLoadPopup{
+display:none;
+position:fixed;
+_position:absolute; /* hack for internet explorer 6*/
+height:150px;
+width:550px;
+background:#FFFFFF;
+border:2px solid #cecece;
+z-index:2;
+padding:12px;
+font-size:13px;
+text-align:center;
+}
+
+#popupContactOrg h1, #popupContactVol h1, #imageLoadPopup h1{
+text-align:center;
+color:#6FA5FD;
+font-size:22px;
+font-weight:700;
+border-bottom:1px dotted #D3D3D3;
+padding-bottom:2px;
+margin-bottom:10px;
+}
+#popupContactCloseOrg , #popupContactCloseVol, #imageUploadClose{
+font-size:14px;
+line-height:14px;
+right:6px;
+top:4px;
+position:absolute;
+color:#6fa5fd;
+font-weight:700;
+display:block;
+font-family :'DroidSansRegular', Verdana, Geneva, sans-serif;
+}
+
+#backgroundPopup2, #backgroundPopup3, #backgroundPopup4, #backgroundPopup5, #backgroundPopup6, #backgroundPopup7, #backgroundPopup8, #backgroundPopup9, #backgroundPopup10, #backgroundPopup11{
+display:none;
+position:fixed;
+_position:absolute; /* hack for internet explorer 6*/
+height:100%;
+width:100%;
+top:0;
+left:0;
+background:#000000;
+border:1px solid #cecece;
+z-index:1;
+font-family :'DroidSansRegular', Verdana, Geneva, sans-serif;
+}
+#popupContact2, #popupContact3, #popupContact4, #popupContact5, #popupContact6, #popupContact7, #popupContact8, #popupContact9, #popupContact10, #popupContact11{
+display:none;
+position:fixed;
+_position:absolute; /* hack for internet explorer 6*/
+height:184px;
+width:490px;
+background:#FFFFFF;
+border:2px solid #cecece;
+z-index:2;
+padding:12px;
+font-size:13px;
+}
+#popupContact2 h1, #popupContact3 h1, #popupContact4 h1, #popupContact5 h1, #popupContact6 h1, #popupContact7 h1, #popupContact8 h1, #popupContact9 h1, #popupContact10 h1, #popupContact11 h1{
+text-align:left;
+color:#6FA5FD;
+font-size:22px;
+font-weight:700;
+border-bottom:1px dotted #D3D3D3;
+padding-bottom:2px;
+margin-bottom:20px;
+}
+#popupContactClose2, #popupContactClose3, #popupContactClose4, #popupContactClose5, #popupContactClose6, #popupContactClose7, #popupContactClose8, #popupContactClose9, #popupContactClose10, #popupContactClose11{
+font-size:14px;
+line-height:14px;
+right:6px;
+top:4px;
+position:absolute;
+color:#6fa5fd;
+font-weight:700;
+display:block;
+}
+
+/*------------------POPUPS------------------------*/
+#fade {
+	display: none;
+	background: #000; 
+	position: fixed; left: 0; top: 0; 
+	z-index: 10;
+	width: 100%; height: 100%;
+	opacity: .80;
+	z-index: 9999;
+}
+.popup_block{
+	display: none;
+	background: #fff;
+	padding: 20px; 	
+	border: 20px solid #ddd;
+	float: left;
+	font-size: 1.2em;
+	position: fixed;
+	top: 50%; left: 50%;
+	z-index: 99999;
+	text-align:center;
+	-webkit-box-shadow: 0px 0px 20px #000;
+	-moz-box-shadow: 0px 0px 20px #000;
+	box-shadow: 0px 0px 20px #000;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+img.btn_close {
+	float: right; 
+	margin: -55px -55px 0 0;
+}
+.popup p {
+	padding: 5px 10px;
+	margin: 5px 0;
+}
+/*--Making IE6 Understand Fixed Positioning--*/
+*html #fade {
+	position: absolute;
+}
+*html .popup_block {
+	position: absolute;
+}
