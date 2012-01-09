@@ -13,23 +13,7 @@
 		$errmsg_arr = array();
 	
 		//Validation error flag
-		$errflag = false;
-	
-		//Connect to pg server
-		$link = mysql_connect("localhost:3306", "root", "coolguy1");
-		if(!$link) {
-			die('Failed to connect to server: ' . mysql_error());
-		}
-		else
-		{
-			$db_select = mysql_select_db("volly", $link);
-		
-			if(!$db_select)
-			{
-				die('Failed to connect to database: ' . mysql_error());
-			}
-		}
-	
+		$errflag = false;	
 
 		//Function to sanitize values received from the form. Prevents SQL injection
 		function clean($str) {
@@ -148,22 +132,7 @@
 	
 		//Validation error flag
 		$errflag = false;
-	
-		//Connect to pg server
-		$link = mysql_connect("localhost:3306", "root", "coolguy1");
-		if(!$link) {
-			die('Failed to connect to server: ' . mysql_error());
-		}
-		else
-		{
-			$db_select = mysql_select_db("volly", $link);
 		
-			if(!$db_select)
-			{
-				die('Failed to connect to database: ' . mysql_error());
-			}
-		}
-	
 
 		//Function to sanitize values received from the form. Prevents SQL injection
 		function clean($str) {
@@ -188,23 +157,7 @@
 		$errmsg_arr = array();
 	
 		//Validation error flag
-		$errflag = false;
-	
-		//Connect to pg server
-		$link = mysql_connect("localhost:3306", "root", "coolguy1");
-		if(!$link) {
-			die('Failed to connect to server: ' . mysql_error());
-		}
-		else
-		{
-			$db_select = mysql_select_db("volly", $link);
-		
-			if(!$db_select)
-			{
-				die('Failed to connect to database: ' . mysql_error());
-			}
-		}
-	
+		$errflag = false;	
 
 		//Function to sanitize values received from the form. Prevents SQL injection
 		function clean($str) {
@@ -214,10 +167,17 @@
 			}
 			return  mysql_escape_string($str);
 		}
+		$login = clean($_SESSION['SESS_MEMBER_ID']);
 	
 		$qry = "select * from vols where login='$vol'";
+		
 		$result = @mysql_query($qry);
+		
+		$qry2 = "select * from friends where id_request='$vol' and id_inviter='$login'";
+		
+		$result2 = @mysql_query($qry2);
 		$volInfo = mysql_fetch_assoc($result);
+		$requestInfo = mysql_fetch_assoc($result2);
 		
 		if($volInfo['privacy'] == 'Public')
 		{
@@ -232,6 +192,9 @@
 			$_SESSION['VOL_USER_PHONE_PART_3'] = substr($volInfo['phonenumber'],6, 4);
 			$_SESSION['VOL_USER_ABOUTME'] = $volInfo['aboutme'];	
 			$_SESSION['IMAGE_USER_PATH'] = $volInfo['userimage'];	
+			$_SESSION['VOL_LOGIN'] = $volInfo['login'];	
+			$_SESSION['VOL_FRIEND_STATUS'] = $requestInfo['status'];
+			
 			if($_SESSION['IMAGE_USER_PATH'] != '')
 			{
 				$_SESSION['VOL_USER_IMAGE'] = 'true';
@@ -247,6 +210,8 @@
 			$_SESSION['VOL_USER_LAST_NAME'] = $volInfo['lastname'];	
 			$_SESSION['VOL_USER_ABOUTME'] = $volInfo['aboutme'];	
 			$_SESSION['IMAGE_USER_PATH'] = $volInfo['userimage'];	
+			$_SESSION['VOL_LOGIN'] = $volInfo['login'];	
+			$_SESSION['VOL_FRIEND_STATUS'] = $requestInfo['status'];
 			if($_SESSION['IMAGE_USER_PATH'] != '')
 			{
 				$_SESSION['VOL_USER_IMAGE'] = 'true';
@@ -282,8 +247,8 @@
 		exit();
 	}
 
-
-	
-
+		
+		
+		mysql_close($link);
 	
 ?>

@@ -12,7 +12,7 @@ $max_file_size = 3000000; // size in bytes
 
 
 	session_start();
-	
+	include("config.php");
 	include 'header-vol.php';
 include 'navigation-vol.php';
 ?>
@@ -24,10 +24,14 @@ include 'navigation-vol.php';
  <script type="text/javascript" src="../js/jquery.js"></script>
   <script type="text/javascript" src="../js/collection.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+  <script type='text/javascript' src='../js/jquery.pack.js'></script>
   <script src="../js/popup.js" type="text/javascript"></script>
 <link href="loginmodule.css" rel="stylesheet" type="text/css" />
+<script src="../js/jquery.ez-pinned-footer.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-1.5.1.min.js" type="text/javascript" charset="utf-8"></script>		
+<script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
 
-<script type="text/javascript" src="../js/jquery-1.2.1.pack.js"></script>
 <script type="text/javascript">
 	function lookup(inputString) {
 		if(inputString.length == 0) {
@@ -85,6 +89,34 @@ include 'navigation-vol.php';
 		$('#inputString3').val(thisValue3);
 		setTimeout("$('#suggestions3').hide();", 200);
 	}
+	
+$(function(){
+	$("form#search-form").submit(function(){
+		//$("#search-form").hide();
+		//$("#search-text").animate({"width":"229px"});
+		//$("#results").fadeOut();
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "search.php",
+			success: function(msg)
+				{
+				$("#results").html(msg);
+				$("#results").fadeIn();
+				//$("#search-text").html("<a href='#' id='search-again'>Search Again</a>");
+				}
+		});
+	return false;
+	});
+	
+/*	$("#search-again").live("click", function()
+		{
+			$("#search-text").html("Search");
+			//$("#search-text").animate({"width":"58px"});
+			$("#search-text").width("58px");
+			$("#search-form").fadeIn();
+		});*/
+});	
 </script>
 
 <style type="text/css">
@@ -148,20 +180,17 @@ include 'navigation-vol.php';
 	</div>
 	<div id="backgroundPopup9"></div>
 <div class="clear"></div>
-<h3>
+<h3 style="font: bold 3.2em 'TeXGyreAdventor', Arial, sans-serif;">
 Find Organizations and Volunteer Opportunities
 </h3>
 <div class="clear"></div>
 <div class="volSearching">
-<div class="volSearchingBoarder">
-<div class="volSearchLeft">
-<div class="volSearchHead">
-I'm looking for...
-</div>
+<div class="volSearchingBoarderResults">
+<div class="volSearchReSearch">
 <br>
-<form id="searchVolForm" name="searchVolForm" method="post" action="search.php">
+<form id="search-form" name="search-form" autocomplete="off">
 <div class="volSearchLeftInnter" style="float:left">
-<input name="name" type="text" size="30" id="inputString" onkeyup="lookup(this.value);" onblur="fill();" value="Enter Program/Organization Name" onfocus="this.value = this.value=='Enter Program/Organization Name' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Enter Program/Organization Name' : this.value; this.value=='Enter Program/Organization Name' ? this.style.color='#999' : this.style.color='#000'"/>
+<input name="name" type="input-text" size="30" id="inputString" onkeyup="lookup(this.value);" value="Enter Program/Organization Name" onfocus="this.value = this.value=='Enter Program/Organization Name' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Enter Program/Organization Name' : this.value; this.value=='Enter Program/Organization Name' ? this.style.color='#999' : this.style.color='#000'"/>
 <div class="suggestionsBox" id="suggestions" style="display: none; text: font:bold 0.4em 'TeXGyreAdventor', Arial, sans-serif!important;">
 	<img src="../images/upArrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
 <div class="suggestionList" id="autoSuggestionsList">
@@ -171,8 +200,10 @@ I'm looking for...
 
 
 </div>
+ 
 <div class="volSearchRightInnter" style="float:left; margin: 0px 0px 0px 15px">
-<input name="tags"  type="text" size="30" id="inputString2" onkeyup="lookupTags(this.value);" onblur="fillTags();" value="Enter Keywords/Interests" onfocus="this.value = this.value=='Enter Keywords/Interests' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Enter Keywords/Interests' : this.value; this.value=='Enter Keywords/Interests' ? this.style.color='#999' : this.style.color='#000'"/>
+
+<input name="tags"  type="text" size="30" id="inputString2" onkeyup="lookupTags(this.value);" value="Enter Keywords/Interests" onfocus="this.value = this.value=='Enter Keywords/Interests' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Enter Keywords/Interests' : this.value; this.value=='Enter Keywords/Interests' ? this.style.color='#999' : this.style.color='#000'"/>
 <div class="suggestionsBox2" id="suggestions2" style="display: none; text: font:bold 0.4em 'TeXGyreAdventor', Arial, sans-serif!important;">
 	<img src="../images/upArrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
 <div class="suggestionList2" id="autoSuggestionsList2">
@@ -180,13 +211,10 @@ I'm looking for...
 	</div>
 	</div>
 </div>
-</div>
-<div class="volSearchRight">
-<div class="volSearchHead">
-In the US...
-</div>
-<br>
-<input name="location" type="text" size="20" id="inputString3" onkeyup="lookupLocation(this.value);" onblur="fillLocation();" value="Enter Any Location" onfocus="this.value = this.value=='Enter Any Location' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Enter Any Location' : this.value; this.value=='Enter Any Location' ? this.style.color='#999' : this.style.color='#000'"/>
+
+<div class="volSearchRightInnter" style="float:left; margin: 0px 0px 0px 15px">
+in
+<input name="location" type="text" size="20" id="inputString3" onkeyup="lookupLocation(this.value);" value="Enter Any Location" onfocus="this.value = this.value=='Enter Any Location' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Enter Any Location' : this.value; this.value=='Enter Any Location' ? this.style.color='#999' : this.style.color='#000'"/>
 <div class="suggestionsBox3" id="suggestions3" style="display: none; text: font:bold 0.4em 'TeXGyreAdventor', Arial, sans-serif!important;">
 	<img src="../images/upArrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
 <div class="suggestionList3" id="autoSuggestionsList3">
@@ -194,15 +222,28 @@ In the US...
 	</div>
 	</div>
 </div>
+<div id="publish" style="float: right; vertical-align:top; padding: 0px 20px 0px 0px; margin: 0px 0px 0px 0px;">
+<input type="image" name="Submit" src="../images/searchagain.png" height="30" width="80"  tabindex="13" value="Seach" />
 <br>
-<br>
-<div class="clear"></div>
-
-<div id="publish" style="float: left; padding: 10px 0px 0px 200px; margin: 20px 0px 0px 10px;">
-<input type="image" name="Submit" src="../images/search.png" height="80" width="200"  tabindex="13" value="Seach" />
+<a href="#" id="searchtips">Search Tips</a>
 </div>
-<img src="../images/searchtips.png" width="80" height="30" id="searchtips" style="float: right; padding: 30px 10px 0px 0px;">
 </form>
+</div>
+</div>
+</div>
+
+
+
+
+
+<div class="boxFormat14">
+<div class="orgProgSearch">
+<div id='results'>
+</div>
+</div>
+</div>
+
+
 </div>
 
 </div>

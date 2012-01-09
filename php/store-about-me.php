@@ -78,4 +78,6 @@ else if($_SESSION['SESS_ORG_OR_VOL'] == 'VOL')
 	else {
 		die("Query failed");
 	}
+	
+	mysql_close($link);
 ?>

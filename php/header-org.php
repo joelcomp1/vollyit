@@ -7,7 +7,7 @@
 </div>
 <div id="leftheading" style="float:left; vertical-align:top;">
 <form class="searchform" method="post" action="search-website.php" >
-	<input class="searchfield" type="text" value="Search" onfocus="if (this.value == 'Search') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search';}" />
+	<input class="searchfield" type="text" value="Search" name="search" onfocus="if (this.value == 'Search') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search';}" />
 	<input class="searchbutton" type="submit" value="Go" />
 </form>
 </div>

@@ -18,6 +18,7 @@ var popupStatus8 = 0;
 var popupStatus9 = 0;
 var popupStatus10 = 0;
 var popupStatus11 = 0;
+var popupStatus12 = 0;
 //loading popup with jQuery magic!
 function loadPopup(popUpSelect){
 	//loads popup only if it is disabled
@@ -578,6 +579,52 @@ function centerPopup11(){
 
 
 
+//loading popup with jQuery magic!
+function loadPopup12(){
+	//loads popup only if it is disabled
+	if(popupStatus12==0){
+		$("#backgroundPopup12").css({
+			"opacity": "0.7"
+		});
+		$("#backgroundPopup12").fadeIn("slow");
+		$("#popupContact12").fadeIn("slow");
+		popupStatus12 = 1;
+	}
+}
+
+//disabling popup with jQuery magic!
+function disablePopup12(){
+	//disables popup only if it is enabled
+	if(popupStatus12==1){
+		$("#backgroundPopup12").fadeOut("slow");
+		$("#popupContact12").fadeOut("slow");
+		popupStatus12 = 0;
+	}
+}
+
+//centering popup
+function centerPopup12(){
+	//request data for centering
+	var windowWidth = document.documentElement.clientWidth;
+	var windowHeight = document.documentElement.clientHeight;
+	var popupHeight = 500;
+	var popupWidth = 200;
+	//centering
+	$("#popupContact12").css({
+		"position": "absolute",
+		"top": windowHeight/2-popupHeight/2,
+		"left": windowWidth/2-popupWidth/2
+	});
+	//only need force for IE6
+	
+	$("#backgroundPopup12").css({
+		"height": windowHeight
+	});
+	
+}
+
+
+
 //CONTROLLING EVENTS IN jQuery
 $(document).ready(function(){
 	
@@ -837,6 +884,31 @@ $(document).ready(function(){
 	});
 	
 	
+		//This is used for the help popup (event coordnators)
+	$("#searchResults").click(function(){
+		//centering with css
+		centerPopup12();
+		//load popup
+		loadPopup12();
+	
+		
+	});
+				
+	//CLOSING POPUP
+	//Click the x event!
+	$("#popupContactClose12").click(function(){
+		disablePopup12();
+	});
+	//Click out event!
+	$("#backgroundPopup12").click(function(){
+		disablePopup12();
+	});
+	//Press Escape event!
+	$(document).keypress(function(e){
+		if(e.keyCode==27 && popupStatus12==1){
+			disablePopup12();
+		}
+	});
 	
 	
 	//LOADING POPUP for Volunteer Registration

@@ -11,8 +11,19 @@ $uploadHandler = 'http://' . $_SERVER['HTTP_HOST'] . $directory_self . 'upload.p
 $max_file_size = 3000000; // size in bytes
 
 	session_start();
-	include 'header-vol.php';
-include 'navigation-vol.php';
+	if(isset($_SESSION['SESS_MEMBER_ID'])) 
+	{
+		if($_SESSION['SESS_ORG_OR_VOL'] == 'ORG')
+		{
+				include "header-org.php";
+				include "navigation.php";
+		}
+		else if($_SESSION['SESS_ORG_OR_VOL'] == 'VOL')
+		{
+					include 'header-vol.php';
+					include 'navigation-vol.php';
+		}
+	}
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -51,7 +62,15 @@ include 'navigation-vol.php';
 <h1 style="text-align:center;">
 <?php echo $_SESSION['VOL_USER_FIRST_NAME']; echo ' '; echo $_SESSION['VOL_USER_LAST_NAME'];?></h1>
 <div class="clear"></div>
-<a href="add-friend.php">Add Me As Your Friend</a><br>
+<?php 
+if($_SESSION['VOL_FRIEND_STATUS'] != '')
+{
+	echo 'Your Friend Request Has Been Sent<br>';
+}
+else
+{
+	echo '<a href="add-friend.php">Add Me As Your Friend</a><br>';
+	}?>
 A Dolphin will smile if you do
 
 	

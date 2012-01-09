@@ -107,9 +107,11 @@
 	}
 	
 
-	  
+   mysql_close($link);
    smtpmailer($email, 'support@volly.it', 'Volly.it', 'Volly.It - Reset Password Request', $message);
    
    
    header("location: ../index.php");
+ 
+ 
  ?>

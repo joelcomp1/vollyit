@@ -254,7 +254,7 @@
 		$inserted = '';
 	}
 		
-	
+	mysql_close($link);
 	//Check whether the query was successful or not
 	if($result) {
 			//Login Successful

@@ -10,8 +10,19 @@ $uploadHandler = 'http://' . $_SERVER['HTTP_HOST'] . $directory_self . 'upload.p
 // set a max file size for the html upload form
 $max_file_size = 3000000; // size in bytes
 	session_start();
-		include 'header-vol.php';
-include 'navigation-vol.php';
+	if(isset($_SESSION['SESS_MEMBER_ID'])) 
+	{
+		if($_SESSION['SESS_ORG_OR_VOL'] == 'ORG')
+		{
+				include "header-org.php";
+				include "navigation.php";
+		}
+		else if($_SESSION['SESS_ORG_OR_VOL'] == 'VOL')
+		{
+					include 'header-vol.php';
+					include 'navigation-vol.php';
+		}
+	}
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>

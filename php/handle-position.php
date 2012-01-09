@@ -127,7 +127,7 @@
 	}
 	else if($nextState == 'Submit')
 	{
-		header("location: program-preview.php");
+		header("location: program-manager.php?programname=$programName&orgname=$orgName");
 	}
 	else
 	{
@@ -209,4 +209,5 @@
 	
 	
 	}
+	mysql_close($link);
 ?>

@@ -183,6 +183,7 @@ $_SESSION['PROGRAM_IMAGE'] = 'true';
 $_SESSION['PROGRAM_IMAGE_PATH'] = $fileNameForDisplay;
 session_write_close();
 header("location: create-program-part1.php");
+mysql_close($link);
 }
 
 

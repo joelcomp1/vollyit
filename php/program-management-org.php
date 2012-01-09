@@ -5,8 +5,6 @@
 
 	require_once('auth.php');
 	
-	include "populate-programs.php";
-	
 	if($displayState != '')
 	{
 
@@ -29,9 +27,38 @@
 			$_SESSION['PROGRAM_VIEW_STATE'] = 'All';
 			session_write_close();
 		}
+		
+		if($displayState == 'calendar')
+		{
+			session_regenerate_id();
+			$_SESSION['SHOW_CALENDAR'] = 'true';
+			session_write_close();
+		
+		}
+		else
+		{
+			unset($_SESSION['SHOW_CALENDAR']);
+		}	
+		
+
 	}
+	else
+	{
+		unset($_SESSION['SHOW_CALENDAR']);
+	}
+
+	
+	session_regenerate_id();
+	$search_term = filter_var($_POST["zoom_query"], FILTER_SANITIZE_STRING);
+	$_SESSION['SEARCH'] = $search_term;
+	session_write_close();
+
 	include "header-org.php";
 	include "navigation.php";
+	
+	
+		echo '<script>$(".listView").hide();</script>';
+	
 
 ?>
 	
@@ -47,12 +74,34 @@
 <script src="../js/jquery.ez-pinned-footer.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/jquery-1.5.1.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/programMgmt.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="../js/jquery-1.2.1.pack.js"></script>
 <script type='text/javascript' src="../js/jquery-1.5.2.min.js"></script>
 <script type='text/javascript' src="../js/jquery-ui-1.8.11.custom.min.js"></script>
 <script type='text/javascript' src="../js/fullcalendar.min.js"></script>
 <link rel='stylesheet' type='text/css' href="../css/fullcalendar.css" />
 <link rel='stylesheet' type='text/css' href="../css/fullcalendar.print.css" media='print' />
 
+<script type="text/javascript">
+
+$(function(){
+		$("#search-text").animate({"width":"229px"});
+		$("#results").fadeOut();
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "populate-program-page.php",
+			success: function(msg)
+				{
+				$("#results").html(msg);
+				$("#results").fadeIn();
+				}
+		});
+
+	
+	
+
+});	
+</script>
 </head>
 <body>
 
@@ -85,6 +134,7 @@ Your Programs
 <div class="leftLinks" style="float:left;">
 <a href="#" class="listViewShowHide">List View</a> | <a href="#" class="calendarViewShowHide">Calendar View</a>
 </div>
+<div class="listView">
 <div class="rightLinks">
 
 <form style="float:left; font:'TeXGyreAdventor', Arial, sans-serif!important;" method="post" action="program-management-display.php" id="programViewForm" name="programViewForm" enctype="multipart/form-data">
@@ -98,7 +148,7 @@ Now Viewing:
 </form>
 
 
-<form method="get" action="program-search.php" style="float:left; font:'TeXGyreAdventor', Arial, sans-serif!important;" >
+<form class="searchform" method="post" action="program-management-org.php" >
 <table bgcolor="#FFFFFF" cellpadding="0px" cellspacing="0px" >
 <tr>
 <td style="border-style:none; font:'TeXGyreAdventor', Arial, sans-serif!important;"">
@@ -114,6 +164,7 @@ Now Viewing:
 </form>
 </div>
 </div>
+</div>
 
 <div class="listView">
 <div class="boxFormat13">
@@ -126,314 +177,29 @@ Your Programs
 
 <div class="boxFormat14">
 <div class="box10">
-
-<?php
-$displayedPrograms = 0;
-	for($j = 0; $j <= count($_SESSION['CREATED_PROGRAM_INDEX']); $j++)
-	{
-		$i = $_SESSION['CREATED_PROGRAM_INDEX'][$j];
-		$programName = 'PROGRAM_NAME';
-		$programName .= $i;
-	
-		$programImage = 'PROGRAM_IMAGE_PATH';
-		$programImage .= $i;
-		
-		$date = 'PROGRAM_DATE';
-		$date .= $i;
-	
-		$timeStart = 'PROGRAM_START_TIME';
-		$timeStart .= $i;
-	
-		$endTime = 'PROGRAM_END_TIME';
-		$endTime .= $i;
-	
-		$endDate = 'PROGRAM_END_DATE';
-		$endDate .= $i;
-		
-		$programStatus = 'PROGRAM_STATUS';
-		$programStatus .= $i;
-	    
-		$totalPositionsAvailable = 'POSITIONS_AVAIL';
-		$totalPositionsAvailable .= $i;
-		
-		if($_SESSION['PROGRAM_VIEW_STATE'] == 'All')
-		{
-			if(isset($_SESSION[$programName])) 
-			{
-				$displayedPrograms += 1;
-				echo '<div id="programImageTable" style="float:left; padding: 0px 0px 0px 10px;"><img src="uploaded_files/',$_SESSION[$programImage],'" alt="Program Picture" width="180" height="120"></div>';
-				echo '<div id="position">';
-				echo '<a href="program-manager.php?programname=',$_SESSION[$programName],'&orgname=',$_SESSION['ORG_NAME'],'">',$_SESSION[$programName],'</a>';
-				if($_SESSION[$programStatus] != 'Published')
-				{
-					echo '     Draft';
-				}
-				echo '</div><br><br>';	
-				echo '<div id="programdate">';	
-				if($_SESSION[$endDate] == '' && $_SESSION[$date] == '')
-				{
-					//don't do anything since this is a draft and it hasn't been set yet
-				}
-				else
-				{
-					echo date('l, M jS Y',strtotime($_SESSION[$date])); echo ' at ';echo date(' h:i A',strtotime($_SESSION[$timeStart]));
-				}
-				
-				if($_SESSION[$endDate] == '' && $_SESSION[$date] == '')
-				{
-					//don't do anything since this is a draft and it hasn't been set yet
-				}
-				else if($_SESSION[$date] == $_SESSION[$endDate]) //If its the same day show end time
-				{
-					echo date(' h:i A',strtotime($_SESSION[$endTime]));
-				}
-				else if($_SESSION[$endDate] == '')
-				{
-					echo ' to '; echo date(' h:i A',strtotime($_SESSION[$endTime]));
-				}
-				else
-				{
-					echo ' to ';
-					echo date('l, M jS Y',strtotime($_SESSION[$endDate])); echo ' at ';echo date(' h:i A',strtotime($_SESSION[$endTime]));
-				}
-				echo '</div>';
-				echo '<div id="programlinks">';	
-				echo '<p id="tooltip1" style="float:left;"><a href="introduction.php"><a href="program-manager.php?programname=',$_SESSION[$programName],'&orgname=',$_SESSION['ORG_NAME'],'"><img src="../images/editProgramsSmall.png" width="30" height="30"><span>Edit Prgoram</span></a></p><p id="tooltip2" style="float:left;"><a href="program-vol-list.php"><img src="../images/volGroup.jpg" width="30" height="30"><span>Volunteers</span></a></p><p id="tooltip3" style="float:left;"><a href="clone-program.php"><img src="../images/cloneProgram.png" width="30" height="30"><span>Clone Program</span></a></p><p id="tooltip4" style="float:left;"><a href="delete-program.php?programname=',rawurlencode($_SESSION[$programName]),'"><img src="../images/trashCan.jpg" width="30" height="30"><span>Delete Program</span></a></p>';
-				echo '</div>';
-				echo '<br><br>';	
-				echo '<div id="programopen">';	
-				if($_SESSION[$totalPositionsAvailable] != '')
-				{
-					echo $_SESSION[$totalPositionsAvailable];
-					echo ' Open Positions';
-				}
-				echo '</div><br>';	
-				echo '<div class="clear"></div>';
-				if(($displayedPrograms < 5))
-				{
-					echo '<div class="boxFormat16">';
-					echo '<div class="box16">';
-					echo '</div>';
-					echo '</div>';
-				}
-			}
-			$totalOpenPositions = 0;
-		}
-		else if($_SESSION['PROGRAM_VIEW_STATE'] == 'Drafts')
-		{
-			if(isset($_SESSION[$programName]) && ($_SESSION[$programStatus] != 'Published'))
-			{
-				$displayedPrograms += 1;
-				echo '<div id="programImageTable" style="float:left; padding: 0px 0px 0px 10px;"><img src="uploaded_files/',$_SESSION[$programImage],'" alt="Program Picture" width="180" height="120"></div>';
-				echo '<div id="position">';
-				echo '<a href="program-manager.php?programname=',$_SESSION[$programName],'&orgname=',$_SESSION['ORG_NAME'],'">',$_SESSION[$programName],'</a>';
-				if($_SESSION[$programStatus] != 'Published')
-				{
-					echo '     Draft';
-				}
-				echo '</div><br><br>';	
-				echo '<div id="programdate">';	
-				if($_SESSION[$endDate] == '' && $_SESSION[$date] == '')
-				{
-					//don't do anything since this is a draft and it hasn't been set yet
-				}
-				else
-				{
-					echo date('l, M jS Y',strtotime($_SESSION[$date])); echo ' at ';echo date(' h:i A',strtotime($_SESSION[$timeStart]));
-				}
-				
-				if($_SESSION[$endDate] == '' && $_SESSION[$date] == '')
-				{
-					//don't do anything since this is a draft and it hasn't been set yet
-				}
-				else if($_SESSION[$date] == $_SESSION[$endDate]) //If its the same day show end time
-				{
-					echo date(' h:i A',strtotime($_SESSION[$endTime]));
-				}
-				else if($_SESSION[$endDate] == '')
-				{
-					echo ' to '; echo date(' h:i A',strtotime($_SESSION[$endTime]));
-				}
-				else
-				{
-					echo ' to ';
-					echo date('l, M jS Y',strtotime($_SESSION[$endDate])); echo ' at ';echo date(' h:i A',strtotime($_SESSION[$endTime]));
-				}
-				echo '</div>';
-				echo '<div id="programlinks">';	
-				echo '<p id="tooltip1" style="float:left;"><a href="introduction.php"><a href="program-manager.php?programname=',$_SESSION[$programName],'&orgname=',$_SESSION['ORG_NAME'],'"><img src="../images/editProgramsSmall.png" width="30" height="30"><span>Edit Prgoram</span></a></p><p id="tooltip2" style="float:left;"><a href="program-vol-list.php"><img src="../images/volGroup.jpg" width="30" height="30"><span>Volunteers</span></a></p><p id="tooltip3" style="float:left;"><a href="clone-program.php"><img src="../images/cloneProgram.png" width="30" height="30"><span>Clone Program</span></a></p><p id="tooltip4" style="float:left;"><a href="delete-program.php?programname=',rawurlencode($_SESSION[$programName]),'"><img src="../images/trashCan.jpg" width="30" height="30"><span>Delete Program</span></a></p>';
-				echo '</div>';
-				echo '<br><br>';	
-				echo '<div id="programopen">';	
-				if($_SESSION[$totalPositionsAvailable] != '')
-				{
-					echo $_SESSION[$totalPositionsAvailable];
-					echo ' Open Positions';
-				}
-				echo '</div><br>';	
-				echo '<div class="clear"></div>';
-				echo '<div class="boxFormat16">';
-				echo '<div class="box16">';
-				echo '</div>';
-				echo '</div>';
-			}
-			$totalOpenPositions = 0;
-		}
-		else if($_SESSION['PROGRAM_VIEW_STATE'] == 'PastPrograms')
-		{
-			$todaysDate = date("m/d/Y");
-			$today = strtotime($todaysDate);
-			$programEndDate = strtotime($_SESSION[$endDate]);
-			if(isset($_SESSION[$programName]) && ($programEndDate < $today) && ($_SESSION[$programStatus] == 'Published')) 
-			{
-				$displayedPrograms += 1;
-				echo '<div id="programImageTable" style="float:left; padding: 0px 0px 0px 10px;"><img src="uploaded_files/',$_SESSION[$programImage],'" alt="Program Picture" width="180" height="120"></div>';
-				echo '<div id="position">';
-				echo '<a href="program-manager.php?programname=',$_SESSION[$programName],'&orgname=',$_SESSION['ORG_NAME'],'">',$_SESSION[$programName],'</a>';
-				echo '</div><br><br>';	
-				echo '<div id="programdate">';	
-				if($_SESSION[$endDate] == '' && $_SESSION[$date] == '')
-				{
-					//don't do anything since this is a draft and it hasn't been set yet
-				}
-				else
-				{
-					echo date('l, M jS Y',strtotime($_SESSION[$date])); echo ' at ';echo date(' h:i A',strtotime($_SESSION[$timeStart]));
-				}
-				
-				if($_SESSION[$endDate] == '' && $_SESSION[$date] == '')
-				{
-					//don't do anything since this is a draft and it hasn't been set yet
-				}
-				else if($_SESSION[$date] == $_SESSION[$endDate]) //If its the same day show end time
-				{
-					echo date(' h:i A',strtotime($_SESSION[$endTime]));
-				}
-				else if($_SESSION[$endDate] == '')
-				{
-					echo ' to '; echo date(' h:i A',strtotime($_SESSION[$endTime]));
-				}
-				else
-				{
-					echo ' to ';
-					echo date('l, M jS Y',strtotime($_SESSION[$endDate])); echo ' at ';echo date(' h:i A',strtotime($_SESSION[$endTime]));
-				}
-				echo '</div>';
-				echo '<div id="programlinks">';	
-				echo '<p id="tooltip1" style="float:left;"><a href="introduction.php"><a href="program-manager.php?programname=',$_SESSION[$programName],'&orgname=',$_SESSION['ORG_NAME'],'"><img src="../images/editProgramsSmall.png" width="30" height="30"><span>Edit Prgoram</span></a></p><p id="tooltip2" style="float:left;"><a href="program-vol-list.php"><img src="../images/volGroup.jpg" width="30" height="30"><span>Volunteers</span></a></p><p id="tooltip3" style="float:left;"><a href="clone-program.php"><img src="../images/cloneProgram.png" width="30" height="30"><span>Clone Program</span></a></p><p id="tooltip4" style="float:left;"><a href="delete-program.php?programname=',rawurlencode($_SESSION[$programName]),'"><img src="../images/trashCan.jpg" width="30" height="30"><span>Delete Program</span></a></p>';
-				echo '</div>';
-				echo '<br><br>';	
-				echo '<div id="programopen">';	
-				if($_SESSION[$totalPositionsAvailable] != '')
-				{
-					echo $_SESSION[$totalPositionsAvailable];
-					echo ' Open Positions';
-				}
-				echo '</div><br>';	
-				echo '<div class="clear"></div>';
-				echo '<div class="boxFormat16">';
-				echo '<div class="box16">';
-				echo '</div>';
-				echo '</div>';
-			}
-			$totalOpenPositions = 0;
-		}
-		else if(($_SESSION['PROGRAM_VIEW_STATE'] == 'UpcomingPrograms') || ($_SESSION['PROGRAM_VIEW_STATE'] == ''))
-		{
-			$todaysDate = date("m/d/Y");
-			$today = strtotime($todaysDate);
-			$programStartDate = strtotime($_SESSION[$date]);
-			if(isset($_SESSION[$programName]) && ($programStartDate >= $today) && ($_SESSION[$programStatus] == 'Published')) 
-			{
-				$displayedPrograms += 1;
-				echo '<div id="programImageTable" style="float:left; padding: 0px 0px 0px 10px;"><img src="uploaded_files/',$_SESSION[$programImage],'" alt="Program Picture" width="180" height="120"></div>';
-				echo '<div id="position">';
-				echo '<a href="program-manager.php?programname=',$_SESSION[$programName],'&orgname=',$_SESSION['ORG_NAME'],'">',$_SESSION[$programName],'</a>';
-				echo '</div><br><br>';	
-				echo '<div id="programdate">';	
-				if($_SESSION[$endDate] == '' && $_SESSION[$date] == '')
-				{
-					//don't do anything since this is a draft and it hasn't been set yet
-				}
-				else
-				{
-					echo date('l, M jS Y',strtotime($_SESSION[$date])); echo ' at ';echo date(' h:i A',strtotime($_SESSION[$timeStart]));
-				}
-				
-				if($_SESSION[$endDate] == '' && $_SESSION[$date] == '')
-				{
-					//don't do anything since this is a draft and it hasn't been set yet
-				}
-				else if($_SESSION[$date] == $_SESSION[$endDate]) //If its the same day show end time
-				{
-					echo date(' h:i A',strtotime($_SESSION[$endTime]));
-				}
-				else if($_SESSION[$endDate] == '')
-				{
-					echo ' to '; echo date(' h:i A',strtotime($_SESSION[$endTime]));
-				}
-				else
-				{
-					echo ' to ';
-					echo date('l, M jS Y',strtotime($_SESSION[$endDate])); echo ' at ';echo date(' h:i A',strtotime($_SESSION[$endTime]));
-				}
-				echo '</div>';
-				echo '<div id="programlinks">';	
-				echo '<p id="tooltip1" style="float:left;"><a href="introduction.php"><a href="program-manager.php?programname=',$_SESSION[$programName],'&orgname=',$_SESSION['ORG_NAME'],'"><img src="../images/editProgramsSmall.png" width="30" height="30"><span>Edit Prgoram</span></a></p><p id="tooltip2" style="float:left;"><a href="program-vol-list.php"><img src="../images/volGroup.jpg" width="30" height="30"><span>Volunteers</span></a></p><p id="tooltip3" style="float:left;"><a href="clone-program.php"><img src="../images/cloneProgram.png" width="30" height="30"><span>Clone Program</span></a></p><p id="tooltip4" style="float:left;"><a href="delete-program.php?programname=',rawurlencode($_SESSION[$programName]),'"><img src="../images/trashCan.jpg" width="30" height="30"><span>Delete Program</span></a></p>';
-				echo '</div>';
-				echo '<br><br>';	
-				echo '<div id="programopen">';	
-				if($_SESSION[$totalPositionsAvailable] != '')
-				{
-					echo $_SESSION[$totalPositionsAvailable];
-					echo ' Open Positions';
-				}
-				echo '</div><br>';	
-				echo '<div class="clear"></div>';
-				echo '<div class="boxFormat16">';
-				echo '<div class="box16">';
-				echo '</div>';
-				echo '</div>';
-			}
-			$totalOpenPositions = 0;
-		}
-	}
-	echo '</div>';
-	echo '</div>';
-	echo '<div class="boxFormat13">';
-	echo '<div class="box14" style="text-align:center;">';
-	if($displayedPrograms >= 1)
-	{
-		echo 'Now Showing: 1-';
-		echo $displayedPrograms;
-		echo ' of ',$displayedPrograms;
-	}
-	else
-	{
-		echo 'No Results';
-	}
-?>
-
+<div id='results'>
+</div>
 </div>
 </div>
 </div>
 <div class="calendarView">
+<?php 
+if(isset($_SESSION['SHOW_CALENDAR']))
+{
+		echo '<script>$(".listView").hide();</script>';
+}
+?>
+
 <script type='text/javascript'>
 
 	$(document).ready(function() {
-	
 		var date = new Date();
 		var d = date.getDate();
 		var m = date.getMonth();
 		var y = date.getFullYear();
 		var i = 0;
-		var eventList = new Array();
-			for(i = 0; i <= 1;  i=i+1)
-			{
-				eventList[0] = {title: 'something', start: new Date(y, m, 1)};
-			}
-		
-		
+		var j = 0;
+				
 		$('.calendar').fullCalendar({
 			header: {
 				left: 'prev,next today',
@@ -442,10 +208,11 @@ $displayedPrograms = 0;
 			},
 			editable: true,
 
-				eventList[]
+				events: "populate-calendar.php"
 		});
 		
 	});
+	
 
 </script>
 <div class="clear"></div>
@@ -453,10 +220,6 @@ $displayedPrograms = 0;
 <div class="calendar">
 </div>
 </div>
-
-<div class="clear"></div>
-
-
 </div>
 </div>
 
