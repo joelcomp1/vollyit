@@ -352,68 +352,67 @@ Primary Organization Type
 </label>
 <select id="Field159" name="Field159"  class="field text addr" tabindex="16" value="">
                     <option value="" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == ''){ echo 'selected="yes"';}?>>Organization Type</option>
-                    <option value="1" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 1){ echo 'selected="yes"';}?>>Advocacy & Human Rights</option>
-                    <option value="2" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 2){ echo 'selected="yes"';}?>>Animals</option>
-                    <option value="3" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 3){ echo 'selected="yes"';}?>>Arts & Culture</option>
-                    <option value="4" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 4){ echo 'selected="yes"';}?>>Children & Youth</option>
-                    <option value="5" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 5){ echo 'selected="yes"';}?>>Church</option>
-                    <option value="6" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 6){ echo 'selected="yes"';}?>>Community</option>
-                    <option value="7" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 7){ echo 'selected="yes"';}?>>Company & Corporations</option>
-                    <option value="8" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 8){ echo 'selected="yes"';}?>>Computers & Technology</option>
-                    <option value="9" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 9){ echo 'selected="yes"';}?>>Crisis Support</option>
-                    <option value="10" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 10){ echo 'selected="yes"';}?>>Disabled </option>
-                    <option value="11" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 11){ echo 'selected="yes"';}?>>Disaster Relief</option>
-                    <option value="12" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 12){ echo 'selected="yes"';}?>>Domestic Aid</option>
-                    <option value="13" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 13){ echo 'selected="yes"';}?>>Education </option>
-                    <option value="14" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 14){ echo 'selected="yes"';}?>>Emergency & Safety</option>
-                    <option value="15" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 15){ echo 'selected="yes"';}?>>Environment</option>
-                    <option value="16" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 16){ echo 'selected="yes"';}?>>Faith-Based</option>
-                    <option value="17" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 17){ echo 'selected="yes"';}?>>Health & Medicine</option>
-                    <option value="18" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 18){ echo 'selected="yes"';}?>>Homeless & Housing</option>
-                    <option value="19" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 19){ echo 'selected="yes"';}?>>Hunger</option>
-                    <option value="20" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 20){ echo 'selected="yes"';}?>>Immigration & Refugees</option>
-                    <option value="21" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 21){ echo 'selected="yes"';}?>>International Aid</option>
-                    <option value="22" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 22){ echo 'selected="yes"';}?>>Justice & Legal</option>
-                    <option value="23" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 23){ echo 'selected="yes"';}?>>Media & Broadcasting</option>
-                    <option value="24" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 24){ echo 'selected="yes"';}?>>Politics</option>
-                    <option value="25" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 25){ echo 'selected="yes"';}?>>Seniors</option>
-                    <option value="26" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 26){ echo 'selected="yes"';}?>>Sports & Recreation</option>
-                    <option value="27" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 27){ echo 'selected="yes"';}?>>Veterans & Military Family</option>		</select>
+                    <option value="Advocacy & Human Rights" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 1){ echo 'selected="yes"';}?>>Advocacy & Human Rights</option>
+                    <option value="Animals" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 2){ echo 'selected="yes"';}?>>Animals</option>
+                    <option value="Arts & Culture" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 3){ echo 'selected="yes"';}?>>Arts & Culture</option>
+                    <option value="Children & Youth" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 4){ echo 'selected="yes"';}?>>Children & Youth</option>
+                    <option value="Church" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 5){ echo 'selected="yes"';}?>>Church</option>
+                    <option value="Community" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 6){ echo 'selected="yes"';}?>>Community</option>
+                    <option value="Company & Corporations" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 7){ echo 'selected="yes"';}?>>Company & Corporations</option>
+                    <option value="Computers & Technology" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 8){ echo 'selected="yes"';}?>>Computers & Technology</option>
+                    <option value="Crisis Support" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 9){ echo 'selected="yes"';}?>>Crisis Support</option>
+                    <option value="Disabled" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 10){ echo 'selected="yes"';}?>>Disabled </option>
+                    <option value="Disaster Relief" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 11){ echo 'selected="yes"';}?>>Disaster Relief</option>
+                    <option value="Domestic Aid" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 12){ echo 'selected="yes"';}?>>Domestic Aid</option>
+                    <option value="Education" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 13){ echo 'selected="yes"';}?>>Education </option>
+                    <option value="Emergency & Safety" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 14){ echo 'selected="yes"';}?>>Emergency & Safety</option>
+                    <option value="Environment" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 15){ echo 'selected="yes"';}?>>Environment</option>
+                    <option value="Faith-Based" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 16){ echo 'selected="yes"';}?>>Faith-Based</option>
+                    <option value="Health & Medicine" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 17){ echo 'selected="yes"';}?>>Health & Medicine</option>
+                    <option value="Homeless & Housing" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 18){ echo 'selected="yes"';}?>>Homeless & Housing</option>
+                    <option value="Hunger" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 19){ echo 'selected="yes"';}?>>Hunger</option>
+                    <option value="Immigration & Refugees" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 20){ echo 'selected="yes"';}?>>Immigration & Refugees</option>
+                    <option value="International Aid" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 21){ echo 'selected="yes"';}?>>International Aid</option>
+                    <option value="Justice & Legal" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 22){ echo 'selected="yes"';}?>>Justice & Legal</option>
+                    <option value="Media & Broadcasting" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 23){ echo 'selected="yes"';}?>>Media & Broadcasting</option>
+                    <option value="Politics" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 24){ echo 'selected="yes"';}?>>Politics</option>
+                    <option value="Seniors" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 25){ echo 'selected="yes"';}?>>Seniors</option>
+                    <option value="Sports & Recreation" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 26){ echo 'selected="yes"';}?>>Sports & Recreation</option>
+                    <option value="Veterans & Military Family" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 27){ echo 'selected="yes"';}?>>Veterans & Military Family</option>		</select>
 <br>
 <br>
 <label class="desc" id="title160" for="Field160">
 Secondary Organization Type
 </label>
 <select id="Field160" name="Field160"  class="field text addr" tabindex="17" value="">
-                    <option value="" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == ''){ echo 'selected="yes"';}?>>Organization Type</option>
-                    <option value="1" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 1){ echo 'selected="yes"';}?>>Advocacy & Human Rights</option>
-                    <option value="2" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 2){ echo 'selected="yes"';}?>>Animals</option>
-                    <option value="3" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 3){ echo 'selected="yes"';}?>>Arts & Culture</option>
-                    <option value="4" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 4){ echo 'selected="yes"';}?>>Children & Youth</option>
-                    <option value="5" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 5){ echo 'selected="yes"';}?>>Church</option>
-                    <option value="6" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 6){ echo 'selected="yes"';}?>>Community</option>
-                    <option value="7" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 7){ echo 'selected="yes"';}?>>Company & Corporations</option>
-                    <option value="8" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 8){ echo 'selected="yes"';}?>>Computers & Technology</option>
-                    <option value="9" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 9){ echo 'selected="yes"';}?>>Crisis Support</option>
-                    <option value="10" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 10){ echo 'selected="yes"';}?>>Disabled </option>
-                    <option value="11" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 11){ echo 'selected="yes"';}?>>Disaster Relief</option>
-                    <option value="12" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 12){ echo 'selected="yes"';}?>>Domestic Aid</option>
-                    <option value="13" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 13){ echo 'selected="yes"';}?>>Education </option>
-                    <option value="14" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 14){ echo 'selected="yes"';}?>>Emergency & Safety</option>
-                    <option value="15" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 15){ echo 'selected="yes"';}?>>Environment</option>
-                    <option value="16" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 16){ echo 'selected="yes"';}?>>Faith-Based</option>
-                    <option value="17" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 17){ echo 'selected="yes"';}?>>Health & Medicine</option>
-                    <option value="18" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 18){ echo 'selected="yes"';}?>>Homeless & Housing</option>
-                    <option value="19" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 19){ echo 'selected="yes"';}?>>Hunger</option>
-                    <option value="20" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 20){ echo 'selected="yes"';}?>>Immigration & Refugees</option>
-                    <option value="21" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 21){ echo 'selected="yes"';}?>>International Aid</option>
-                    <option value="22" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 22){ echo 'selected="yes"';}?>>Justice & Legal</option>
-                    <option value="23" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 23){ echo 'selected="yes"';}?>>Media & Broadcasting</option>
-                    <option value="24" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 24){ echo 'selected="yes"';}?>>Politics</option>
-                    <option value="25" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 25){ echo 'selected="yes"';}?>>Seniors</option>
-                    <option value="26" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 26){ echo 'selected="yes"';}?>>Sports & Recreation</option>
-                    <option value="27" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 27){ echo 'selected="yes"';}?>>Veterans & Military Family</option>
-		</select>
+                                 <option value="" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == ''){ echo 'selected="yes"';}?>>Organization Type</option>
+                    <option value="Advocacy & Human Rights" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 1){ echo 'selected="yes"';}?>>Advocacy & Human Rights</option>
+                    <option value="Animals" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 2){ echo 'selected="yes"';}?>>Animals</option>
+                    <option value="Arts & Culture" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 3){ echo 'selected="yes"';}?>>Arts & Culture</option>
+                    <option value="Children & Youth" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 4){ echo 'selected="yes"';}?>>Children & Youth</option>
+                    <option value="Church" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 5){ echo 'selected="yes"';}?>>Church</option>
+                    <option value="Community" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 6){ echo 'selected="yes"';}?>>Community</option>
+                    <option value="Company & Corporations" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 7){ echo 'selected="yes"';}?>>Company & Corporations</option>
+                    <option value="Computers & Technology" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 8){ echo 'selected="yes"';}?>>Computers & Technology</option>
+                    <option value="Crisis Support" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 9){ echo 'selected="yes"';}?>>Crisis Support</option>
+                    <option value="Disabled" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 10){ echo 'selected="yes"';}?>>Disabled </option>
+                    <option value="Disaster Relief" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 11){ echo 'selected="yes"';}?>>Disaster Relief</option>
+                    <option value="Domestic Aid" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 12){ echo 'selected="yes"';}?>>Domestic Aid</option>
+                    <option value="Education" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 13){ echo 'selected="yes"';}?>>Education </option>
+                    <option value="Emergency & Safety" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 14){ echo 'selected="yes"';}?>>Emergency & Safety</option>
+                    <option value="Environment" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 15){ echo 'selected="yes"';}?>>Environment</option>
+                    <option value="Faith-Based" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 16){ echo 'selected="yes"';}?>>Faith-Based</option>
+                    <option value="Health & Medicine" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 17){ echo 'selected="yes"';}?>>Health & Medicine</option>
+                    <option value="Homeless & Housing" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 18){ echo 'selected="yes"';}?>>Homeless & Housing</option>
+                    <option value="Hunger" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 19){ echo 'selected="yes"';}?>>Hunger</option>
+                    <option value="Immigration & Refugees" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 20){ echo 'selected="yes"';}?>>Immigration & Refugees</option>
+                    <option value="International Aid" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 21){ echo 'selected="yes"';}?>>International Aid</option>
+                    <option value="Justice & Legal" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 22){ echo 'selected="yes"';}?>>Justice & Legal</option>
+                    <option value="Media & Broadcasting" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 23){ echo 'selected="yes"';}?>>Media & Broadcasting</option>
+                    <option value="Politics" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 24){ echo 'selected="yes"';}?>>Politics</option>
+                    <option value="Seniors" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 25){ echo 'selected="yes"';}?>>Seniors</option>
+                    <option value="Sports & Recreation" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 26){ echo 'selected="yes"';}?>>Sports & Recreation</option>
+                    <option value="Veterans & Military Family" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 27){ echo 'selected="yes"';}?>>Veterans & Military Family</option>		</select>
 </li>
 <li id="foli10" class="phone      ">
 <label class="desc" id="title10" for="Field10">

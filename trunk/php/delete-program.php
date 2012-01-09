@@ -38,68 +38,35 @@
 	$result = @mysql_query($qry);
 	$program = mysql_fetch_assoc($result);
 	
+	$tempNumber = $program['programnumber'];
+	$qry = "select * from programs where programnumber > $tempNumber";
+	$result4 = @mysql_query($qry);
+	
+	while($alterNum = mysql_fetch_assoc($result4))
+	{
+		$orgToAlter = $alterNum['orgname'];
+		$progToAlter = $alterNum['programname'];
+		$qry = "update programs set programnumber='$tempNumber' where orgname='$orgToAlter' and programname='$progToAlter'";
+		$result5 = @mysql_query($qry);
+		$tempNumber += 1;
+	}
+
+	
 	$qry = "delete from programs where orgname='$orgName' and programname='$programName'";
 	$result2 = @mysql_query($qry);
 
 	$qry = "delete from programpositions where orgname='$orgName' and programname='$programName'";
 	$result3 = @mysql_query($qry);
 	
+	
 	//Check whether the query was successful or not
 	if($result && $result2 && $result3) {
 	//Login Successful
-			session_regenerate_id();
 
-			$programName = 'PROGRAM_NAME';
-			$programName .= $program['programnumber'];
-	
-			$programImage = 'PROGRAM_IMAGE_PATH';
-			$programImage .= $program['programnumber'];
-		
-			$date = 'PROGRAM_DATE';
-			$date .= $program['programnumber'];
-	
-			$timeStart = 'PROGRAM_START_TIME';
-			$timeStart .= $program['programnumber'];
-	
-			$endTime = 'PROGRAM_END_TIME';
-			$endTime .= $program['programnumber'];
-	
-			$endDate = 'PROGRAM_END_DATE';
-			$endDate .= $program['programnumber'];
-	    
-			$programStatus = 'PROGRAM_STATUS';
-			$programStatus .= $program['programnumber'];
-			
-			$programDesc = 'PROGRAM_DESC';
-			$programDesc .= $program['programnumber'];
-			
-			$programCity = 'PROGRAM_CITY';
-			$programCity .= $program['programnumber'];
-			
-			$programState = 'PROGRAM_STATE';
-			$programState .= $program['programnumber'];
-			
-			unset($_SESSION[$programName]);
-			unset($_SESSION[$programImage]);
-			unset($_SESSION[$date]);
-			unset($_SESSION[$timeStart]);
-			unset($_SESSION[$endTime]);
-			unset($_SESSION[$endDate]);
-			unset($_SESSION[$programDesc]);
-			unset($_SESSION[$programStatus]);
-			unset($_SESSION[$programCity]);
-			unset($_SESSION[$programState]);
-			
-			$_SESSION['PROGRAMS_CREATED'] -= 1;
-				
-			$totalPositionsAvailable = 'POSITIONS_AVAIL';
-			$totalPositionsAvailable .= $program['programnumber'];
-			unset($_SESSION[$totalPositionsAvailable]);	
 			header("location: program-management-org.php");	
-			session_write_close();
 	}
 	else {
 		die("Query failed");
 	}
-
+	mysql_close($link);
 ?>

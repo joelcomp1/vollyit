@@ -55,6 +55,8 @@
  
     // make an associative array of server admins
  
-        $client->account->sms_messages->create($from, $messageTo, $body);
-        header("location: message-center-org.php");    
+    $client->account->sms_messages->create($from, $messageTo, $body);
+    header("location: message-center-org.php");   
+	
+	mysql_close($link);		
 ?>

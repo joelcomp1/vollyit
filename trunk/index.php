@@ -47,12 +47,6 @@
 ?>
 	
 <div class="header" style="height: 0px!important; padding: 0 0 0 0px!important">
-<div id="leftheading" style="float:left; vertical-align:top;">
-<form class="searchform" method="post" action="search-website.php" >
-	<input class="searchfield" type="text" value="Search" onfocus="if (this.value == 'Search') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search';}" />
-	<input class="searchbutton" type="submit" value="Go" />
-</form>
-</div>
 <nav id="mainnavuser">
 <div id="heading" style="float:right">
 <div class="wrapLanding">
@@ -64,13 +58,13 @@
 
 </div>
 <div id="headingLeft"  style="text-align:center;">
-<h1 id="textlogo" style="float:none; text-align:center; margin:0px 80px 0px 0px;">
+<h1 id="textlogo" style="float:none; text-align:center; margin:0px 0px 0px 0px;">
 volly<span>.it</span>
 </h1>
 </div>
 
 <br>
-<div id="headingLeft"  style="text-align:center;">
+<div id="headingLeft"  style="float:none; text-align:center;">
 <h2 style="float:none;">Volunteering to change the world</h2>
 </div>
 </nav>

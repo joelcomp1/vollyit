@@ -13,6 +13,10 @@
 					include 'navigation-vol.php';
 		}
 	}
+	session_regenerate_id();
+	$search_term = filter_var($_POST["search"], FILTER_SANITIZE_STRING);
+	$_SESSION['SEARCH'] = $search_term;
+	session_write_close();
 
 ?>
 
@@ -40,51 +44,47 @@ if($_SESSION['SESS_ORG_OR_VOL'] == 'ORG')
 
 <script type="text/javascript" src="http://static.twilio.com/libs/twiliojs/1.0/twilio.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-				
+<script src="../js/popup.js" type="text/javascript"></script>
+<script src="../js/jquery.ez-pinned-footer.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-1.5.1.min.js" type="text/javascript" charset="utf-8"></script>		
 <script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/jquery.tabify.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-			// <![CDATA[
-				
-			$(document).ready(function () {
-				$('#menu').tabify();
-			});
-					
-			// ]]>
+						
+$(function(){
+		//$("#search-form").hide();
+		$("#search-text").animate({"width":"229px"});
+		$("#results").fadeOut();
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "search-website-query.php",
+			success: function(msg)
+				{
+				$("#results").html(msg);
+				$("#results").fadeIn();
+				//$("#search-text").html("<a href='#' id='search-again'>Search Again</a>");
+				}
+		});
+	return false;
+	
+	
+
+});	
 </script>
-<script src="../js/calendar.js"></script>
-<link href="../css/calendar.css" rel="stylesheet">
 </head>
 <body>
 
 <div id="wrap">
 <div id="mainnavuser">
-<br>
-<div class="clear"></div>
-<h3>
+<h3 style="float:left;"> All Results </h3>
+<div class="boxFormat14">
+<div class="orgProgSearch">
+<div id='results'>
+</div>
+</div>
+</div>
 
-Terms of Use & Privacy Policy
-
-</h3>
-<div class="clear"></div>
-<br>
-<br>
-<ul id="menu" class="menu">
-			<li class="active"><a href="#description">Terms of Use</a></li>
-			<li><a href="#usage">Privacy Policy</a></li>
-		</ul>
-
-
-		<div id="description" class="content">
-			<p>
-			asdfasdf
-			</p>
-		</div>
-		<div id="usage" class="content">
-			<p>
-asdfasdfasdf
-			</p>
-		</div>
 </div></div>
 <div id="footerclear"></div><?php include "footer.php";?>
 </body>

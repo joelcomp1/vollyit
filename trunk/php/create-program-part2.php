@@ -21,6 +21,9 @@
     <script type="text/javascript" src="../js/jquery.ui.core.min.js"></script>
 	<script src="../js/calendar.js"></script>
 	<link href="../css/calendar.css" rel="stylesheet">
+	<script src="../js/jquery-1.5.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script type='text/javascript' src="../js/jquery-1.5.2.min.js"></script>
+<script type='text/javascript' src="../js/jquery-ui-1.8.11.custom.min.js"></script>
     <script type="text/javascript" src="../js/jquery.ui.timepicker.js?v=0.2.9"></script>
 <script src="../scripts/wufoo.js"></script>
 </head>
@@ -106,7 +109,7 @@ Easy as 1.. 2.. 3..
 <div style="float:left; padding: 0px 30px 0px 0px;">
         <input type="text" style="width: 70px" name="timepicker_end" id="timepicker_end" tabindex="3" value="<?php echo $_SESSION['PROGRAM_END_TIME_TEMP'];?>" />
 </div>
-		<input id="Field6" name="Field6" type="checkbox" value="Recurring" tabindex="4"  />
+		<input id="Field6" name="Field6" type="checkbox" value="Recurring" tabindex="4" onclick="$('.repeatsChecker').toggle();" />
 <div style="float:left; font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important; padding: 0px 30px 0px 0px;">
 		Recurring Program:
 </div>
@@ -226,7 +229,7 @@ function tpEndOnMinuteShowCallback(hour, minute) {
     </div>
 </span>
 
-
+<div class="repeatsChecker">
 <div class="clear"></div>
 <br>
 <div style="float:left; font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important; padding: 0px 30px 0px 0px;">
@@ -303,7 +306,7 @@ OR
 No End Date
 </div>
 
-
+</div>
 
 
  

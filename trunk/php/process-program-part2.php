@@ -68,7 +68,7 @@
 	if($nextState == 'Submit')
 	{
 		if($statrtDate == '') {
-			$errmsg_arr[] = $noEnd;
+			$errmsg_arr[] = 'Need to have a Program Start Date';
 			$errflag = true;
 		}
 		if(($programStartDate < $today) && ($statrtDate != ''))
@@ -85,17 +85,17 @@
 			$errmsg_arr[] = 'End Time Missing';
 			$errflag = true;
 		}
-		if(($endDate == '') && ($noEnd == '')) {
+		if(($recurring != '') && ($endDate == '') && ($noEnd == '')) {
 			$errmsg_arr[] = 'End Date Missing';
 			$errflag = true;
 		}
-		if(($programEndDate < $today) && ($endDate != ''))
+		if(($recurring != '') && ($programEndDate < $today) && ($endDate != ''))
 		{
 			$errmsg_arr[] = 'You cannot have a program end in the past';
 			$errflag = true;
 		
 		}
-		if(($noEnd == '') && ($programEndDate < $programStartDate))
+		if(($recurring != '') && ($noEnd == '') && ($programEndDate < $programStartDate))
 		{
 			$errmsg_arr[] = 'You cannot have a end date before your start date ';
 			$errflag = true;
@@ -208,4 +208,6 @@
 	}else {
 		die("Query failed");
 	}
+	
+	mysql_close($link);
 ?>

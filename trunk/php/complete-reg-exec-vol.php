@@ -198,4 +198,6 @@
 	}else {
 		die('firstName');
 	}
+	
+	mysql_close($link);
 ?>

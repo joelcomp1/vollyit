@@ -349,4 +349,6 @@
 	}else {
 		die("Query failed");
 	}
+	
+	mysql_close($link);
 ?>

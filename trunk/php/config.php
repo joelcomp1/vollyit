@@ -1,6 +1,9 @@
 <?php
-	define('DB_HOST', 'localhost');
-    define('DB_USER', 'root');
-    define('DB_PASSWORD', 'coolguy1');
-    define('DB_DATABASE', 'volly');
+$hostname = "127.0.0.1";
+$username = "root";
+$password = "coolguy1";
+$database_name = "volly";
+
+$link = mysql_connect($hostname, $username, $password) or die("Cannot connect to the database!");
+mysql_select_db($database_name) or die("Cannot select the database!");
 ?>

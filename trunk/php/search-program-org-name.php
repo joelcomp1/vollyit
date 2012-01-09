@@ -1,9 +1,9 @@
 ﻿<?php
 	//Start session
 	session_start();
-	
+
 	//Include database connection details
-	require_once('config.php');
+	include("config.php");
 	
 	//Array to store validation errors
 	$errmsg_arr = array();
@@ -12,19 +12,6 @@
 	$errflag = false;
 	
 	//Connect to pg server
-	$db = mysql_connect("localhost:3306", "root", "coolguy1");
-	if(!$db) {
-		die('Failed to connect to server: ' . mysql_error());
-	}
-	else
-	{
-		$db_select = mysql_select_db("volly", $db);
-		
-		if(!$db_select)
-		{
-			die('Failed to connect to database: ' . mysql_error());
-		}
-
 		// Is there a posted query string?
 		if(isset($_POST['queryString'])) {
 
@@ -60,7 +47,7 @@
 					echo 'ERROR: There was a problem with the query.';
 				}
 				
-				$query = mysql_query("SELECT * FROM programs WHERE programname LIKE '$queryString%' LIMIT 25");
+				$query = mysql_query("SELECT * FROM programs WHERE draft='Published' and programname LIKE '$queryString%' LIMIT 25 ");
 				if($query) {
 					echo '<li type="squre">Programs: </li>';
 					// While there are results loop through them - fetching an Object (i like PHP5 btw!).
@@ -83,5 +70,4 @@
 		} else {
 			echo 'There should be no direct access to this script!';
 		}
-	}
 ?>

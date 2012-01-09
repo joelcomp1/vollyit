@@ -3,7 +3,7 @@
 	session_start();
 	
 	//Include database connection details
-	require_once('config.php');
+	include("config.php");
 	
 	//Array to store validation errors
 	$errmsg_arr = array();
@@ -11,19 +11,6 @@
 	//Validation error flag
 	$errflag = false;
 	
-	//Connect to pg server
-	$db = mysql_connect("localhost:3306", "root", "coolguy1");
-	if(!$db) {
-		die('Failed to connect to server: ' . mysql_error());
-	}
-	else
-	{
-		$db_select = mysql_select_db("volly", $db);
-		
-		if(!$db_select)
-		{
-			die('Failed to connect to database: ' . mysql_error());
-		}
 
 		// Is there a posted query string?
 		if(isset($_POST['queryString'])) {
@@ -65,5 +52,4 @@
 		} else {
 			echo 'There should be no direct access to this script!';
 		}
-	}
 ?>

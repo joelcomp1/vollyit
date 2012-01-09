@@ -45,6 +45,8 @@
 	$result = @mysql_query($qry);
 	
 	//Check whether the query was successful or not
+	mysql_close($link);
+	
 	if($result) {
 	$result=mysql_query($qry);
 			//Login Successful
@@ -58,4 +60,6 @@
 	else {
 		die("Query failed");
 	}
+	
+	
 ?>

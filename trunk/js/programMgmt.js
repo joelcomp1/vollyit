@@ -1,11 +1,9 @@
 $(document).ready(function(){
 
-
 	
-
 	$('.listViewShowHide').click(function(){
 	$(".listView").show();
-	$(".calendarView").hide();
+	$(".calendar").hide();
 	
 	})
 	
@@ -13,7 +11,7 @@ $(document).ready(function(){
 	
 	$('.calendarViewShowHide').click(function(){
 	$(".listView").hide();
-	$(".calendarView").show();
+	$(".calendar").show();
 
 	});
 	

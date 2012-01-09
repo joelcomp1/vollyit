@@ -44,4 +44,6 @@
 	session_write_close();
 	header("location: program-published.php");
 	exit();
+	
+	mysql_close($link);
 ?>
