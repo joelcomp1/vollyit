@@ -1,19 +1,10 @@
 <?php
 	require_once('auth.php');
-	
-// make a note of the current working directory relative to root.
-$directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
-
-// make a note of the location of the upload handler
-$uploadHandler = 'http://' . $_SERVER['HTTP_HOST'] . $directory_self . 'upload.processor.php';
-
-// set a max file size for the html upload form
-$max_file_size = 3000000; // size in bytes
 
 	session_start();
 	
 	include 'header-vol.php';
-include 'navigation-vol.php';
+	include 'navigation-vol.php';
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -38,15 +29,6 @@ function onABCommComplete() {
 
 <body>
 
-
-
-
-<script type="text/javascript">
-function redirectMe (sel) {
-    var url = sel[sel.selectedIndex].value;
-    window.location = url;
-}
-</script>
 
 <div id="wrap">
 <div id="mainnavuser">

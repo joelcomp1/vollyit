@@ -1,12 +1,11 @@
 /*** Overall MovingBoxes Slider ***/
 .mb-wrapper {
-	width: 900px; /* default, this is overridden by script settings */
-	min-height: 150px;
+	width: 700px; /* default, this is overridden by script settings */
+	
 	border: 5px solid #ccc;
 	margin: 0 auto;
 	position: relative;
-	left: 0;
-	top: 0;
+
 	border-radius: 1em;
 	-moz-border-radius: 1em;
 	-webkit-border-radius: 1em;
@@ -23,8 +22,7 @@
 	margin: 0 auto;
 	padding: 0;
 	position: relative;
-	left: 0;
-	top: 0;
+
 
 	/***(>'-')> Control Panel Font size here <('-'<)***/
 	font-size: 18px;

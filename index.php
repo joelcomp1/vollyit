@@ -160,7 +160,7 @@ volly<span>.it</span>
 	
 	<h2 style=" padding:0px 0 0 30px!important; float:none; text-align: left;">Reset Password</h2>
 	<p id="contactArea" style=" padding:0px 0 0 30px!important; float:none; text-align: left;">
-	Enter the email address you used whne creating your accround.  Hit the send button and we will send you an email with instructions to reset your password.
+	Enter the email address you used whne creating your account.  Hit the send button and we will send you an email with instructions to reset your password.
 	<br><br>
 <form id="loginForm" name="loginForm" method="post" action="php/reset-password.php">
 <b>Email</b>
@@ -224,8 +224,8 @@ Some various Content here</nav></div>
 <div class="wrapLanding">
 <nav id="mainnavuser">
 <p align=center>
-<iframe width="320" height="240" src="http://www.youtube.com/embed/dkHbQrlQ7yE" frameborder="0" align="middle" ></iframe>
-</p>
+<div id="video" align=center>
+<object width="560" height="315"><param name="movie" value="http://www.youtube.com/v/aS-mAz34NA0?version=3&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/aS-mAz34NA0?version=3&amp;hl=en_US" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed></object></div></p>
 <h3><b>Get Started</b></h3>
 <div class="clear"></div>
 
@@ -234,7 +234,7 @@ Some various Content here</nav></div>
 <div id="newOrg" style="font:bold 1.6em 'TeXGyreAdventor', Arial, sans-serif!important;  text-align:center;">
 Organizations
 <br>
-<img class="floatleft" src="images/homepageClickable2.png" style="padding: 0 0 0 20px;" alt="header image"  class="headerimg"  usemap ="#homepagemap">  
+<img class="floatleft" src="images/homepageClickable2.png"  onclick="$('#video').hide();" style="padding: 0 0 0 20px;" alt="header image"  class="headerimg"  usemap ="#homepagemap">  
 <br>
 </div>
 
@@ -249,7 +249,7 @@ Simple. Quick. Easy.
 <div id="newVol" style="font:bold 1.6em 'TeXGyreAdventor', Arial, sans-serif!important;  text-align:center;">
 Volunteers
 <br>
-<img class="floatleft" src="images/homepageClickable.png" style="padding: 0 0 0 40px;" alt="header image"  class="headerimg"  usemap ="#homepagemap"> 
+<img class="floatleft" src="images/homepageClickable.png" onclick="$('#video').hide();" style="padding: 0 0 0 40px;" alt="header image"  class="headerimg"  usemap ="#homepagemap"> 
 <br>
 </div>
 <div class="clear"></div>

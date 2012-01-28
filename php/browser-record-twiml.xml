@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
     <Say>
-        Please record your message at the beep. Press # when finished
+        Please record your message at the beep. Press Stop Recording on your Screen when finished.
     </Say>
     <Record
         action="http://joelcomp1.no-ip.org/php/recording-goodbye.php"
         method="GET"
-		finishOnKey="#"
         maxLength="30"
         />
     <Say>I did not hear a recording.  Goodbye.</Say>

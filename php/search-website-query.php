@@ -1,6 +1,3 @@
-<script src="../js/popup.js" type="text/javascript"></script>
-<script src="../js/jquery.ez-pinned-footer.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/jquery-1.5.1.min.js" type="text/javascript" charset="utf-8"></script>	
 <?php
 	//Start session
 	session_start();
@@ -21,7 +18,7 @@ if($_SESSION['SEARCH'] == 'Search')
 
 $q = "SELECT * FROM orgs WHERE orgname LIKE '%".$search_term."%'";
 $qProg = "SELECT * FROM programs WHERE programname LIKE '%".$search_term."%' and draft='Published'";
-$qVols = "SELECT * FROM vols WHERE firstname LIKE '%".$search_term."%' or lastname LIKE '%".$search_term."%'";
+$qVols = "SELECT * FROM vols WHERE privacy<>'Hidden' and firstname LIKE '%".$search_term."%' or lastname LIKE '%".$search_term."%' ";
 $r = mysql_query($q);
 $rProg = mysql_query($qProg);
 $rVols = mysql_query($qVols);

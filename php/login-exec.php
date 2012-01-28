@@ -104,38 +104,41 @@
 					$orgName = $orgInfo['orgname'];
 				
 				
-					$qry="SELECT * FROM websitelink WHERE orgname='$orgName'";
-					$result3 =mysql_query($qry);
+					$result3 = mysql_query('SELECT * FROM websitelink WHERE orgname="'.$orgName.'"');
+
 					$website = mysql_fetch_assoc($result3);
-					$link = 'link';
+					
 					for($i = 1; $i <= 5; $i++)
 					{	
+						$link = 'link';
 						$link .= $i;
+						
 						if($website[$link] != '')
 						{
+							
 							$_SESSION['ORG_WEBSITE'] = $website[$link];
 						}
 					}
-				
-				    $qry="SELECT * FROM facebooklink WHERE orgname='$orgName'";
-				    $result4 =mysql_query($qry);
+
+					$result4 =mysql_query('SELECT * FROM facebooklink WHERE orgname="'.$orgName.'"');
 				    $fbook = mysql_fetch_assoc($result4);
-					$link = 'link';
 					for($i = 1; $i <= 5; $i++)
 					{	
+						$link = 'link';
 						$link .= $i;
+						
 						if($fbook[$link] != '')
 						{
 							$_SESSION['FACEBOOK_LINK'] = $fbook[$link];
 						}
 					}
 				
-				    $qry="SELECT * FROM twitterlink WHERE orgname='$orgName'";
-				    $result5 =mysql_query($qry);
+					$result5 =mysql_query('SELECT * FROM twitterlink WHERE orgname="'.$orgName.'"');
+
 				    $twitter = mysql_fetch_assoc($result5);
-					$link = 'link';
 					for($i = 1; $i <= 5; $i++)
 					{	
+						$link = 'link';
 						$link .= $i;
 						if($twitter[$link] != '')
 						{
@@ -144,12 +147,12 @@
 					}
 					
 					
-				    $qry="SELECT * FROM linkedinlink WHERE orgname='$orgName'";
-				    $result6 =mysql_query($qry);
+					$result6 =mysql_query('SELECT * FROM linkedinlink WHERE orgname="'.$orgName.'"');
+
 				    $linkedin = mysql_fetch_assoc($result6);
-					$link = 'link';
 					for($i = 1; $i <= 5; $i++)
 					{	
+						$link = 'link';
 						$link .= $i;
 						if($linkedin[$link] != '')
 						{
@@ -157,13 +160,12 @@
 						}
 					}
 
-				    
-				    $qry="SELECT * FROM blogLink WHERE orgname='$orgName'";
-				    $result7 =mysql_query($qry);
+				    $result7 = mysql_query('SELECT * FROM blogLink WHERE orgname="'.$orgName.'"');
+
 				    $blog = mysql_fetch_assoc($result7);
-					$link = 'link';
 					for($i = 1; $i <= 5; $i++)
 					{	
+						$link = 'link';
 						$link .= $i;
 						if($blog[$link] != '')
 						{
@@ -171,13 +173,15 @@
 						}
 					}
 				
-				    $qry="SELECT * FROM youTubeLink WHERE orgname='$orgName'";
-				    $result8 =mysql_query($qry);
+				    $result8 = mysql_query('SELECT * FROM youTubeLink WHERE orgname="'.$orgName.'"');
+
 				    $youTube = mysql_fetch_assoc($result8);
-					$link = 'link';
+					
 					for($i = 1; $i <= 5; $i++)
 					{	
+						$link = 'link';
 						$link .= $i;
+						
 						if($youTube[$link] != '')
 						{
 							$_SESSION['YOUTUBE_LINK'] = $youTube[$link];
@@ -204,6 +208,9 @@
 				$_SESSION['VOL_STATE'] = $volInfo['state'];
 				$_SESSION['VOL_FIRST_NAME'] = $volInfo['firstname'];
 				$_SESSION['VOL_LAST_NAME'] = $volInfo['lastname'];
+				$_SESSION['VOL_PHONE_PART_1'] = substr($volInfo['phonenumber'],0, 3);
+				$_SESSION['VOL_PHONE_PART_2'] = substr($volInfo['phonenumber'],3, 3);
+				$_SESSION['VOL_PHONE_PART_3'] = substr($volInfo['phonenumber'],6, 4);	
 				$_SESSION['VOL_EMAIL'] = $volInfo['email'];	
 				$_SESSION['VOL_PRIVACY'] = $volInfo['privacy'];
 				if($_SESSION['IMAGE_PATH'] != '')

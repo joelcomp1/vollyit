@@ -1,69 +1,22 @@
 <?php
 	require_once('auth.php');
 	
-// make a note of the current working directory relative to root.
-$directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
-
-// make a note of the location of the upload handler
-$uploadHandler = 'http://' . $_SERVER['HTTP_HOST'] . $directory_self . 'upload.processor.php';
-
-// set a max file size for the html upload form
-$max_file_size = 3000000; // size in bytes
-
-session_start();
+	session_start();
 	
-$_SESSION['ref'] = $_SERVER['SCRIPT_NAME'];
+	$_SESSION['ref'] = $_SERVER['SCRIPT_NAME'];
 	
-include "header-org.php";
-include "navigation.php";
-
-
-
+	include "header-org.php";
+	include "navigation.php";
 ?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Volly.it: <?php echo $_SESSION['ORG_NAME'];?>'s Profile</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
-  <script type="text/javascript" src="../js/collection.js"></script>
-   <script type="text/javascript" src="../js/jquery.js"></script>
 <link href="loginmodule.css" rel="stylesheet" type="text/css" />
-  <script src="../js/popup.js" type="text/javascript"></script>
-<script src="../js/jquery.ez-pinned-footer.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/jquery-1.5.1.min.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="../js/jquery-1.2.1.pack.js"></script>
-<script type="text/javascript">
-$(function(){
+<link href="../css/movingboxes.css" media="screen" rel="stylesheet">
+<link rel='stylesheet' type='text/css' href="../css/fullcalendar.css" />
+<link rel='stylesheet' type='text/css' href="../css/fullcalendar.print.css" media='print' />
 
-		$("#search-text").animate({"width":"229px"});
-		$("#results").fadeOut();
-		$.ajax({
-			type:"GET",
-			data: $(this).serialize(),
-			url: "populate-org-page.php",
-			success: function(msg)
-				{
-				$("#results").html(msg);
-				$("#results").fadeIn();
-				}
-		});
-		
-		
-		$("#search-text").animate({"width":"229px"});
-		$("#results2").fadeOut();
-		$.ajax({
-			type:"GET",
-			data: $(this).serialize(),
-			url: "populate-org-page-bottom.php",
-			success: function(msg)
-				{
-				$("#results2").html(msg);
-				$("#results2").fadeIn();
-				}
-		});
-});	
-
-
-</script>
 </head>
 <body>
 <div id="wrap">
@@ -214,7 +167,7 @@ Phone Number
  Your Next Program...
 </div>
 <div class="rightText"  style="float: right;">        
-<a href="program-management-org.php?state=all">view all</a>
+<a href="program-management-display.php?state=All">view all</a>
 </div>
 </div>
 </div>
@@ -231,13 +184,6 @@ Phone Number
 </div>
 </div>
 
-
-
-
-
-
-
-
 <!--This is used for the  snapshot box-->
 <div class="boxFormat3">
 <div class="box1">
@@ -249,19 +195,19 @@ Phone Number
 <div class="boxFormat2">
 <div class="snapShotBox">
 <div class="volunteersSnapshot" style="float: left; font:bold 0.6em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 7px; text-align:center;">
-<a href="volunteers-in-org.php"><img src="../images/emptyIcon.jpg" width="30" height="40" ></a>
+<a href="org-volunteer-mgmt.php?state=All"><img src="../images/emptyIcon.jpg" width="30" height="40" ></a>
 <br>
 Volunteers
 </div>
 <div class="upcomingSnapshot" style="float: left; font:bold 0.6em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 9px; text-align:center;">
 
-<a href="program-management-org.php?state=upcoming"><img src="../images/emptyIcon.jpg" width="30" height="40" ></a>
+<a href="program-management-display.php?state=UpcomingPrograms"><img src="../images/emptyIcon.jpg" width="30" height="40" ></a>
 <br>
 Upcoming Programs
 
 </div>
 <div class="pastProgramsSnapshot" style="float: left; font:bold 0.6em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 9px; text-align:center;">
-<a href="program-management-org.php?state=past"><img src="../images/emptyIcon.jpg" width="30" height="40" ></a>
+<a href="program-management-display.php?state=PastPrograms"><img src="../images/emptyIcon.jpg" width="30" height="40" ></a>
 <br>
 Past Programs
 </div>
@@ -365,7 +311,15 @@ rows="5" cols="37"
 <?php
 	if(isset($_SESSION['ORG_WEBSITE'])) 
 	{
-		echo '<a href="http://',$_SESSION['ORG_WEBSITE'],'">',$_SESSION['ORG_WEBSITE'],'</a>';
+		if(substr($_SESSION['ORG_WEBSITE'], 0, 4) == 'http')
+		{
+			echo '<a href="',$_SESSION['ORG_WEBSITE'],'">',$_SESSION['ORG_WEBSITE'],'</a>';
+		}
+		else
+		{	
+			echo '<a href="http://',$_SESSION['ORG_WEBSITE'],'">',$_SESSION['ORG_WEBSITE'],'</a>';	
+		}
+
 	}?>
 <br>
 <?php echo $_SESSION['ORG_PHONE'];?>
@@ -378,27 +332,64 @@ rows="5" cols="37"
 
 	if(isset($_SESSION['FACEBOOK_LINK'])) 
 	{
-		echo '<a href="http://',$_SESSION['FACEBOOK_LINK'],'"><img src="../images/fbook.png" width="20" height="20" alt="Facebook" /></a>';
+		if(substr($_SESSION['FACEBOOK_LINK'], 0, 4) == 'http')
+		{
+			echo '<a href="',$_SESSION['FACEBOOK_LINK'],'"><img src="../images/fbook.png" width="20" height="20" alt="Facebook" /></a>';
+		}
+		else
+		{	
+			echo '<a href="http://',$_SESSION['FACEBOOK_LINK'],'"><img src="../images/fbook.png" width="20" height="20" alt="Facebook" /></a>';	
+		}
 	}
 
 	if(isset($_SESSION['TWITTER_LINK'])) 
 	{
-		echo '<a href="http://',$_SESSION['TWITTER_LINK'],'"><img src="../images/twitter.png" width="20" height="20" alt="Twitter" /></a>';
+		if(substr($_SESSION['TWITTER_LINK'], 0, 4) == 'http')
+		{
+			echo '<a href="',$_SESSION['TWITTER_LINK'],'"><img src="../images/twitter.png" width="20" height="20" alt="Twitter" /></a>';
+		}
+		else
+		{	
+			echo '<a href="http://',$_SESSION['TWITTER_LINK'],'"><img src="../images/twitter.png" width="20" height="20" alt="Twitter" /></a>';	
+		}
+		
 	}
 
 	if(isset($_SESSION['LINKEDIN_LINK'])) 
 	{
-		echo '<a href="http://',$_SESSION['LINKEDIN_LINK'],'"><img src="../images/linkedin.png" width="20" height="20" alt="Linked In" /></a>';
+		if(substr($_SESSION['LINKEDIN_LINK'], 0, 4) == 'http')
+		{
+			echo '<a href="',$_SESSION['LINKEDIN_LINK'],'"><img src="../images/linkedin.png" width="20" height="20" alt="Linked In" /></a>';
+		}
+		else
+		{	
+			echo '<a href="http://',$_SESSION['LINKEDIN_LINK'],'"><img src="../images/linkedin.png" width="20" height="20" alt="Linked In" /></a>';	
+		}
+
 	}
 
 	if(isset($_SESSION['BLOG_LINK'])) 
 	{
-		echo '<a href="http://',$_SESSION['LINKEDIN_LINK'],'"><img src="../images/blogger.png" width="20" height="20" alt="Blog" /></a>';
+		if(substr($_SESSION['BLOG_LINK'], 0, 4) == 'http')
+		{
+			echo '<a href="',$_SESSION['BLOG_LINK'],'"><img src="../images/blogger.png" width="20" height="20" alt="Blog" /></a>';
+		}
+		else
+		{	
+			echo '<a href="http://',$_SESSION['BLOG_LINK'],'"><img src="../images/blogger.png" width="20" height="20" alt="Blog" /></a>';	
+		}
 	}
 
 	if(isset($_SESSION['YOUTUBE_LINK'])) 
 	{
-		echo '<a href="http://',$_SESSION['YOUTUBE_LINK'],'"><img src="../images/youTube.png" width="20" height="20" alt="You Tube" /></a>';
+		if(substr($_SESSION['YOUTUBE_LINK'], 0, 4) == 'http')
+		{
+			echo '<a href="',$_SESSION['YOUTUBE_LINK'],'"><img src="../images/youTube.png" width="20" height="20" alt="You Tube" /></a>';
+		}
+		else
+		{	
+			echo '<a href="http://',$_SESSION['YOUTUBE_LINK'],'"><img src="../images/youTube.png" width="20" height="20" alt="You Tube" /></a>';	
+		}
 	}
 ?>
 
@@ -423,16 +414,17 @@ rows="5" cols="37"
 
 
 
-
-
-
-
 <div class="boxFormat11">
 <div class="box9">
 The Most Awesomest Volunteers
 </div>
-<div class="rightText"  style="float: right; padding: 0px 0px 0px 50px;">        
-<a href="view-all-volunteers-org.php">View All</a> |  <a href="invite-volunteers.php">Invite Volunteers</a>
+<div class="rightText"  style="float: left; padding: 0px 0px 0px 80px;">        
+<a href="org-volunteer-mgmt.php?state=All">View All</a> |  <a href="invite-volunteers.php">Invite Volunteers</a>
+</div>
+
+<div class="slidersizing">
+<ul id="slider">
+</ul> <!-- end Slider #1 -->
 </div>
 </div>
 
@@ -441,16 +433,31 @@ The Most Awesomest Volunteers
 <div class="box9">
 Upcoming Programs
 </div>
-<div class="rightText"  style="float: right; padding: 0px 0px 0px 65px;">        
-<a href="program-management-org.php?state=all">View all</a> |  <a href="program-management-org.php?state=calendar">Calendar View</a>
+<div class="rightText"  style="float: right; padding: 0px 0px 0px 10px;">      
+
+<a href="program-management-display.php?state=All">View all</a> | <a href="#" class="listViewShowHide" onclick="$('.calendar').fullCalendar('destroy');">List View</a> | <a href="#" onclick="makeCalendar();" class="calendarViewShowHide">Calendar View</a>
+
+
 </div>
 </div>
 
 <div class="boxFormat17">
 <div class="box15">
+<div class="listView">
 <div id='results2'>
 </div>
+</div>
+<div class="calendarView">
+<?php 
+if(isset($_SESSION['SHOW_CALENDAR']))
+{
+		echo '<script>$(".listView").hide();</script>';
+}
 
+?>
+<div class="calendar" style="width: 625px;">
+</div>
+</div>
 </div>
 </div>
 
@@ -458,11 +465,16 @@ Upcoming Programs
 </div>
 
 </div>
+
 <div id="footerclear"></div><?php include "footer.php";?>
 </body>
 </html>
-
-
-
+<script src="../js/popup.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+<script src="../js/jquery.movingboxes.js"></script>
+<script type="text/javascript" src="../js/orgProgAndImages.js"></script>
+<script type='text/javascript' src="../js/populateCalendar.js"></script>
+<script type='text/javascript' src="../js/fullcalendar.min.js"></script>
+<script src="../js/programMgmt.js" type="text/javascript" charset="utf-8"></script>
 
 

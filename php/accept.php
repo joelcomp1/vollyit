@@ -21,7 +21,7 @@
 	$todaysDate = date("m/d/Y h:i:s A");
 
 
-	$qry = "update friends set updated_at='$todaysDate', status='ACCEPTED' where id_inviter='$pendingReqeuest' and id_request='$login'";
+	$qry = "update friends set updated_at='$todaysDate', status='ACCEPTED' where id_inviter='$pendingReqeuest' and id_request='$login' or  id_inviter='$login' and id_request='$pendingReqeuest'";
 	$result = @mysql_query($qry);
 	    
 	$url = $_SESSION['ref'];

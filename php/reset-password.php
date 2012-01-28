@@ -102,7 +102,7 @@
 		$message .= "&reset=";
 		$message .= $uid;
 		$message .="'>Reset Your Password</a></p>";
-		$message .= "<p>If you think you received this message in error, please disreguard.</p><p></p></body></html>";
+		$message .= "<p>If you think you received this message in error, please disregard.</p><p></p></body></html>";
 
 	}
 	

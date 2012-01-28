@@ -13,91 +13,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Volly.it: <?php echo $_SESSION['ORG_NAME'];?>'s Profile</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
- <script type="text/javascript" src="../js/jquery.js"></script>
-  <script type="text/javascript" src="../js/collection.js"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
-  <script src="../js/popup.js" type="text/javascript"></script>
+<link href="../css/liveQuery.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../js/jquery.js"></script>
 <link href="loginmodule.css" rel="stylesheet" type="text/css" />
-
 <script type="text/javascript" src="../js/jquery-1.2.1.pack.js"></script>
-<script LANGUAGE="JavaScript">
-
-function CountLeft(field, count, max) {
-
-if (field.value.length > max)
-
-field.value = field.value.substring(0, max);
-
-else
-
-count.value = max - field.value.length;
-
-}
-	function lookup(inputString) {
-		if(inputString.length == 0) {
-			// Hide the suggestion box.
-			$('#suggestions').hide();
-		} else {
-			$.post("search-programs-noorg.php", {queryString: ""+inputString+""}, function(data){
-				if(data.length >0) {
-					$('#suggestions').show();
-					$('#autoSuggestionsList').html(data);
-				}
-			});
-		}
-	} // lookup
-	
-	function fillPrograms(thisValue) {
-		$('#inputString').val(thisValue);
-		setTimeout("$('#suggestions').hide();", 200);
-	}
-
-
-</script>
-
-<style type="text/css">
-	body {
-		font-family: Helvetica;
-		font-size: 11px;
-		color: #000;
-	}
-	
-	h3 {
-		margin: 0px;
-		padding: 0px;	
-	}
-
-	.suggestionsBox, .suggestionsBox2, .suggestionsBox3, .suggestionsBox4{
-		position: relative;
-		left: 30px;
-		margin: 10px 0px 0px 0px;
-		width: 200px;
-		background-color: #212427;
-		-moz-border-radius: 7px;
-		-webkit-border-radius: 7px;
-		border: 2px solid #000;	
-		color: #fff;
-	}
-	
-	.suggestionList, .suggestionList2 , .suggestionList3, .suggestionList4 {
-		margin: 0px;
-		padding: 0px;
-	}
-	
-	.suggestionList li, .suggestionList2 li, .suggestionList3 li, .suggestionList4 li{
-		
-		margin: 0px 0px 3px 0px;
-		padding: 3px;
-		cursor: pointer;
-	}
-	
-	.suggestionList li:hover, .suggestionList2 li:hover , .suggestionList3 li:hover , .suggestionList4 li:hover {
-		background-color: #659CD8;
-	}
-	
-
-
-</style>
+<script LANGUAGE="JavaScript" src="../js/textMsg.js"></script>
 </head>
 <body>
 
@@ -140,12 +60,12 @@ To:
 </div>
  <div class="clear"></div>
  <br>
-      Type Test Message:
+      Type Text Message:
 	  <div class="clear"></div>
 
 	  <font size="1" face="arial, helvetica, sans-serif"> 
 <textarea name="textMsg"   id="textMsg" class="textfield"
-rows="5" cols="37"  onKeyDown="CountLeft(this.form.textMsg, this.form.left,160);" onKeyUp="CountLeft(this.form.textMsg,this.form.left,160);"
+rows="5" cols="37" style="resize: none;" onKeyDown="CountLeft(this.form.textMsg, this.form.left,160);" onKeyUp="CountLeft(this.form.textMsg,this.form.left,160);"
  >
 </textarea>
 <input readonly type="text" name="left" size=3 maxlength=3 value="160"> characters left</font>

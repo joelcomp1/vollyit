@@ -1,17 +1,8 @@
 <?php
 	require_once('auth.php');
-	
-// make a note of the current working directory relative to root.
-$directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
 
-// make a note of the location of the upload handler
-$uploadHandler = 'http://' . $_SERVER['HTTP_HOST'] . $directory_self . 'upload.processor.php';
-
-// set a max file size for the html upload form
-$max_file_size = 3000000; // size in bytes
-
-include "header-org.php";
-include "navigation.php";
+	include "header-org.php";
+	include "navigation.php";
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -23,11 +14,6 @@ include "navigation.php";
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Volly.it: <?php echo $_SESSION['ORG_NAME'];?>'s Profile</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
- <script type="text/javascript" src="../js/jquery.js"></script>
-  <script type="text/javascript" src="../js/collection.js"></script>
-  <script src="../js/popup.js" type="text/javascript"></script>
-  <script LANGUAGE="JavaScript" SRC="../js/date.js"></script>
-
 <link href="loginmodule.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -342,7 +328,8 @@ Filled
 <div id="footerclear"></div><?php include "footer.php";?>
 </body>
 </html>
-
+ <script type="text/javascript" src="../js/jquery.js"></script>
+  <script type="text/javascript" src="../js/collection.js"></script>
 
 
 

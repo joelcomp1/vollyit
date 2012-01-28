@@ -62,6 +62,7 @@
 .calendar {
 		width: 900px;
 		margin: 0 auto;
+
 }
 	
 .calendarView
@@ -164,7 +165,7 @@ a:hover, #content a:hover {color:#d35537; text-decoration:underline!important;}
 #mainnavuser buttonSet1 {float:right;}
 #mainnavuser h2 {float:right;  padding:0px 0 0 55px; font: 'TeXGyreAdventor', Arial, sans-serif; color:#d35537; text-shadow:#fff 1px 1px 1px; }
 #mainnavuser h3 {float:inherit;  font: bold 3.8em 'TeXGyreAdventor', Arial, sans-serif; color:#d35537; text-shadow:#fff 1px 1px 1px; text-align:center;}
-#mainnavuser h4 {float:inherit;  font: bold 1.8em 'TeXGyreAdventor', Arial, sans-serif; color:#d35537; text-shadow:#fff 1px 1px 1px; }
+#mainnavuser h4 {float:inherit;  font: bold 1.8em 'TeXGyreAdventor', Arial, sans-serif; color:#d35537; text-shadow:#fff 1px 1px 1px; text-align:center;}
 #homeheader h2 {display:block; width:450px; float:left; padding:85px 0 0 40px; color:#fff; font:normal 1.4em 'DroidSansRegular', Verdana, Geneva, sans-serif; line-height:1.8em;}
 #homeheader h2 span {display:block; font:bold 1.6em 'TeXGyreAdventor', Arial, sans-serif!important; color:#89260f; text-shadow:#f98465 1px 1px 1px; line-height:1em!important; margin-bottom:20px;}
 #bottom {width:440px;margin:0 auto;padding:15px;position:relative;z-index:10}
@@ -275,6 +276,21 @@ padding: 10px 0px 0px;
 font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
 }
 
+
+.orgListComplete {
+float:left;
+overflow-y: scroll;
+        width: 260px;
+		height:308px;
+
+font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+.yourOrganizationsCollection
+{
+overflow-y: scroll;
+	height:500px;
+}
 
 .emailInviteInnerMain {
 float:left;
@@ -534,6 +550,17 @@ font:bold 1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
         border: solid #190707;
         border-width: 2px 2px 2px 2px;
         background-color: #F5ECCE;
+font:bold 1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+
+
+.box20{
+	width: 490px;
+	height: 20px;
+		padding: 0px 0px 10px 0px;
+
+        border: solid #190707;
+        border-width: 2px 2px 2px 2px;
 font:bold 1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
 }
 
@@ -834,6 +861,11 @@ padding: 0px 0 0 50px;
 float:left;
 padding: 60px 0 0 70px;
 }
+.slidersizing
+{
+float:left;
+}
+
 .boxFormat14
 {
 float:left;
@@ -849,6 +881,13 @@ padding: 0px 0 0 70px;
 float:left;
 padding: 0px 0 0 20px;
 }
+.boxFormat20
+{
+float:left;
+padding: 0px 0 0 0px;
+}
+
+
 .boxFormat16
 {
 float:left;
@@ -889,6 +928,11 @@ padding: 0px 10px 0px 10px;
         background-color: #F5ECCE;
 font:bold 1.5em 'TeXGyreAdventor', Arial, sans-serif!important;
 }
+#positionToShow {
+float:left;
+padding: 0px 0px 0px 10px;
+}
+
 
 #searchResultsNameLocation {
 float:left;
@@ -939,6 +983,19 @@ padding: 0px 0px 0px 10px;
         background-color: #F5ECCE;
 font:bold 0.9em 'TeXGyreAdventor', Arial, sans-serif!important;
 }
+#volunteerAboutMe {
+float:left;
+width: 250px;
+padding: 0px 0px 0px 10px;
+        background-color: #F5ECCE;
+font:bold 0.9em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+#volInfo {
+float:left;
+padding: 0px 0px 0px 10px;
+        background-color: #F5ECCE;
+font:bold 0.9em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
 
 #orgInfoForDisplay {
 float:left;
@@ -957,6 +1014,20 @@ text-align:center;
 #programlinks {
 float:right;
 padding: 0px 10px 0px 10px;
+        background-color: #F5ECCE;
+font:bold 0.9em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+#vollinkRequest {
+float:right;
+width: 60px;
+padding: 0px 10px 0px 30px;
+        background-color: #F5ECCE;
+font:bold 0.9em 'TeXGyreAdventor', Arial, sans-serif!important;
+}
+#volStatusRequest {
+float:right;
+width: 80px;
+padding: 0px 10px 0px 50px;
         background-color: #F5ECCE;
 font:bold 0.9em 'TeXGyreAdventor', Arial, sans-serif!important;
 }
@@ -1302,11 +1373,21 @@ border:1px solid #cecece;
 z-index:1;
 font-family :'DroidSansRegular', Verdana, Geneva, sans-serif;
 }
-#popupContact2, #popupContact3, #popupContact4, #popupContact5, #popupContact6, #popupContact7, #popupContact8, #popupContact9, #popupContact10, #popupContact11, #popupContact12{
+#popupContact2, #popupContact3, #popupContact4, #popupContact5, #popupContact6, #popupContact7, #popupContact8, #popupContact9, #popupContact10, #popupContact11{
 display:none;
 position:fixed;
 _position:absolute; /* hack for internet explorer 6*/
 height:184px;
+width:490px;
+background:#FFFFFF;
+border:2px solid #cecece;
+z-index:2;
+padding:12px;
+font-size:13px;
+}
+
+#popupContact12{
+display:none;
 width:490px;
 background:#FFFFFF;
 border:2px solid #cecece;
@@ -1432,7 +1513,7 @@ display:none;
 	margin:15px 0px;
 	padding:0px;
 }
-#results ul li,#results2 ul li {
+#results ul li,#results2 ul li{
 	background:#f8f9fc;
 	padding:5px 5px 5px 18px;
 	margin-bottom:15px;

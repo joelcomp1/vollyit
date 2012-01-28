@@ -11,21 +11,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Volly.it: <?php echo $_SESSION['ORG_NAME'];?>'s Profile</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
- <script type="../text/javascript" src="../js/jquery.js"></script>
-  <script type="../text/javascript" src="../js/collection.js"></script>
-<link href="loginmodule.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="../form.css" type="text/css" />
-    <link rel="stylesheet" href="../css/jquery-ui-1.8.14.custom.css" type="text/css" />
-    <link rel="stylesheet" href="../css/jquery.ui.timepicker.css?v=0.2.9" type="text/css" />
-    <script type="text/javascript" src="../js/jquery-1.5.1.min.js"></script>
-    <script type="text/javascript" src="../js/jquery.ui.core.min.js"></script>
-	<script src="../js/calendar.js"></script>
-	<link href="../css/calendar.css" rel="stylesheet">
-	<script src="../js/jquery-1.5.1.min.js" type="text/javascript" charset="utf-8"></script>
-<script type='text/javascript' src="../js/jquery-1.5.2.min.js"></script>
-<script type='text/javascript' src="../js/jquery-ui-1.8.11.custom.min.js"></script>
-    <script type="text/javascript" src="../js/jquery.ui.timepicker.js?v=0.2.9"></script>
-<script src="../scripts/wufoo.js"></script>
+<link rel="stylesheet" href="../css/jquery-ui-1.8.14.custom.css" type="text/css" />
+<link rel="stylesheet" href="../css/jquery.ui.timepicker.css?v=0.2.9" type="text/css" />
+<link href="../css/calendar.css" rel="stylesheet">
 </head>
 <body>
 
@@ -339,9 +327,11 @@ No End Date
 <div id="footerclear"></div><?php include "footer.php";?>
 </body>
 </html>
-
-
-
+<script type="text/javascript" src="../js/jquery-1.5.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery.ui.core.min.js"></script>
+<script src="../js/calendar.js"></script>
+<script type='text/javascript' src="../js/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="../js/jquery.ui.timepicker.js?v=0.2.9"></script>
 
 
 
