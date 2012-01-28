@@ -24,7 +24,7 @@ include 'navigation-vol.php';
   <script type="text/javascript" src="../js/collection.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
   <script src="../js/popup.js" type="text/javascript"></script>
-  <script type="text/javascript" src="../js/characterCounter.js"></script>
+
 <link href="loginmodule.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -127,14 +127,14 @@ A Dolphin will smile if you do
 <div class="box2">
 <div class="volunteersSnapshot" style="float: left; font:bold 0.8em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 5px;">
 <center>
-<a href="organizations-vol.php"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a>
+<a href="#" onclick="popup(250, 'popup5');" class="poplight"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a>
 <br>
 Organizations
 </center>
 </div>
 <div class="upcomingSnapshot" style="float: left; font:bold 0.8em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 5px;">
 <center>
-<a href="vol-friends.php"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a>
+<a href="#" onclick="popup(250, 'popup4');" class="poplight"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a>
 <br>
 Friends
 </center>
@@ -166,7 +166,7 @@ Past Vollys
 <div class="boxFormat7">
 <div class="box1">
 <div class="leftText" style="float: left;">
-<a href="vol-organizations.php">My Organizations</a>
+<a href="#" onclick="popup(250, 'popup5');" class="poplight">My Organizations</a>
 </div>
 <div class="rightText"  style="float: right;">        
 <a href="search-vol.php">find organizations</a>
@@ -175,13 +175,9 @@ Past Vollys
 </div>
 </div>
 
+<div id='results2'>
+</div>
 
-<!--This is used for the about box part 3-->
-<div class="userOrganizations">
-<div class="box2">
-<br>
-</div>
-</div>
 
 <!--This is used for the about box-->
 <div class="aboutmevol">
@@ -240,20 +236,12 @@ onKeyUp="toCount('eBann','sBann','{CHAR} characters left',500);">
 </div>
 </div>
 
-
-
-<!--This is used for the Friends box-->
-<div class="boxFormat3">
-<div class="box1">
-<a href="vol-all-friends.php">Friends (<?php echo $_SESSION['VOL_TOTAL_FRIENDS'];?>)</a>
-</div>
+<div id='results'>
 </div>
 
-<!--This is used for the Friends box part 2-->
-<div class="boxFormat2">
-<div class="box2">
-</div>
-</div>
+
+
+
 
 <!--This is used for the Friends box part 3-->
 <div class="boxFormat2">
@@ -271,15 +259,23 @@ onKeyUp="toCount('eBann','sBann','{CHAR} characters left',500);">
 </div>
 </div>
 
+<div id="popup5" class="popup_block">
+<div id='results3'>
+</div>
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
+</div>
 
-
-
+<div id="popup4" class="popup_block">
+<div id='results4'>
+</div>
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
+</div>
 
 
 
 <!--POPUP to finish registration if needed-->
 <div id="popup3" class="popup_block">
-	    <h4>Great! You're in. <br> We need a few more details.</h4>
+	     <div id="finishUser" style="text-align:left;"><h4>Great! You're in. <br> We need a few more details.</h4>
 		<br>
 		<?php
 	if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
@@ -292,7 +288,7 @@ onKeyUp="toCount('eBann','sBann','{CHAR} characters left',500);">
 	}
 	?>
 <form id="loginForm" name="loginForm" method="post" action="complete-reg-exec-vol.php">
- <b>First Name</b>
+<b>First Name</b>
  <input name="firstName" type="text" class="textfield" id="login" tabindex="1" style="color:#0000;" value="<?php echo $_SESSION['VOL_FIRST_NAME'];?>" onfocus="this.value = this.value=='First Name' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'First Name' : this.value; this.value=='First Name' ? this.style.color='#999' : this.style.color='#000'"/>
 <br><b>Last Name</b>
 <input name="lastName" type="text" class="textfield" id="lastName" tabindex="2" style="color:#0000;" value="<?php echo $_SESSION['VOL_LAST_NAME'];?>" onfocus="this.value = this.value=='Last Name' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Last Name' : this.value; this.value=='Last Name' ? this.style.color='#999' : this.style.color='#000'"/>
@@ -363,24 +359,30 @@ onKeyUp="toCount('eBann','sBann','{CHAR} characters left',500);">
 <input id="Field134_0" name="Field134" type="radio" class="field radio" value="Public" tabindex="21" <?php if($_SESSION['VOL_PRIVACY'] == 'Public'){ echo 'checked="checked"'; } ?>
 />
 <label class="choice" for="Field134_0" >
-Public</label>
+Public Profile</label>
 </span>
 <span>
 <input id="Field134_1" name="Field134" type="radio" class="field radio" value="Private" tabindex="22" <?php if($_SESSION['VOL_PRIVACY'] == 'Private'){ echo 'checked="checked"'; } ?>/>
 <label class="choice" for="Field134_1" >
-Private</label>
+Private Profile</label>
 </span>
 <span>
 <input id="Field134_2" name="Field134" type="radio" class="field radio" value="Hidden" tabindex="23" <?php if($_SESSION['VOL_PRIVACY'] == 'Hidden'){ echo 'checked="checked"'; } ?>/>
 <label class="choice" for="Field134_2" >
-Hidden</label>
+Hidden Profile</label>
 </span>
-<br>
+<a href="#" onclick="$('#finishUser').hide(); $('#helpOnProfileType').show();"><img src="../images/help.png" width="20" height="20" style="float:right; padding: 0px 0px 0px 50px;"><a><br><br>
       &nbsp;
+	  <div style="text-align:center;">
       <input type="submit" name="Submit" tabindex="6" value="Finish" />
-
+		</div>
 
 </form>
+</div>
+<div id="helpOnProfileType" style="display:none;">
+Help info here about stuff <br>
+<a href="#" onclick="$('#finishUser').show(); $('#helpOnProfileType').hide();">Back To Sign-up<a><br>
+</div>
 </div>
 </div>
 </div>
@@ -390,59 +392,6 @@ Hidden</label>
 
 
 
-
-<script type="text/javascript">
-$(document).ready(function(){
-
-
-
-	$.fn.popOpen = function(){
-		
-		popID = $(this).attr('rel'); //Get Popup Name
-		popURL = $(this).attr('href'); //Get Popup href to define size
-		
-		//Pull Query & Variables from href URL
-		query= popURL.split('?');
-		dim= query[1].split('&');
-		popWidth = dim[0].split('=')[1]; //Gets the first query string value
-		
-		
-		//Fade in the Popup and add close button
-		$('#' + popID).fadeIn().css({ 'width': Number( popWidth ) }).prepend();
-		
-		//Define margin for center alignment (vertical + horizontal) - we add 80 to the height/width to accomodate for the padding + border width defined in the css
-		var popMargTop = ($('#' + popID).height() + 80) / 2;
-		var popMargLeft = ($('#' + popID).width() + 80) / 2;
-		
-		//Apply Margin to Popup
-		$('#' + popID).css({ 
-			'margin-top' : -popMargTop,
-			'margin-left' : -popMargLeft
-		});
-		
-		//Fade in Background
-		$('body').append('<div id="fade"></div>'); //Add the fade layer to bottom of the body tag.
-		$('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn(); //Fade in the fade layer 
-		
-	};
-
-	//When you click on a link with class of poplight and the href starts with a # 
-	$('a.poplight[href^=#]').click(function() {
-		$(this).popOpen(); //Run popOpen function on click
-		return false;
-	});
-	
-	$('a.poplight[href=#?w=350]').popOpen(); //Run popOpen function once on load
-	
-	//Close Popups and Fade Layer
-/*	$('a.close, #fade').live('click', function() { //When clicking on the close or fade layer...
-	  	$('#fade , .popup_block').fadeOut(); //fade them both out
-		$('#fade').remove();
-		return false;
-	});*/
-
-
-	popOpen
-	
-});
-</script>
+<script type="text/javascript" src="../js/memberIndexVol.js"></script>
+<script type="text/javascript" src="../js/customPopupBox.js"></script>
+<script type="text/javascript" src="../js/characterCounter.js"></script>

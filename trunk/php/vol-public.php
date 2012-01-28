@@ -39,31 +39,64 @@ $max_file_size = 3000000; // size in bytes
 
 <body>
 
+<script type="text/javascript">
+
+$(function(){
+
+	
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "friends-accepted.php",
+			success: function(msg)
+				{
+				$("#results").html(msg);
+	
+				}
+		});
+		
+	
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "org-accepted.php",
+			success: function(msg)
+				{
+				$("#results2").html(msg);
+	
+				}
+		});
+		
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "org-accepted-fulllist.php",
+			success: function(msg)
+				{
+				$("#results3").html(msg);
+	
+				}
+		});
+		
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "friends-accepted-fulllist.php",
+			success: function(msg)
+				{
+				$("#results4").html(msg);
+	
+				}
+		});
+		
+});	
+	
+</script>
 
 <div id="wrap">
 <div id="mainnavuser">
 <br>
-<div id="popup4" class="popup_block" style="text-align:center;">
-<a id="imageUploadClose">x</a>
-<form id="Upload" action="upload.processor.php" enctype="multipart/form-data" method="post">
-		<p>
-			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size ?>">
 
-		<center>
-			<label for="file">You need a Picture!</label>
-			<br>
-			<br>
-			<input id="file" type="file" name="file">
-				<br>
-<br>
-			<input id="submit" type="submit" name="submit" value="Upload me!">
-				</center>
-		</p>
-	
-	
-	</form>
-</div>
-<div id="backgroundCloseImageLoad"></div>
 
 <div class="clear"></div>
 <h3>
@@ -83,12 +116,23 @@ $max_file_size = 3000000; // size in bytes
 	}
 	?>
 <br>
-<h1>
-<?php echo $_SESSION['VOL_USER_FIRST_NAME']; echo ' '; echo $_SESSION['VOL_USER_LAST_NAME'];?></h1>
+<h4>
+<?php echo $_SESSION['VOL_USER_FIRST_NAME']; echo ' '; echo $_SESSION['VOL_USER_LAST_NAME'];?></h4>
 <div class="clear"></div>
-<a href="add-friend.php">Add Me As Your Friend</a><br>
-A Dolphin will smile if you do
+<?php 
+if(($_SESSION['VOL_FRIEND_STATUS'] != '') && ($_SESSION['VOL_FRIEND_STATUS'] != 'ACCEPTED'))
+{
+	echo 'Your Friend Request Has Been Sent<br>';
+}
+else if(($_SESSION['VOL_FRIEND_STATUS'] == 'ACCEPTED') || ($_SESSION['SESS_ORG_OR_VOL'] == 'ORG'))
+{
+}
+else
+{
+	echo '<a href="add-friend.php">Add Me As Your Friend</a><br>';
+	echo 'A Dolphin will smile if you do';
 
+	}?>
 	
 <div id="popupContact">
 	<center>
@@ -138,14 +182,14 @@ A Dolphin will smile if you do
 <div class="box2">
 <div class="volunteersSnapshot" style="float: left; font:bold 0.8em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 5px;">
 <center>
-<a href="organizations-vol.php"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a>
+<a href="#" onclick="popup(250, 'popup5');" class="poplight"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a>
 <br>
 Organizations
 </center>
 </div>
 <div class="upcomingSnapshot" style="float: left; font:bold 0.8em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 5px;">
 <center>
-<a href="vol-friends.php"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a>
+<a href="#" onclick="popup(250, 'popup4');" class="poplight"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a>
 <br>
 Friends
 </center>
@@ -189,7 +233,7 @@ Past Vollys
  <?php echo $_SESSION['VOL_USER_FIRST_NAME'];?>'s  Organizations
 </div>
 <div class="rightText"  style="float: right;">        
-<a href="view-all-organizations.php">view all</a>
+<a href="#" onclick="popup(250, 'popup5');" class="poplight">view all</a>
 </div>
 
 </div>
@@ -209,11 +253,10 @@ Past Vollys
 
 
 <!--This is used for the about box part 3-->
-<div class="userOrganizations">
-<div class="box2">
-<br>
+
+<div id='results2'>
 </div>
-</div>
+
 
 <!--This is used for the users organizations box part 3-->
 <div class="boxFormat2">
@@ -223,23 +266,11 @@ Past Vollys
 </div>
 
 <!--This is used for the Friends box-->
-<div class="boxFormat3">
-<div class="box1">
-<div class="leftText" style="float: left;">
- <?php echo $_SESSION['VOL_USER_FIRST_NAME'];?>'s  Friends
-</div>
-<div class="rightText"  style="float: right;">        
-<a href="view-all-friends.php">view all</a>
+
+<div id='results'>
 </div>
 
-</div>
-</div>
 
-<!--This is used for the Friends box part 2-->
-<div class="boxFormat2">
-<div class="box2">
-</div>
-</div>
 
 <!--This is used for the About me box part 3-->
 <div class="boxFormat5">
@@ -255,7 +286,17 @@ Past Vollys
 <br>
 </div>
 </div>
+<div id="popup5" class="popup_block">
+<div id='results3'>
+</div>
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
+</div>
 
+<div id="popup4" class="popup_block">
+<div id='results4'>
+</div>
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
+</div>
 </div>
 </div>
 <div id="footerclear"></div><?php include "footer.php";?>
@@ -301,21 +342,49 @@ $(document).ready(function(){
 
 	//When you click on a link with class of poplight and the href starts with a # 
 	$('a.poplight[href^=#]').click(function() {
-		$(this).popOpen(); //Run popOpen function on click
+		popUp(); //Run popOpen function on click
 		return false;
 	});
 	
 	$('a.poplight[href=#?w=350]').popOpen(); //Run popOpen function once on load
 	
 	//Close Popups and Fade Layer
-/*	$('a.close, #fade').live('click', function() { //When clicking on the close or fade layer...
+	$('a.close, #fade').live('click', function() { //When clicking on the close or fade layer...
 	  	$('#fade , .popup_block').fadeOut(); //fade them both out
 		$('#fade').remove();
 		return false;
-	});*/
+	});
 
 
 	popOpen
 	
 });
+</script>
+<script type="text/javascript">
+	function popup(width, name){
+		var popID = new String(name);
+
+		popURL = width; //Get Popup href to define size
+		
+		popWidth = width; //Gets the first query string value
+
+		
+		//Fade in the Popup and add close button
+		$('#' + popID).fadeIn().css({ 'width': Number( popWidth ) }).prepend();
+		
+		//Define margin for center alignment (vertical + horizontal) - we add 80 to the height/width to accomodate for the padding + border width defined in the css
+		var popMargTop = ($('#' + popID).height() + 80) / 2;
+		var popMargLeft = ($('#' + popID).width() + 80) / 2;
+		
+		//Apply Margin to Popup
+		$('#' + popID).css({ 
+			'margin-top' : -popMargTop,
+			'margin-left' : -popMargLeft
+		});
+		
+		//Fade in Background
+		$('body').append('<div id="fade"></div>'); //Add the fade layer to bottom of the body tag.
+		$('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn(); //Fade in the fade layer 
+		
+	};
 </script>

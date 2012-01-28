@@ -22,7 +22,82 @@
 
 <script type="text/javascript" src="http://static.twilio.com/libs/twiliojs/1.0/twilio.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-		<script type="text/javascript">
+		
+</head>
+<body>
+
+<div id="wrap">
+<div id="mainnavuser">
+<br>
+<div class="clear"></div>
+<h3>
+Messaging Center
+</h3>
+<div class="clear"></div>
+<h3>
+<div class="allDay">
+Call Your Volunteers
+</div>
+</h3>
+<?php	
+	if( isset($_SESSION['ERRMSG_ARR']) && is_array($_SESSION['ERRMSG_ARR']) && count($_SESSION['ERRMSG_ARR']) >0 ) {
+		echo '<ul class="err">';
+		foreach($_SESSION['ERRMSG_ARR'] as $msg) {
+			echo '<li>',$msg,'</li>'; 
+		}
+		echo '</ul>';
+		unset($_SESSION['ERRMSG_ARR']);
+	}
+?>
+<div class="clear"></div>
+<div class="boxFormat10">
+<div class="contactVols">
+
+<form id="sendSms" name="sendSms" method="post" action="send-voicemail.php">
+<div class="volSearchLeftInnter" style="float:left">
+To: 
+
+<input name="name" type="text" size="30" id="inputString" onkeyup="lookup(this.value);" onblur="fillPrograms();" value="Program Name" onfocus="this.value = this.value=='Program Name' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Program Name' : this.value; this.value=='Program Name' ? this.style.color='#999' : this.style.color='#000'"/>
+<div class="suggestionsBox" id="suggestions" style="display: none; text: font:bold 0.4em 'TeXGyreAdventor', Arial, sans-serif!important;">
+	<img src="../images/upArrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
+<div class="suggestionList" id="autoSuggestionsList">
+		&nbsp;
+	</div>
+	</div>
+
+
+</div>
+ <div class="clear"></div>
+ <br>
+      Record Voice Message:
+	  <div class="clear"></div><br><br>
+
+<input type="button" id="call" value="Begin Recording"/>
+<input type="button" id="hangup" value="Stop Recording" style="display:none;"/>
+<div id="status">
+    Offline
+</div>
+
+	
+      &nbsp;
+	  <br>
+	  <br><br>
+	  <input type="image" name="Submit" src="../images/send.jpg" height="50" width="90" value="Send" tabindex="22" /></td>
+
+ 
+</form>
+
+</div>
+</div>
+
+
+
+</div>
+</div>
+<div id="footerclear"></div><?php include "footer.php";?>
+</body>
+</html>
+<script type="text/javascript">
 		var conn = {};		
 		
 		$(document).ready(function(){
@@ -69,40 +144,6 @@
 			}
 		});
 </script>
-</head>
-<body>
-
-<div id="wrap">
-<div id="mainnavuser">
-<br>
-<div class="clear"></div>
-<h3>
-<div class="box4">
-Messaging Center
-</div>
-</h3>
-<div class="clear"></div>
-<h3>
-<div class="allDay">
-Call Your Volunteers
-</div>
-</h3>
-<div class="clear"></div>
-To:
-
-<input type="button" id="call" value="Begin Recording"/>
-<input type="button" id="hangup" value="Stop Recording" style="display:none;"/>
-<div id="status">
-    Offline
-</div>
-
-
-</div>
-</div>
-<div id="footerclear"></div><?php include "footer.php";?>
-</body>
-</html>
-
 
 
 

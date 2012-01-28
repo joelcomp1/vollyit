@@ -1,53 +1,8 @@
 <?php
 	session_start();
 
-	$displayState = $_GET['state'];
-
 	require_once('auth.php');
-	
-	if($displayState != '')
-	{
-
-		if($displayState == 'upcoming')
-		{
-			session_regenerate_id();
-			$_SESSION['PROGRAM_VIEW_STATE'] = 'UpcomingPrograms';
-			session_write_close();
 		
-		}
-		else if($displayState == 'past')
-		{
-			session_regenerate_id();
-			$_SESSION['PROGRAM_VIEW_STATE'] = 'PastPrograms';
-			session_write_close();
-		}
-		else if($displayState == 'all')
-		{
-			session_regenerate_id();
-			$_SESSION['PROGRAM_VIEW_STATE'] = 'All';
-			session_write_close();
-		}
-		
-		if($displayState == 'calendar')
-		{
-			session_regenerate_id();
-			$_SESSION['SHOW_CALENDAR'] = 'true';
-			session_write_close();
-		
-		}
-		else
-		{
-			unset($_SESSION['SHOW_CALENDAR']);
-		}	
-		
-
-	}
-	else
-	{
-		unset($_SESSION['SHOW_CALENDAR']);
-	}
-
-	
 	session_regenerate_id();
 	$search_term = filter_var($_POST["zoom_query"], FILTER_SANITIZE_STRING);
 	$_SESSION['SEARCH'] = $search_term;
@@ -55,11 +10,6 @@
 
 	include "header-org.php";
 	include "navigation.php";
-	
-	
-		echo '<script>$(".listView").hide();</script>';
-	
-
 ?>
 	
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -67,41 +17,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Volly.it: <?php echo $_SESSION['ORG_NAME'];?>'s Profile</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
- <script type="../text/javascript" src="../js/jquery.js"></script>
-  <script type="../text/javascript" src="../js/collection.js"></script>
-  <script src="../js/popup.js" type="../text/javascript"></script>
 <link href="loginmodule.css" rel="stylesheet" type="text/css" />
-<script src="../js/jquery.ez-pinned-footer.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/jquery-1.5.1.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/programMgmt.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="../js/jquery-1.2.1.pack.js"></script>
-<script type='text/javascript' src="../js/jquery-1.5.2.min.js"></script>
-<script type='text/javascript' src="../js/jquery-ui-1.8.11.custom.min.js"></script>
-<script type='text/javascript' src="../js/fullcalendar.min.js"></script>
 <link rel='stylesheet' type='text/css' href="../css/fullcalendar.css" />
 <link rel='stylesheet' type='text/css' href="../css/fullcalendar.print.css" media='print' />
-
-<script type="text/javascript">
-
-$(function(){
-		$("#search-text").animate({"width":"229px"});
-		$("#results").fadeOut();
-		$.ajax({
-			type:"GET",
-			data: $(this).serialize(),
-			url: "populate-program-page.php",
-			success: function(msg)
-				{
-				$("#results").html(msg);
-				$("#results").fadeIn();
-				}
-		});
-
-	
-	
-
-});	
-</script>
 </head>
 <body>
 
@@ -132,7 +50,7 @@ Your Programs
 
 <div class="yourprogramsViews">
 <div class="leftLinks" style="float:left;">
-<a href="#" class="listViewShowHide">List View</a> | <a href="#" class="calendarViewShowHide">Calendar View</a>
+<a href="#" class="listViewShowHide" onclick="$('.calendar').fullCalendar('destroy');">List View</a> | <a href="#" onclick="makeCalendar();" class="calendarViewShowHide">Calendar View</a>
 </div>
 <div class="listView">
 <div class="rightLinks">
@@ -190,31 +108,7 @@ if(isset($_SESSION['SHOW_CALENDAR']))
 }
 ?>
 
-<script type='text/javascript'>
 
-	$(document).ready(function() {
-		var date = new Date();
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
-		var i = 0;
-		var j = 0;
-				
-		$('.calendar').fullCalendar({
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,basicWeek,basicDay'
-			},
-			editable: true,
-
-				events: "populate-calendar.php"
-		});
-		
-	});
-	
-
-</script>
 <div class="clear"></div>
 <br><br>
 <div class="calendar">
@@ -226,8 +120,11 @@ if(isset($_SESSION['SHOW_CALENDAR']))
 <div id="footerclear"></div><?php include "footer.php";?>
 </body>
 </html>
-
-
+<script type='text/javascript' src="../js/populateCalendar.js"></script>
+<script type='text/javascript' src="../js/jquery-1.5.2.min.js"></script>
+<script type='text/javascript' src="../js/fullcalendar.min.js"></script>
+<script type="text/javascript" src="../js/populateProgramPage.js"></script>
+<script src="../js/programMgmt.js" type="text/javascript" charset="utf-8"></script>
 
 
 

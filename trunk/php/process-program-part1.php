@@ -81,6 +81,15 @@
 			$errmsg_arr[] = 'Program Description Missing';
 			$errflag = true;
 		}
+		
+		$qry = "select * from programs where programname='$programName'";
+		$result = @mysql_query($qry);
+	    $numOfRows = mysql_num_rows($result);
+		if($numOfRows != 0)
+		{
+			$errmsg_arr[] = 'Program already exists with same name!';
+			$errflag = true;
+		}
 		//If there are input validations, redirect back to the login form
 		if($errflag) {
 		    //Save to help user if a fail, reset below
@@ -171,6 +180,8 @@
 	}
    
    }
+   
+   
    
     if(($draft == 'Draft') || ($draft == 'Submit'))
 	{

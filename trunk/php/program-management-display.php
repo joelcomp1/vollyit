@@ -13,12 +13,18 @@
 		}
 		return  mysql_escape_string($str);
 	}
-	
+	$state = $_GET['state'];
 	$programViewState = clean($_POST['programView']);
 	session_regenerate_id();
-
-	$_SESSION['PROGRAM_VIEW_STATE'] = $programViewState;
 	
+	if($programViewState != '')
+	{
+		$_SESSION['PROGRAM_VIEW_STATE'] = $programViewState;
+	}
+	else 
+	{
+		$_SESSION['PROGRAM_VIEW_STATE'] = $state;
+	}	
 	session_write_close();
 	header("location: program-management-org.php");
 	exit();

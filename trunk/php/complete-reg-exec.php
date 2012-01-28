@@ -222,23 +222,23 @@
 		
 		if($link1Type != "Website")
 		{
-			$localLink1 = 0;
+			$localLink1 = '';
 		}
 		if($link2Type != "Website")
 		{
-			$localLink2 = 0;
+			$localLink2 = '';
 		}
 		if($link3Type != "Website")
 		{
-			$localLink3 = 0;
+			$localLink3 = '';
 		}
 		if($link4Type != "Website")
 		{
-			$localLink4 = 0;
+			$localLink4 = '';
 		}
 		if($link5Type != "Website")
 		{
-			$localLink5 = 0;
+			$localLink5 = '';
 		}
 		
 		$qry = "INSERT INTO websiteLink(orgname, link1, link2, link3, link4, link5) 
@@ -257,23 +257,23 @@
 		
 		if($link1Type != "Facebook")
 		{
-			$localLink1 = 0;
+			$localLink1 = '';
 		}
 		if($link2Type != "Facebook")
 		{
-			$localLink2 = 0;
+			$localLink2 = '';
 		}
 		if($link3Type != "Facebook")
 		{
-			$localLink3 = 0;
+			$localLink3 = '';
 		}
 		if($link4Type != "Facebook")
 		{
-			$localLink4 = 0;
+			$localLink4 = '';
 		}
 		if($link5Type != "Facebook")
 		{
-			$localLink5 = 0;
+			$localLink5 = '';
 		}
 		
 		$qry = "INSERT INTO facebookLink(orgname, link1, link2, link3, link4, link5) 
@@ -292,23 +292,23 @@
 		
 		if($link1Type != "Twitter")
 		{
-			$localLink1 = 0;
+			$localLink1 = '';
 		}
 		if($link2Type != "Twitter")
 		{
-			$localLink2 = 0;
+			$localLink2 = '';
 		}
 		if($link3Type != "Twitter")
 		{
-			$localLink3 = 0;
+			$localLink3 = '';
 		}
 		if($link4Type != "Twitter")
 		{
-			$localLink4 = 0;
+			$localLink4 = '';
 		}
 		if($link5Type != "Twitter")
 		{
-			$localLink5 = 0;
+			$localLink5 = '';
 		}
 		
 		$qry = "INSERT INTO twitterLink(orgname, link1, link2, link3, link4, link5) 
@@ -327,23 +327,23 @@
 		
 		if($link1Type != "LinkedIn")
 		{
-			$localLink1 = 0;
+			$localLink1 = '';
 		}
 		if($link2Type != "LinkedIn")
 		{
-			$localLink2 = 0;
+			$localLink2 = '';
 		}
 		if($link3Type != "LinkedIn")
 		{
-			$localLink3 = 0;
+			$localLink3 = '';
 		}
 		if($link4Type != "LinkedIn")
 		{
-			$localLink4 = 0;
+			$localLink4 = '';
 		}
 		if($link5Type != "LinkedIn")
 		{
-			$localLink5 = 0;
+			$localLink5 = '';
 		}
 		
 		$qry = "INSERT INTO linkedInLink(orgname, link1, link2, link3, link4, link5) 
@@ -361,23 +361,23 @@
 		
 		if($link1Type != "Blog")
 		{
-			$localLink1 = 0;
+			$localLink1 = '';
 		}
 		if($link2Type != "Blog")
 		{
-			$localLink2 = 0;
+			$localLink2 = '';
 		}
 		if($link3Type != "Blog")
 		{
-			$localLink3 = 0;
+			$localLink3 = '';
 		}
 		if($link4Type != "Blog")
 		{
-			$localLink4 = 0;
+			$localLink4 = '';
 		}
 		if($link5Type != "Blog")
 		{
-			$localLink5 = 0;
+			$localLink5 = '';
 		}
 		
 		$qry = "INSERT INTO blogLink(orgname, link1, link2, link3, link4, link5) 
@@ -395,23 +395,23 @@
 		
 		if($link1Type != "YouTube")
 		{
-			$localLink1 = 0;
+			$localLink1 = '';
 		}
 		if($link2Type != "YouTube")
 		{
-			$localLink2 = 0;
+			$localLink2 = '';
 		}
 		if($link3Type != "YouTube")
 		{
-			$localLink3 = 0;
+			$localLink3 = '';
 		}
 		if($link4Type != "YouTube")
 		{
-			$localLink4 = 0;
+			$localLink4 = '';
 		}
 		if($link5Type != "YouTube")
 		{
-			$localLink5 = 0;
+			$localLink5 = '';
 		}
 		
 		$qry = "INSERT INTO youTubeLink(orgname, link1, link2, link3, link4, link5) 

@@ -1,14 +1,6 @@
 <?php
 	require_once('auth.php');
 	
-// make a note of the current working directory relative to root.
-$directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
-
-// make a note of the location of the upload handler
-$uploadHandler = 'http://' . $_SERVER['HTTP_HOST'] . $directory_self . 'upload.processor.php';
-
-// set a max file size for the html upload form
-$max_file_size = 3000000; // size in bytes
 
 	session_start();
 	
@@ -19,33 +11,12 @@ include 'navigation-vol.php';
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Volly.it: <?php echo $_SESSION['SESS_MEMBER_ID'];?>'s Profile</title>
-<link href="../style.css" rel="stylesheet" type="text/css">
- <script type="text/javascript" src="../js/jquery.js"></script>
-  <script type="text/javascript" src="../js/collection.js"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
-  <script src="../js/popup.js" type="text/javascript"></script>
-<link href="loginmodule.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-<script language="javascript">
-function autotab(current,to){
-    if (current.getAttribute && 
-      current.value.length==current.getAttribute("maxlength")) {
-        to.focus() 
-        }
-}
-</script>
+
 
 <div id="wrap">
-<script type="text/javascript">
-function redirectMe (sel) {
-    var url = sel[sel.selectedIndex].value;
-    window.location = url;
-}
-</script>
-
-
 <div id="mainnavuser">
 
 <br>
@@ -287,7 +258,8 @@ Change Password
 <div id="footerclear"></div><?php include "footer.php";?>
 </body>
 </html>
-
+<script src="../js/popup.js" type="text/javascript"></script>
+<script language="javascript" src="../js/autoTab.js"></script>
 
 
 

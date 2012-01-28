@@ -142,11 +142,157 @@
 			}
 			return  mysql_escape_string($str);
 		}
+		
+		$login = clean($_SESSION['SESS_MEMBER_ID']);
+		//$qry = "select * from orgs where orgname='";
+		
+		//$qry .= $orgName;
+		//$qry .= "' and zipcode='$zipcode'";
 	
-		$qry = "select * from orgs where orgname='$orgName' and zipcode='$zipcode'";
-		$result = @mysql_query($qry);
+		$result=mysql_query('SELECT * FROM orgs WHERE orgname="'.$orgName.'"');
 		$orgInfo = mysql_fetch_assoc($result);
+		
+		$qry2 = "select * from volConn where id_request='$orgName' and id_inviter='$login'";
+		$result2 = @mysql_query($qry2);
+		$requestInfo = mysql_fetch_assoc($result2);
+			
+					$_SESSION['ORG_NAME_VIEW'] = $orgInfo['orgname'];
+					$_SESSION['ORG_DESC_VIEW'] = $orgInfo['orgdescrip'];
+					$_SESSION['ORG_ADDRESS_VIEW'] = $orgInfo['address'];
+					$_SESSION['ORG_CITY_VIEW'] = $orgInfo['city'];
+					$_SESSION['ORG_STATE_VIEW'] = $orgInfo['state'];
+					$_SESSION['ORG_ZIPCODE_VIEW'] = $orgInfo['zipcode'];
+					$_SESSION['ORG_PHONE_VIEW'] = $orgInfo['phonenumber'];
+					$_SESSION['ORG_EMAIL_VIEW'] = $orgInfo['orgemail'];
+					$_SESSION['ORG_PHONE_PART_1_VIEW'] = substr($orgInfo['phonenumber'],0, 3);
+					$_SESSION['ORG_PHONE_PART_2_VIEW'] = substr($orgInfo['phonenumber'],3, 3);
+					$_SESSION['ORG_PHONE_PART_3_VIEW'] = substr($orgInfo['phonenumber'],6, 4);
+					$_SESSION['ORG_TYPE_PRIMARY_VIEW'] = $orgInfo['primaryorgtype'];
+					$_SESSION['ORG_TYPE_SECONDARY_VIEW'] = $orgInfo['secondaryorgtype'];
+					$_SESSION['ORG_PLAN_TYPE_VIEW'] = $orgInfo['pricing'];
+					$orgName = $orgInfo['orgname'];
+					unset($_SESSION['ORG_WEBSITE_VIEW']);
+					unset($_SESSION['TWITTER_LINK_VIEW']);
+					unset($_SESSION['FACEBOOK_LINK_VIEW']);
+					unset($_SESSION['LINKEDIN_LINK_VIEW']);
+					unset($_SESSION['YOUTUBE_LINK_VIEW']);
+					unset($_SESSION['BLOG_LINK_VIEW']);
 
+				
+					if($requestInfo['status'] != '')
+					{
+						$_SESSION['ORG_FRIEND_STATUS_VIEW'] = $requestInfo['status'];
+					}
+					else 
+					{
+						$_SESSION['ORG_FRIEND_STATUS_VIEW'] = '';
+					}
+				
+				
+					$result3 = mysql_query('SELECT * FROM websitelink WHERE orgname="'.$orgName.'"');
+
+					$website = mysql_fetch_assoc($result3);
+					
+					for($i = 1; $i <= 5; $i++)
+					{	
+						$link = 'link';
+						$link .= $i;
+						
+						if($website[$link] != '')
+						{
+							
+							$_SESSION['ORG_WEBSITE_VIEW'] = $website[$link];
+						}
+					}
+
+					$result4 =mysql_query('SELECT * FROM facebooklink WHERE orgname="'.$orgName.'"');
+				    $fbook = mysql_fetch_assoc($result4);
+					for($i = 1; $i <= 5; $i++)
+					{	
+						$link = 'link';
+						$link .= $i;
+						
+						if($fbook[$link] != '')
+						{
+							$_SESSION['FACEBOOK_LINK_VIEW'] = $fbook[$link];
+						}
+					}
+				
+					$result5 =mysql_query('SELECT * FROM twitterlink WHERE orgname="'.$orgName.'"');
+
+				    $twitter = mysql_fetch_assoc($result5);
+					for($i = 1; $i <= 5; $i++)
+					{	
+						$link = 'link';
+						$link .= $i;
+						if($twitter[$link] != '')
+						{
+							$_SESSION['TWITTER_LINK_VIEW'] = $twitter[$link];
+						}
+					}
+					
+					
+					$result6 =mysql_query('SELECT * FROM linkedinlink WHERE orgname="'.$orgName.'"');
+
+				    $linkedin = mysql_fetch_assoc($result6);
+					for($i = 1; $i <= 5; $i++)
+					{	
+						$link = 'link';
+						$link .= $i;
+						if($linkedin[$link] != '')
+						{
+							$_SESSION['LINKEDIN_LINK_VIEW'] = $linkedin[$link];
+						}
+					}
+
+				    $result7 = mysql_query('SELECT * FROM blogLink WHERE orgname="'.$orgName.'"');
+
+				    $blog = mysql_fetch_assoc($result7);
+					for($i = 1; $i <= 5; $i++)
+					{	
+						$link = 'link';
+						$link .= $i;
+						if($blog[$link] != '')
+						{
+							$_SESSION['BLOG_LINK_VIEW'] = $blog[$link];
+						}
+					}
+				
+				    $result8 = mysql_query('SELECT * FROM youTubeLink WHERE orgname="'.$orgName.'"');
+
+				    $youTube = mysql_fetch_assoc($result8);
+					
+					for($i = 1; $i <= 5; $i++)
+					{	
+						$link = 'link';
+						$link .= $i;
+						
+						if($youTube[$link] != '')
+						{
+							$_SESSION['YOUTUBE_LINK_VIEW'] = $youTube[$link];
+						}
+					}
+				    
+				    $_SESSION['IMAGE_PATH_ORG_VIEW'] = $orgInfo['orgimage'];
+				    if($_SESSION['IMAGE_PATH_ORG_VIEW'] != '')
+				    {
+				    	$_SESSION['ORG_IMAGE_VIEW'] = 'true';
+				    }
+					else
+					{
+						$_SESSION['ORG_IMAGE_VIEW'] = 'false';
+					}
+				    
+				    session_write_close();
+					if($orgInfo['privacy'] == 'Public')
+					{
+						header("location: org-public.php");		
+					}
+					else if($orgInfo['privacy'] == 'Private')
+					{
+						header("location: org-private.php");		
+					}
+		
 	}
 	else if($vol != '')
 	{	
@@ -174,10 +320,12 @@
 		$result = @mysql_query($qry);
 		
 		$qry2 = "select * from friends where id_request='$vol' and id_inviter='$login'";
-		
+		$qry3 = "select * from friends where id_inviter='$vol' and id_request='$login'";
 		$result2 = @mysql_query($qry2);
+		$result3 = @mysql_query($qry3);
 		$volInfo = mysql_fetch_assoc($result);
 		$requestInfo = mysql_fetch_assoc($result2);
+		$requestInfo2 = mysql_fetch_assoc($result3);
 		
 		if($volInfo['privacy'] == 'Public')
 		{
@@ -192,8 +340,20 @@
 			$_SESSION['VOL_USER_PHONE_PART_3'] = substr($volInfo['phonenumber'],6, 4);
 			$_SESSION['VOL_USER_ABOUTME'] = $volInfo['aboutme'];	
 			$_SESSION['IMAGE_USER_PATH'] = $volInfo['userimage'];	
-			$_SESSION['VOL_LOGIN'] = $volInfo['login'];	
-			$_SESSION['VOL_FRIEND_STATUS'] = $requestInfo['status'];
+			$_SESSION['VOL_LOGIN'] = $volInfo['login'];
+			if($requestInfo['status'] != '')
+			{
+				$_SESSION['VOL_FRIEND_STATUS'] = $requestInfo['status'];
+			}
+			else if($requestInfo2['status'] != '')
+			{
+				$_SESSION['VOL_FRIEND_STATUS'] = $requestInfo2['status'];
+			}
+			else 
+			{
+				$_SESSION['VOL_FRIEND_STATUS'] = '';
+			}
+
 			
 			if($_SESSION['IMAGE_USER_PATH'] != '')
 			{
@@ -211,7 +371,19 @@
 			$_SESSION['VOL_USER_ABOUTME'] = $volInfo['aboutme'];	
 			$_SESSION['IMAGE_USER_PATH'] = $volInfo['userimage'];	
 			$_SESSION['VOL_LOGIN'] = $volInfo['login'];	
-			$_SESSION['VOL_FRIEND_STATUS'] = $requestInfo['status'];
+			if($requestInfo['status'] != '')
+			{
+				$_SESSION['VOL_FRIEND_STATUS'] = $requestInfo['status'];
+			}
+			else if($requestInfo2['status'] != '')
+			{
+				$_SESSION['VOL_FRIEND_STATUS'] = $requestInfo2['status'];
+			}
+			else 
+			{
+				$_SESSION['VOL_FRIEND_STATUS'] = '';
+			}
+			
 			if($_SESSION['IMAGE_USER_PATH'] != '')
 			{
 				$_SESSION['VOL_USER_IMAGE'] = 'true';

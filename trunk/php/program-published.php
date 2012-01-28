@@ -10,10 +10,19 @@ $uploadHandler = 'http://' . $_SERVER['HTTP_HOST'] . $directory_self . 'upload.p
 
 // set a max file size for the html upload form
 $max_file_size = 3000000; // size in bytes
-
-include "header-org.php";
-include "navigation.php";
-
+	if(isset($_SESSION['SESS_MEMBER_ID'])) 
+	{
+		if($_SESSION['SESS_ORG_OR_VOL'] == 'ORG')
+		{
+				include "header-org.php";
+				include "navigation.php";
+		}
+		else if($_SESSION['SESS_ORG_OR_VOL'] == 'VOL')
+		{
+					include 'header-vol.php';
+					include 'navigation-vol.php';
+		}
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -30,30 +39,8 @@ include "navigation.php";
   <script src="../js/popup.js" type="text/javascript"></script>
   <SCRIPT LANGUAGE="JavaScript" SRC="../js/date.js"></SCRIPT>
 <link href="loginmodule.css" rel="stylesheet" type="text/css" />
-	<!-- Required CSS -->
-	<link href="../css/movingboxes.css" media="screen" rel="stylesheet">
-	<!--[if lt IE 9]>
-	<link href="css/movingboxes-ie.css" rel="stylesheet" media="screen" />
-	<![endif]-->
-	
-	<!-- Required script -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
-	<script src="../js/jquery.movingboxes.js"></script>
 	
 
-	<script>
-	$(function(){
-
-		$('#slider').movingBoxes({
-			startPanel   : 1,      // start with this panel
-			width        : 700,    // overall width of movingBoxes (not including navigation arrows)
-			wrap         : true,   // if true, the panel will "wrap" (it really rewinds/fast forwards) at the ends
-			buildNav     : true,   // if true, navigation links will be added
-			navFormatter : function(){ return "&#9679;"; } // function which returns the navigation text for each panel
-		});
-
-	});
-</script>
 </head>
 <body>
 

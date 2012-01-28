@@ -24,25 +24,44 @@
 		<script src="../js/calendar.js"></script>
 		<link href="../css/calendar.css" rel="stylesheet">
     <script type="text/javascript" src="../js/jquery.ui.timepicker.js?v=0.2.9"></script>
-	
 <script src="../scripts/wufoo.js"></script>
+	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+	<script src="ckeditor/_samples/sample.js" type="text/javascript"></script>
+	<link href="ckeditor/_samples/sample.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
 
 <div id="wrap">
 <div id="mainnavuser">
 <div class="clear"></div>
 <h3>
-<div class="box4">
 Messaging Center
-</div>
 <div class="allDay">
 E-Mail Your Volunteers
 </div>
 </h3>
+
+	<!-- This <div> holds alert messages to be display in the sample page. -->
+	<div id="alerts">
+		<noscript>
+			<p>
+				<strong>CKEditor requires JavaScript to run</strong>. In a browser with no JavaScript
+				support, like yours, you should still see the contents (HTML data) and you should
+				be able to edit it normally, without a rich editor interface.
+			</p>
+		</noscript>
+	</div>
+	<form action="contact.php" method="post">
+		
+	<textarea style="resize: none;"
+class="ckeditor" cols="80" id="editor1" name="editor1" rows="10">Start Typing Here...</textarea>
+		
+		
+			<input type="submit" value="Submit" />
+	</form>
 </div>
 </div>
-<form method="post" action="contact.php"> Email: <input name="email" type="text"><br> Message:<br> <textarea name="message" rows="15" cols="40"></textarea><br> <input type="submit"> </form> 
 <div id="footerclear"></div><?php include "footer.php";?>
 </body>
 </html>

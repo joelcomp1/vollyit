@@ -56,11 +56,13 @@ function disablePopup(popUpSelect){
 		{
 			$("#backgroundPopupVol").fadeOut("slow");
 			$("#popupContactVol").fadeOut("slow");
+			$('#video').show();
 		}
 		else if(popUpSelect == "#newOrg")
 		{
 			$("#backgroundPopupOrg").fadeOut("slow");
 			$("#popupContactOrg").fadeOut("slow");
+			$('#video').show();
 		}
 		
 		popupStatus = 0;
@@ -80,8 +82,8 @@ function centerPopup(popUpSelect){
 			//centering
 			$("#popupContactVol").css({
 				"position": "absolute",
-				"top": windowHeight/2-popupHeight/2,
-				"left": windowWidth/2-popupWidth/2
+				"top": windowHeight/2-popupHeight,
+				"left": windowWidth/2-popupWidth/1.2
 			});
 			//only need force for IE6
 	
@@ -97,8 +99,8 @@ function centerPopup(popUpSelect){
 			//centering
 			$("#popupContactOrg").css({
 				"position": "absolute",
-				"top": windowHeight/2-popupHeight/2,
-				"left": windowWidth/2-popupWidth/2
+				"top": windowHeight/2-popupHeight,
+				"left": windowWidth/2-popupWidth/1.2
 			});
 			//only need force for IE6
 	
@@ -607,13 +609,13 @@ function centerPopup12(){
 	//request data for centering
 	var windowWidth = document.documentElement.clientWidth;
 	var windowHeight = document.documentElement.clientHeight;
-	var popupHeight = 500;
-	var popupWidth = 200;
+	var popupHeight = $("#popupContact12").height();
+	var popupWidth = $("#popupContact12").height();
 	//centering
 	$("#popupContact12").css({
 		"position": "absolute",
-		"top": windowHeight/2-popupHeight/2,
-		"left": windowWidth/2-popupWidth/2
+		"bottom": windowHeight/2-popupHeight*2,
+		"right": windowWidth/2-popupWidth * 2
 	});
 	//only need force for IE6
 	

@@ -376,8 +376,8 @@
 	$.movingBoxes.defaultOptions = {
 		// Appearance
 		startPanel   : 1,         // start with this panel
-		width        : 800,       // overall width of movingBoxes
-		panelWidth   : 0.5,       // current panel width adjusted to 50% of overall width
+		width        : 700,       // overall width of movingBoxes
+		panelWidth   : 0.3,       // current panel width adjusted to 50% of overall width
 		reducedSize  : 0.8,       // non-current panel size: 80% of panel size
 		fixedHeight  : false,     // if true, slider height set to max panel height; if false, slider height will auto adjust.
 

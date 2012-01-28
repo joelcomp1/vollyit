@@ -1,6 +1,3 @@
-<script src="../js/popup.js" type="text/javascript"></script>
-<script src="../js/jquery.ez-pinned-footer.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/jquery-1.5.1.min.js" type="text/javascript" charset="utf-8"></script>	
 <?php
 include("config.php");
 $search_term = filter_var($_GET["name"], FILTER_SANITIZE_STRING);
@@ -176,69 +173,4 @@ echo '<div class="orgProgHeadingPrograms"><div class="box9">';
 	
 	
 ?>
-<script type="text/javascript">
-	
-	function showAllPrograms(){
-			$(".orgProgHeadingOrganizations").hide();
-			$("#pageOrgs1").hide();
-			$("#extraPrograms").hide();
-			$("#extraOrgs").hide();
-			$("#backToResults").show();
-			var classToShow = "#page";
-			var maxClass = <?php echo $displayProgs ?>;
-			for(loop = 2; loop <= maxClass;loop = loop + 1)
-			{
-				classToShow = classToShow + loop;
-				$(classToShow).show();
-			}
-
-	
-	}
-	
-	function showAllOrgs(){
-			$(".orgProgHeadingPrograms").hide();
-			$("#page1").hide();
-			$("#extraPrograms").hide();
-			$("#extraOrgs").hide();
-			$("#backToResults").show();
-			var classToShow = "#pageOrgs";
-			var maxClass = <?php echo $displayOrgs ?>;
-			for(loop = 2; loop <= maxClass;loop = loop + 1)
-			{
-				classToShow = classToShow + loop;
-				$(classToShow).show();
-			}
-
-	
-	}
-	
-		
-	function showResults(){
-			$(".orgProgHeadingPrograms").show();
-			$(".orgProgHeadingOrganizations").show();
-			$("#extraPrograms").show();
-			$("#extraOrgs").show();
-			$("#backToResults").hide();
-			$("#pageOrgs1").show();			
-			$("#page1").show();
-			
-			var classToShow1 = "#page";
-			var classToShow2 = "#pageOrgs";
-			var maxClass1 = <?php echo $displayOrgs ?>;
-			var maxClass2 = <?php echo $displayProgs ?>;
-			for(loop = 2; loop <= maxClass1;loop = loop + 1)
-			{
-				classToShow2 = classToShow2 + loop;
-				$(classToShow2).hide();
-			}
-			for(loop = 2; loop <= maxClass2;loop = loop + 1)
-			{
-				classToShow1 = classToShow1 + loop;
-				$(classToShow1).hide();
-			}
-
-	
-	}
-	
-	
-	</script>
+<script type="text/javascript" src="../js/search.js"></script>

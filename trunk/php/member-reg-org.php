@@ -99,18 +99,9 @@ session_start();
 
 </style>
 <div class="header" style="height: 120px!important;">
-<div id="headerIcon" style="float:left;">
-<img src="../images/emptyIcon.jpg" width="70" height="70" >
-</div>
-<div id="leftheading" style="float:left; vertical-align:top;">
-<form class="searchform" method="post" action="search-website.php" >
-	<input class="searchfield" type="text" value="Search" onfocus="if (this.value == 'Search') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search';}" />
-	<input class="searchbutton" type="submit" value="Go" />
-</form>
-</div>
 <div id="mainnav" style="text-align:center; vertical-align:top; margin: 0px 150px 0px 0px;">
 <center>
-<h1 id="textlogo" >
+<h1>
 Volly<span>.it</span>
 </h1>
 <br>
@@ -452,22 +443,24 @@ Phone Number
 <label id="title134" class="desc">
 </label>
 <![endif]-->
-<div>
+<div style="width:1000px;">
 <input id="radioDefault_134" name="Field134" type="hidden" value="" />
-<span>
+<div style="padding: 0 0 0 0px; float:left; width:500px;">
+
 <input id="Field134_0" name="Field134" type="radio" class="field radio" value="Public" tabindex="21" checked="checked"  
 />
-<label class="choice" for="Field134_0" style="padding: 0 150px 0px 0px;">
-Public</label>
-</span>
-<span>
-<input id="Field134_1" name="Field134" type="radio"   class="field radio" value="Private" tabindex="22" />
+<label class="choice" for="Field134_0">
+Public - Searchable and viewable by everyone.</label>
+</div>
+<div style="padding: 0 0 0 00px; float:left; width:500px;">
+
+<input id="Field134_1" name="Field134" type="radio"  class="field radio" value="Private" tabindex="22" />
 <label class="choice" for="Field134_1" >
-Private</label>
-</span>
+Private - Group content and activity is visable to everyone.</label> 
+</div>
 </div>
 </fieldset>
-Searchable and viewable by everyone.  	Group content and activity is visable to everyone.
+
 </li>
 
 
@@ -534,7 +527,7 @@ What is your Organization involved with?
 <![endif]-->
 
 <div class="volSearchLeftInnter" style="float:left; padding: 0px 20px 0px 0px;">
-<input name="inputString" type="text" size="30" id="inputString" onkeyup="lookup(this.value);" onblur="fillTags();" value="Start Typing Keywords here..." onfocus="this.value = this.value=='Start Typing Keywords here...' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Start Typing Keywords here...' : this.value; this.value=='Start Typing Keywords here...' ? this.style.color='#999' : this.style.color='#000'"/>
+<input name="inputString" type="text" size="30" id="inputString" autocomplete="off" onkeyup="lookup(this.value);" onblur="fillTags();" value="Start Typing Keywords here..." onfocus="this.value = this.value=='Start Typing Keywords here...' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Start Typing Keywords here...' : this.value; this.value=='Start Typing Keywords here...' ? this.style.color='#999' : this.style.color='#000'"/>
 <div class="suggestionsBox" id="suggestions" style="display: none; text: font:bold 0.4em 'TeXGyreAdventor', Arial, sans-serif!important;">
 	<img src="../images/upArrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
 <div class="suggestionList" id="autoSuggestionsList">
