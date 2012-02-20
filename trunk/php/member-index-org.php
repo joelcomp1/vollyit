@@ -12,21 +12,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Volly.it: <?php echo $_SESSION['ORG_NAME'];?>'s Profile</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
-<link href="loginmodule.css" rel="stylesheet" type="text/css" />
 <link href="../css/movingboxes.css" media="screen" rel="stylesheet">
 <link rel='stylesheet' type='text/css' href="../css/fullcalendar.css" />
 <link rel='stylesheet' type='text/css' href="../css/fullcalendar.print.css" media='print' />
 
 </head>
 <body>
+
 <div id="wrap">
 <div id="mainnavuser">
+
 <div class="clear"></div>
 <h3>
-<?php echo $_SESSION['ORG_NAME'];?>
-<div class="createNewProgram"  style="float:right; padding: 5px 5px 0px 0px;">
-<a href="create-program-part1.php"><img src="../images/program.png" width="150" height="80"></a>
+<div class="publishProgram"  style="text-align:center;">
+Quick Tasks: <a href="add-volunteers-org.php"><img src="../images/addVolunteers.png" alt="Add Your Volunteers"  width="93" height="105"><a href="create-program-part1.php?reset=true"><img src="../images/createNewProgram.png" alt="Create New Program"  width="93" height="105"></a><a href="org-volunteer-mgmt.php"><img src="../images/volMgmt.png" width="93" height="105"></a><a href="program-management-org.php"><img src="../images/programMgmt.png" width="93" height="105"></a>
 </div>
+<div class="clear"></div>
+<?php echo $_SESSION['ORG_NAME'];?>
+
 <div class="clear"></div>
 <div class="orgAddress">
 <?php echo $_SESSION['ORG_ADDRESS'];?> - 
@@ -164,10 +167,7 @@ Phone Number
 <div class="boxFormat">
 <div class="TextBox1">
 <div class="leftText" style="float: left;">
- Your Next Program...
-</div>
-<div class="rightText"  style="float: right;">        
-<a href="program-management-display.php?state=All">view all</a>
+ Upcoming Program...
 </div>
 </div>
 </div>
@@ -211,11 +211,11 @@ Upcoming Programs
 <br>
 Past Programs
 </div>
-<div class="collabSnapshot" style="float: left; font:bold 0.6em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 9px; text-align:center;">
+<!--div class="collabSnapshot" style="float: left; font:bold 0.6em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 9px; text-align:center;">
 <a href="collaborations-org.php"><img src="../images/emptyIcon.jpg" width="30" height="40" ></a>
 <br>
 Collaborations
-</div>
+</div-->
 </div>
 </div>
 
@@ -299,7 +299,7 @@ rows="5" cols="37"
  Connections
 </div>
 <div class="rightText"  style="float: right;" id="phoneAccountSettings">   
-<a href="#">Edit Connections<a/>   
+<a href="#">Edit<a/>   
 </div>
 </div>
 </div>

@@ -9,23 +9,7 @@
 	$errmsg_arr = array();
 	
 	//Validation error flag
-	$errflag = false;
-	
-	//Connect to pg server
-	$link = mysql_connect("localhost:3306", "root", "coolguy1");
-	if(!$link) {
-		die('Failed to connect to server: ' . mysql_error());
-	}
-	else
-	{
-		$db_select = mysql_select_db("volly", $link);
-		
-		if(!$db_select)
-		{
-			die('Failed to connect to database: ' . mysql_error());
-		}
-	}
-	
+	$errflag = false;	
 
 	//Function to sanitize values received from the form. Prevents SQL injection
 	function clean($str) {
@@ -54,10 +38,7 @@
 	$endDate = clean($_POST['endDate']);
 	$noEnd = clean($_POST['Field16']);
 	$orgName = clean($_SESSION['ORG_NAME']);
-	$programName = 'PROGRAM_NAME';
-	$programsCreated = clean($_SESSION['PROGRAMS_CREATED']);
-	$programName .= $programsCreated;
-	$programName = clean($_SESSION[$programName]);
+	$programName = clean($_SESSION['PROGRAM_NAME_TEMP']);
 	
 	
 	//Input Validations
@@ -108,6 +89,20 @@
 		    $_SESSION['PROGRAM_START_TIME_TEMP'] = $startTime;
 		    $_SESSION['PROGRAM_END_TIME_TEMP'] = $endTime;
 			$_SESSION['PROGRAM_END_DATE_TEMP'] = $endDate;
+			$_SESSION['PROGRAM_RECURRING_TEMP'] = $recurring;
+			$_SESSION['PROGRAM_REPEATS_TEMP'] = $repeats;
+			$_SESSION['PROGRAM_DATE_SUNDAY_TEMP'] = $sunday;
+			$_SESSION['PROGRAM_DATE_MONDAY_TEMP'] = $monday;
+			$_SESSION['PROGRAM_DATE_TUESDAY_TEMP'] = $tuesday;
+			$_SESSION['PROGRAM_DATE_WEDNESDAY_TEMP'] = $wednesday;
+			$_SESSION['PROGRAM_DATE_THURSDAY_TEMP'] = $thursday;
+			$_SESSION['PROGRAM_DATE_FRIDAY_TEMP'] = $friday;
+			$_SESSION['PROGRAM_DATE_SATURDAY_TEMP'] = $saturday;
+			$_SESSION['PROGRAM_NO_END_TEMP'] = $noEnd;
+
+		
+			
+			
 			
 			$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 			header("location: create-program-part2.php");
@@ -149,9 +144,9 @@
 		$result2 = 'true';
 	}
 	
-	$qry = "SELECT * FROM programs WHERE programname='$programName' and orgname='$orgName'";  
-	$result3 = @mysql_query($qry);
-	
+	$qry = "SELECT * FROM programs where programname='$programName' and orgname='$orgName'";  
+	$result3 = mysql_query($qry);
+
 	$program = mysql_fetch_assoc($result3);
 	
 	
@@ -169,7 +164,36 @@
 				
 	$programStateSaved = 'PROGRAM_STATE';
 	$programStateSaved .= $program['programnumber'];
-				
+	
+	$programRecurringSaved = 'PROGRAM_RECURRING';
+	$programRecurringSaved .= $program['programnumber'];
+	
+	$programRepeatsSaved = 'PROGRAM_REPEATS';
+	$programRepeatsSaved .= $program['programnumber'];
+	
+	$programSundaySaved = 'PROGRAM_DATE_SUNDAY';
+	$programSundaySaved .= $program['programnumber'];
+
+	$programMondaySaved = 'PROGRAM_DATE_MONDAY';
+	$programMondaySaved .= $program['programnumber'];
+	
+	$programTuesdaySaved = 'PROGRAM_DATE_TUESDAY';
+	$programTuesdaySaved .= $program['programnumber'];
+	
+	$programWednesdaySaved = 'PROGRAM_DATE_WEDNESDAY';
+	$programWednesdaySaved .= $program['programnumber'];
+	
+	$programThursdaySaved = 'PROGRAM_DATE_THURSDAY';
+	$programThursdaySaved .= $program['programnumber'];
+	
+	$programFridaySaved = 'PROGRAM_DATE_FRIDAY';
+	$programFridaySaved .= $program['programnumber'];
+	
+	$programSaturdaySaved = 'PROGRAM_DATE_SATURDAY';
+	$programSaturdaySaved .= $program['programnumber'];
+	
+	$programNoEndSaved = 'PROGRAM_NO_END';
+	$programNoEndSaved .= $program['programnumber'];
 	//Check whether the query was successful or not
 	if($result && result2 && $result3) {
 			//create program part 1 Successful
@@ -179,18 +203,85 @@
 			$_SESSION[$endTimeSaved] = $endTime;
 			$_SESSION[$endDateSaved] = $endDate;
 			$_SESSION[$programStateSaved] = $nextState;
+			$_SESSION[$programRecurringSaved] = $recurring;
+			$_SESSION[$programRepeatsSaved] = $repeats;
+			$_SESSION[$programSundaySaved] = $sunday;
+			$_SESSION[$programMondaySaved] = $monday;
+			$_SESSION[$programTuesdaySaved] = $tuesday;
+			$_SESSION[$programWednesdaySaved] = $wednesday;
+			$_SESSION[$programThursdaySaved] = $thursday;
+			$_SESSION[$programFridaySaved] = $friday;
+			$_SESSION[$programSaturdaySaved] = $saturday;
+			$_SESSION[$programNoEndSaved] = $noEnd;
 			
-			//These were used for error detection, clear them here
+			
 	        unset($_SESSION['PROGRAM_DATE_TEMP']);
 	        unset($_SESSION['PROGRAM_START_TIME_TEMP']);
-	        unset($_SESSION['PROGRAM_END_TIME_TEMP']);
+			unset($_SESSION['PROGRAM_END_TIME_TEMP']);
 			unset($_SESSION['PROGRAM_END_DATE_TEMP']);
+			unset($_SESSION['PROGRAM_RECURRING_TEMP']);
+	        unset($_SESSION['PROGRAM_DATE_SUNDAY_TEMP']);
+			unset($_SESSION['PROGRAM_DATE_MONDAY_TEMP']);
+			unset($_SESSION['PROGRAM_DATE_TUESDAY_TEMP']);
+			unset($_SESSION['PROGRAM_DATE_WEDNESDAY_TEMP']);
+			unset($_SESSION['PROGRAM_DATE_THURSDAY_TEMP']);
+			unset($_SESSION['PROGRAM_DATE_FRIDAY_TEMP']);
+			unset($_SESSION['PROGRAM_DATE_SATURDAY_TEMP']);
+			unset($_SESSION['PROGRAM_NO_END_TEMP']);
+			
+			if($program['programimage'] != '')
+			{
+				$_SESSION['PROGRAM_IMAGE'] = 'true';
+			}
 			session_write_close();
 						
 			
 			if($nextState == 'Submit')
 			{
-				header("location: create-program-part3.php");
+				$header = "location: create-program-part3.php?startDate=";
+				$header .= $statrtDate;
+				$header .= '&enddate=';
+				$header .= $endDate;
+				$header .= '&startTime=';
+				$header .= $startTime;
+				$header .= '&endtime=';
+				$header .= $endTime;
+				$header .= '&name=';
+				$header .= $programName;
+				$header .= '&image=';
+				$header .= $program['programimage'];
+				$header .= '&address=';
+				$header .= $program['address'];
+				$header .= '&state=';
+				$header .= $program['state'];
+				$header .= '&city=';
+				$header .= $program['city'];
+				$header .= '&zip=';
+				$header .= $program['zipcode'];
+				$header .= '&descrip=';
+				$header .= $program['programdescrip']; 
+				$header .= '&recurring=';
+				$header .= $recurring; 
+				$header .= '&repeats=';
+				$header .= $repeats; 
+				$header .= '&sunday=';
+				$header .= $sunday; 
+				$header .= '&monday=';
+				$header .= $monday; 
+				$header .= '&tuesday=';
+				$header .= $tuesday; 
+				$header .= '&wednesday=';
+				$header .= $wednesday; 
+				$header .= '&thursday=';
+				$header .= $thursday; 
+				$header .= '&friday=';
+				$header .= $friday; 
+				$header .= '&saturday=';
+				$header .= $saturday; 
+				$header .= '&noend=';
+				$header .= $noEnd; 				
+				
+				header($header);
 			}
 			else if($nextState == 'Draft')
 			{
@@ -199,13 +290,58 @@
 			}
 			else if($nextState == 'Previous')
 			{
+				$header = "location: create-program-part1.php?startDate=";
+				$header .= $statrtDate;
+				$header .= '&enddate=';
+				$header .= $endDate;
+				$header .= '&startTime=';
+				$header .= $startTime;
+				$header .= '&endtime=';
+				$header .= $endTime;
+				$header .= '&name=';
+				$header .= $programName;
+				$header .= '&image=';
+				$header .= $program['programimage'];
+				$header .= '&address=';
+				$header .= $program['address'];
+				$header .= '&state=';
+				$header .= $program['state'];
+				$header .= '&city=';
+				$header .= $program['city'];
+				$header .= '&zip=';
+				$header .= $program['zipcode'];
+				$header .= '&descrip=';
+				$header .= $program['programdescrip']; 
+				$header .= '&recurring=';
+				$header .= $recurring; 
+				$header .= '&repeats=';
+				$header .= $repeats; 
+				$header .= '&sunday=';
+				$header .= $sunday; 
+				$header .= '&monday=';
+				$header .= $monday; 
+				$header .= '&tuesday=';
+				$header .= $tuesday; 
+				$header .= '&wednesday=';
+				$header .= $wednesday; 
+				$header .= '&thursday=';
+				$header .= $thursday; 
+				$header .= '&friday=';
+				$header .= $friday; 
+				$header .= '&saturday=';
+				$header .= $saturday; 
+				$header .= '&noend=';
+				$header .= $noEnd; 				
 				
-				header("location: create-program-part1.php");
+				header($header);
 			}
 			
 
 			exit();
 	}else {
+		echo $result;
+		echo $result2;
+		echo $result3;
 		die("Query failed");
 	}
 	

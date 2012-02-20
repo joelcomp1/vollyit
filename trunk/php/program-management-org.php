@@ -17,7 +17,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Volly.it: <?php echo $_SESSION['ORG_NAME'];?>'s Profile</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
-<link href="loginmodule.css" rel="stylesheet" type="text/css" />
 <link rel='stylesheet' type='text/css' href="../css/fullcalendar.css" />
 <link rel='stylesheet' type='text/css' href="../css/fullcalendar.print.css" media='print' />
 </head>
@@ -37,7 +36,7 @@ Easy as 1.. 2.. 3..
 </h3>
 <!--This is used for the upcoming vollys box-->
 <div class="createNewProgram"  style="text-align:center;">
-<a href="create-program-part1.php"><img src="../images/program.png" width="150" height="80"></a>
+<a href="create-program-part1.php?reset=true"><img src="../images/program.png" width="150" height="80"></a>
 </div>
 
 <div class="yourprograms">

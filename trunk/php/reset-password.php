@@ -41,7 +41,7 @@
 	
 	
 	define('GUSER', 'joelcomp1@gmail.com'); // GMail username
-	define('GPWD', 'enungames04'); // GMail password
+	define('GPWD', 'Coolenungames!2'); // GMail password
 		  
 	function smtpmailer($to, $from, $from_name, $subject, $body) { 
 	global $error;

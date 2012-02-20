@@ -3,6 +3,8 @@
 
 	include "header-org.php";
 	include "navigation.php";
+	
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -14,7 +16,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Volly.it: <?php echo $_SESSION['ORG_NAME'];?>'s Profile</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
-<link href="loginmodule.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -77,7 +78,20 @@
 <br>
 </div>
 
-
+<?php 
+		$programCitySaved = 'PROGRAM_CITY';
+		$programCitySaved .= $_SESSION['PROGRAMS_CREATED'];
+		
+		$programStateSaved = 'PROGRAM_STATE';
+		$programStateSaved .= $_SESSION['PROGRAMS_CREATED'];
+		
+		$programAddressSaved = 'PROGRAM_ADDRESS';
+		$programAddressSaved .= $_SESSION['PROGRAMS_CREATED'];
+		
+		$programZipSaved = 'PROGRAM_ZIP';
+		$programZipSaved .= $_SESSION['PROGRAMS_CREATED'];
+		
+?>
 
 <!--This is used for the upcoming vollys box-->
 <div class="boxFormat">
@@ -86,7 +100,7 @@
  Summary
 </div>
 <div class="rightText"  style="float: right;">        
-<a href="create-program-part1.php">Edit Program Info</a>
+<a href="create-program-part1.php?name=<?php echo $_SESSION['PROGRAM_NAME']; ?>&image=<?php echo $_SESSION['PROGRAM_IMAGE_PATH']; ?>&address=<?php echo $_SESSION[$programAddressSaved]; ?>&state=<?php echo $_SESSION[$programStateSaved]; ?>&city=<?php echo $_SESSION[$programCitySaved]; ?>&zip=<?php echo $_SESSION[$programZipSaved]; ?>&descrip=<?php echo $_SESSION['PROGRAM_DESCRIPTION']; ?>&startDate=<?php echo $_SESSION[$dateSaved]; ?>&enddate=<?php echo $_SESSION[$endDateSaved]; ?>&startTime=<?php echo $_SESSION[$timeStartSaved]; ?>&endtime=<?php echo $_SESSION[$endTimeSaved]; ?>">Edit Program Info</a>
 </div>
 </div>
 </div>
@@ -96,17 +110,6 @@
 
 <center>
 <?php 
-	$dateSaved = 'PROGRAM_DATE';
-	$dateSaved .= $_SESSION['PROGRAMS_CREATED'];
-	
-	$timeStartSaved = 'PROGRAM_START_TIME';
-	$timeStartSaved .= $_SESSION['PROGRAMS_CREATED'];
-	
-	$endTimeSaved = 'PROGRAM_END_TIME';
-	$endTimeSaved .= $_SESSION['PROGRAMS_CREATED'];
-	
-	$endDateSaved = 'PROGRAM_END_DATE';
-	$endDateSaved .= $_SESSION['PROGRAMS_CREATED'];
 
 
 	echo date('D, M jS Y',strtotime($_SESSION[$dateSaved])); echo ' at ';echo date(' h:i A',strtotime($_SESSION[$timeStartSaved]));
@@ -126,17 +129,7 @@
 ?> <div class="clear"></div><b>
 <?php echo $_SESSION['PROGRAM_NAME'];?></b><br>
 <?php 
-		$programCitySaved = 'PROGRAM_CITY';
-		$programCitySaved .= $_SESSION['PROGRAMS_CREATED'];
-		
-		$programStateSaved = 'PROGRAM_STATE';
-		$programStateSaved .= $_SESSION['PROGRAMS_CREATED'];
-		
-		$programAddressSaved = 'PROGRAM_ADDRESS';
-		$programAddressSaved .= $_SESSION['PROGRAMS_CREATED'];
-		
-		$programZipSaved = 'PROGRAM_ZIP';
-		$programZipSaved .= $_SESSION['PROGRAMS_CREATED'];
+
 
 		echo $_SESSION[$programCitySaved]; echo ', '; echo $_SESSION[$programStateSaved];
 		
@@ -161,7 +154,7 @@
    Program Coordinators
 </div>
 <div class="rightText"  style="float: right;">        
-<a href="create-program-part1.php">Edit Program Coordinators</a>
+<a href="create-program-part1.php?name=<?php echo $_SESSION['PROGRAM_NAME']; ?>&image=<?php echo $_SESSION['PROGRAM_IMAGE_PATH']; ?>&address=<?php echo $_SESSION[$programAddressSaved]; ?>&state=<?php echo $_SESSION[$programStateSaved]; ?>&city=<?php echo $_SESSION[$programCitySaved]; ?>&zip=<?php echo $_SESSION[$programZipSaved]; ?>&descrip=<?php echo $_SESSION['PROGRAM_DESCRIPTION']; ?>&startDate=<?php echo $_SESSION[$dateSaved]; ?>&enddate=<?php echo $_SESSION[$endDateSaved]; ?>&startTime=<?php echo $_SESSION[$timeStartSaved]; ?>&endtime=<?php echo $_SESSION[$endTimeSaved]; ?>">Edit Program Coordinators</a>
 </div>
 
 </div>
@@ -177,7 +170,7 @@
 <?php echo $_SESSION['POSITIONS_CREATED'];?>  Open Positions
 </div>
 <div class="rightText"  style="float: right;">        
-<a href="create-program-part3.php">add positions</a>
+<a href="create-program-part3.php">edit positions</a>
 </div>
 </div>
 </div>
@@ -186,7 +179,8 @@
 <!--This is used for the program Coordinators box part 2-->
 <div class="programCoordsBox2">
 <div class="snapShotBox">
-
+<div id='results'>
+</div>
 </div>
 </div>
 
@@ -270,7 +264,7 @@ Filled
 
 
 <!--This is used for the  program msgs box-->
-<div class="programMsgs">
+<!--div class="programMsgs">
 <div class="box3">
 <div class="leftText" style="float: left;">
  Program Messages...
@@ -279,32 +273,32 @@ Filled
 <a href="program-message.php">Add New Messages</a>
 </div>
 </div>
-</div>
+</div-->
 <div class="clear"></div>
 
 <!--This is used for the  program msgs box part 2-->
-<div class="programMsgBox2">
+<!--div class="programMsgBox2">
 <div class="programMessages">
 	<?php
-	if(($_SESSION['PROGRAM_MSG']) == true) {
+	//if(($_SESSION['PROGRAM_MSG']) == true) {
 	
-		echo '';
-	}
-	else
-	{
-		echo 'No Posted Messages <br> <br><a href="program-message.php"><img src="../images/programmsg.jpg"></a>';
-	}
+	//	echo '';
+	//}
+	//else
+	//{
+	//	echo 'No Posted Messages <br> <br><a href="program-message.php"><img src="../images/programmsg.jpg"></a>';
+	//}
 	?>
 </div>
 </div>
-<div class="clear"></div>
+<div class="clear"></div-->
 
 <!--This is used for the program msgs box part 3-->
-<div class="programCoordsBox2">
+<!--div class="programCoordsBox2">
 <div class="box3">
 <br>
 </div>
-</div>
+</div-->
 
 
 
@@ -316,6 +310,7 @@ Filled
 <a href="program-management-org.php"><img src="../images/saveDraft.png" height="80" width="150"/></a>
 </div>
 
+<a href="create-program-part1.php?name=<?php echo $_SESSION['PROGRAM_NAME']; ?>&image=<?php echo $_SESSION['PROGRAM_IMAGE_PATH']; ?>&address=<?php echo $_SESSION[$programAddressSaved]; ?>&state=<?php echo $_SESSION[$programStateSaved]; ?>&city=<?php echo $_SESSION[$programCitySaved]; ?>&zip=<?php echo $_SESSION[$programZipSaved]; ?>&descrip=<?php echo $_SESSION['PROGRAM_DESCRIPTION']; ?>&startDate=<?php echo $_SESSION[$dateSaved]; ?>&enddate=<?php echo $_SESSION[$endDateSaved]; ?>&startTime=<?php echo $_SESSION[$timeStartSaved]; ?>&endtime=<?php echo $_SESSION[$endTimeSaved]; ?>">Continue Editing</a>
 
 <div id="publish" style="float:right; padding: 0px 10px 10px 0px">
 <a href="publish-program.php"><input type="image" name="Submit" src="../images/publishProgram.png" height="100" width="300" value="Submit" tabindex="22" /><a/>
@@ -328,9 +323,8 @@ Filled
 <div id="footerclear"></div><?php include "footer.php";?>
 </body>
 </html>
- <script type="text/javascript" src="../js/jquery.js"></script>
-  <script type="text/javascript" src="../js/collection.js"></script>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+<script type="text/javascript" src="../js/populateProgramCoords.js"></script>
 
 
 

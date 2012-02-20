@@ -109,6 +109,9 @@
 			$_SESSION['SESS_MEMBER_ID'] = $member['login'];
 			$_SESSION['SESS_ORG_OR_VOL'] = $member['orgorvol'];
 			$_SESSION['SESS_FIRST_TIME'] = 'true';
+			$shareLink = 'http://joelcomp1.no-ip.org/php/invitation.php?userid=';
+			$shareLink .= $member['userid'];
+			$_SESSION['USER_INVITE_LINK'] = $shareLink;
 			session_write_close();
 			header("location: member-index-vol.php");
 			exit();

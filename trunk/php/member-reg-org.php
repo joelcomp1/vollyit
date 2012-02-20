@@ -23,13 +23,12 @@ session_start();
 <link href="../style.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="../structure.css" type="text/css" />
 <link rel="stylesheet" href="../form.css" type="text/css" />
- <script type="text/javascript" src="../js/jquery.js"></script>
-  <script type="text/javascript" src="../js/collection.js"></script>
-  <script src="../js/popup.js" type="text/javascript"></script>
- <script src="../scripts/wufoo.js" type="../text/javascript"></script>
- 
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/collection.js"></script>
+<script src="../js/popup.js" type="text/javascript"></script>
+<script src="../scripts/wufoo.js" type="../text/javascript"></script>
 <script type="text/javascript" src="../js/characterCounter.js"></script>
-<link href="loginmodule.css" rel="stylesheet" type="text/css" />
+
 
 <script type="text/javascript" src="../js/jquery-1.2.1.pack.js"></script>
 <script type="text/javascript">

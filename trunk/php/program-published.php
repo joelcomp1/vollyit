@@ -2,14 +2,6 @@
 
 	require_once('auth.php');
 	
-// make a note of the current working directory relative to root.
-$directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
-
-// make a note of the location of the upload handler
-$uploadHandler = 'http://' . $_SERVER['HTTP_HOST'] . $directory_self . 'upload.processor.php';
-
-// set a max file size for the html upload form
-$max_file_size = 3000000; // size in bytes
 	if(isset($_SESSION['SESS_MEMBER_ID'])) 
 	{
 		if($_SESSION['SESS_ORG_OR_VOL'] == 'ORG')
@@ -36,31 +28,12 @@ $max_file_size = 3000000; // size in bytes
 <link href="../style.css" rel="stylesheet" type="text/css">
  <script type="text/javascript" src="../js/jquery.js"></script>
   <script type="text/javascript" src="../js/collection.js"></script>
-  <script src="../js/popup.js" type="text/javascript"></script>
-  <SCRIPT LANGUAGE="JavaScript" SRC="../js/date.js"></SCRIPT>
-<link href="loginmodule.css" rel="stylesheet" type="text/css" />
+
 	
 
 </head>
 <body>
-
-<div id="wrap">
-<nav id="mainnavuser">
-<br>
-<div class="clear"></div>
-
-<h3>
-<div class="publishProgram"  style="text-align:center;">
-Quick Tasks: <a href="edit-program.php"><img src="../images/editProgram.png" alt="edit program"  width="55" height="55"><a href="edit-volunteers.php"><img src="../images/editVolunteers.png" alt="edit program"  width="55" height="55"></a><a href="message-center-org-email.php"><img src="../images/emailProgram.png" width="55" height="55"></a><a href="message-center-org-voicemail.php"><img src="../images/voicemail.png" width="55" height="55"></a><a href="message-center-org-textmsg.php"><img src="../images/textmsg.png" width="55" height="55"></a><a href="message-center-org-programmsg.php"><img src="../images/programmsg.png" width="55" height="55"></a>
-</div>
-<div class="clear"></div>
-<div class="programNameTitle">
-<?php echo $_SESSION['PROGRAM_NAME'];?>
-
-</div>
-<div class="clear"></div>
-<div class="orgAddress">
-<?php 
+	<?php
 	$dateSaved = 'PROGRAM_DATE';
 	$dateSaved .= $_SESSION['PROGRAMS_CREATED'];
 	
@@ -73,6 +46,39 @@ Quick Tasks: <a href="edit-program.php"><img src="../images/editProgram.png" alt
 	$endDateSaved = 'PROGRAM_END_DATE';
 	$endDateSaved .= $_SESSION['PROGRAMS_CREATED'];
 
+	$programCitySaved = 'PROGRAM_CITY';
+	$programCitySaved .= $_SESSION['PROGRAMS_CREATED'];
+		
+	$programStateSaved = 'PROGRAM_STATE';
+	$programStateSaved .= $_SESSION['PROGRAMS_CREATED'];
+	
+	$programAddressSaved = 'PROGRAM_ADDRESS';
+	$programAddressSaved .= $_SESSION['PROGRAMS_CREATED'];
+		
+	$programZipSaved = 'PROGRAM_ZIP';
+	$programZipSaved .= $_SESSION['PROGRAMS_CREATED'];
+	
+	if(true) {
+		echo '<a href="#?w=350" rel="popup5" class="poplight"></a>';	
+	}
+	?>
+<div id="wrap">
+<nav id="mainnavuser">
+<br>
+<div class="clear"></div>
+
+<h3>
+<div class="publishProgram"  style="text-align:center;">
+Quick Tasks: <a href="create-program-part1.php?name=<?php echo $_SESSION['PROGRAM_NAME']; ?>&image=<?php echo $_SESSION['PROGRAM_IMAGE_PATH']; ?>&address=<?php echo $_SESSION[$programAddressSaved]; ?>&state=<?php echo $_SESSION[$programStateSaved]; ?>&city=<?php echo $_SESSION[$programCitySaved]; ?>&zip=<?php echo $_SESSION[$programZipSaved]; ?>&descrip=<?php echo $_SESSION['PROGRAM_DESCRIPTION']; ?>&startDate=<?php echo $_SESSION[$dateSaved]; ?>&enddate=<?php echo $_SESSION[$endDateSaved]; ?>&startTime=<?php echo $_SESSION[$timeStartSaved]; ?>&endtime=<?php echo $_SESSION[$endTimeSaved]; ?>"><img src="../images/editProgram.png" alt="edit program"  width="55" height="55"><a href="edit-volunteers.php"><img src="../images/editVolunteers.png" alt="edit program"  width="55" height="55"></a><a href="message-center-org-email.php"><img src="../images/emailProgram.png" width="55" height="55"></a><a href="message-center-org-voicemail.php"><img src="../images/voicemail.png" width="55" height="55"></a><a href="message-center-org-textmsg.php"><img src="../images/textmsg.png" width="55" height="55"></a><a href="#"  onclick="popup(350, 'popup6');" rel="popup6" class="poplight"><img src="../images/programmsg.png" width="55" height="55"></a><a href="#"><img src="../images/print.png" width="55" height="55"></a>
+</div>
+<div class="clear"></div>
+<div class="programNameTitle">
+<?php echo $_SESSION['PROGRAM_NAME'];?>
+
+</div>
+<div class="clear"></div>
+<div class="orgAddress">
+<?php 
 
 	echo date('l, F jS Y',strtotime($_SESSION[$dateSaved])); echo ' at ';echo date(' h:i A',strtotime($_SESSION[$timeStartSaved]));
 	if($_SESSION[$dateSaved] == $_SESSION[$endDateSaved]) //If its the same day show end time
@@ -91,20 +97,7 @@ Quick Tasks: <a href="edit-program.php"><img src="../images/editProgram.png" alt
 ?> 
 <div class="clear"></div>
 <?php 
-		$programCitySaved = 'PROGRAM_CITY';
-		$programCitySaved .= $_SESSION['PROGRAMS_CREATED'];
-		
-		$programStateSaved = 'PROGRAM_STATE';
-		$programStateSaved .= $_SESSION['PROGRAMS_CREATED'];
-		
-		$programAddressSaved = 'PROGRAM_ADDRESS';
-		$programAddressSaved .= $_SESSION['PROGRAMS_CREATED'];
-		
-		$programZipSaved = 'PROGRAM_ZIP';
-		$programZipSaved .= $_SESSION['PROGRAMS_CREATED'];
-
-		echo $_SESSION[$programAddressSaved]; echo ', '; echo $_SESSION[$programCitySaved]; echo ', '; echo $_SESSION[$programStateSaved]; echo ' '; echo $_SESSION[$programZipSaved];
-		
+	echo $_SESSION[$programAddressSaved]; echo ', '; echo $_SESSION[$programCitySaved]; echo ', '; echo $_SESSION[$programStateSaved]; echo ' '; echo $_SESSION[$programZipSaved];
 ?>
 		
 </div>
@@ -120,23 +113,6 @@ Quick Tasks: <a href="edit-program.php"><img src="../images/editProgram.png" alt
 <br>
 </div>
 
-
-
-<!--This is used for the upcoming vollys box-->
-<div class="boxFormat">
-<div class="TextBox1">
-<div class="leftText" style="float: left;">
- Summary
-</div>
-<div class="rightText"  style="float: right;">        
-<a href="create-program-part1.php">Edit Program Info</a>
-</div>
-</div>
-</div>
-
-<div class="boxFormat2">
-<div class="nextProgramsPublished">
-<center>
 <?php 
 	$dateSaved = 'PROGRAM_DATE';
 	$dateSaved .= $_SESSION['PROGRAMS_CREATED'];
@@ -149,6 +125,27 @@ Quick Tasks: <a href="edit-program.php"><img src="../images/editProgram.png" alt
 	
 	$endDateSaved = 'PROGRAM_END_DATE';
 	$endDateSaved .= $_SESSION['PROGRAMS_CREATED'];
+	
+?>
+
+<!--This is used for the upcoming vollys box-->
+<div class="boxFormat">
+<div class="TextBox1">
+<div class="leftText" style="float: left;">
+ Summary
+</div>
+<div class="rightText"  style="float: right;">        
+<a href="create-program-part1.php?name=<?php echo $_SESSION['PROGRAM_NAME']; ?>&image=<?php echo $_SESSION['PROGRAM_IMAGE_PATH']; ?>&address=<?php echo $_SESSION[$programAddressSaved]; ?>&state=<?php echo $_SESSION[$programStateSaved]; ?>&city=<?php echo $_SESSION[$programCitySaved]; ?>&zip=<?php echo $_SESSION[$programZipSaved]; ?>&descrip=<?php echo $_SESSION['PROGRAM_DESCRIPTION']; ?>&startDate=<?php echo $_SESSION[$dateSaved]; ?>&enddate=<?php echo $_SESSION[$endDateSaved]; ?>&startTime=<?php echo $_SESSION[$timeStartSaved]; ?>&endtime=<?php echo $_SESSION[$endTimeSaved]; ?>">Edit Program Info</a>
+
+</div>
+</div>
+</div>
+
+<div class="boxFormat2">
+<div class="nextProgramsPublished">
+<center>
+<?php 
+
 
 
 	echo date('D, M jS Y',strtotime($_SESSION[$dateSaved])); echo ' at ';echo date(' h:i A',strtotime($_SESSION[$timeStartSaved]));
@@ -168,18 +165,6 @@ Quick Tasks: <a href="edit-program.php"><img src="../images/editProgram.png" alt
 ?> <div class="clear"></div><b>
 <?php echo $_SESSION['PROGRAM_NAME'];?></b><br>
 <?php 
-		$programCitySaved = 'PROGRAM_CITY';
-		$programCitySaved .= $_SESSION['PROGRAMS_CREATED'];
-		
-		$programStateSaved = 'PROGRAM_STATE';
-		$programStateSaved .= $_SESSION['PROGRAMS_CREATED'];
-		
-		$programAddressSaved = 'PROGRAM_ADDRESS';
-		$programAddressSaved .= $_SESSION['PROGRAMS_CREATED'];
-		
-		$programZipSaved = 'PROGRAM_ZIP';
-		$programZipSaved .= $_SESSION['PROGRAMS_CREATED'];
-
 		echo $_SESSION[$programCitySaved]; echo ', '; echo $_SESSION[$programStateSaved];
 		
 ?><br>
@@ -222,7 +207,7 @@ People Volunteering for This Program
    Program Coordinators
 </div>
 <div class="rightText"  style="float: right;">        
-<a href="create-program-part1.php">Edit Program Coordinators</a>
+<a href="create-program-part1.php?name=<?php echo $_SESSION['PROGRAM_NAME']; ?>&image=<?php echo $_SESSION['PROGRAM_IMAGE_PATH']; ?>&address=<?php echo $_SESSION[$programAddressSaved]; ?>&state=<?php echo $_SESSION[$programStateSaved]; ?>&city=<?php echo $_SESSION[$programCitySaved]; ?>&zip=<?php echo $_SESSION[$programZipSaved]; ?>&descrip=<?php echo $_SESSION['PROGRAM_DESCRIPTION']; ?>&startDate=<?php echo $_SESSION[$dateSaved]; ?>&enddate=<?php echo $_SESSION[$endDateSaved]; ?>&startTime=<?php echo $_SESSION[$timeStartSaved]; ?>&endtime=<?php echo $_SESSION[$endTimeSaved]; ?>">Edit Program Coordinators</a>
 </div>
 
 </div>
@@ -247,7 +232,8 @@ People Volunteering for This Program
 <!--This is used for the Program Coordinators box part 2-->
 <div class="programCoordsBox2">
 <div class="snapShotBox">
-
+<div id='results'>
+</div>
 </div>
 </div>
 
@@ -337,7 +323,7 @@ Filled
  Program Messages...
 </div>
 <div class="rightText"  style="float: right;">        
-<a href="program-message.php">Add New Messages</a>
+<a href="program-message.php">Post New Message</a>
 </div>
 </div>
 </div>
@@ -353,7 +339,7 @@ Filled
 	}
 	else
 	{
-		echo '<center>No Posted Messages <br> <br><a href="program-message.php"><img src="../images/programmsg.jpg"></a></center>';
+		echo '<center>No Posted Messages <br> <br><a href="program-message.php"><img src="../images/programmsg.png"></a></center>';
 	}
 	?>
 </div>
@@ -369,57 +355,81 @@ Filled
 
 <div class="clear"></div>
 
-<!--This is used for the  programs box-->
-<div class="programMsgs">
-<div class="box3">
-<div class="leftText" style="float: left;">
-More Programs at <?php echo $_SESSION['ORG_NAME'];?>!
-</div>
-<div class="rightText"  style="float: right;">        
-<a href="view-all-programs.php">View all programs</a>
-</div>
-</div>
-</div>
 
+
+
+
+<br>
 <div class="clear"></div>
-<!--This is used for the  programs part 2-->
-<div class="programMsgBox2">
-<div class="programMessages">
-	<?php
-	if(($_SESSION['PROGRAMS']) == true) {
+<br>
+<div id="popup5" class="popup_block">
+	<h2 style=" padding:0px 0 0 30px!important; float:none; text-align: center;">Your Program Has Published</h2><br>
+	<p id="contactArea" style=" padding:0px 0 0 30px!important; float:none; text-align: center;">
+			An e-mail notification will be sent to your volunteers.  You can also:</p>
+<a href="https://www.facebook.com/sharer/sharer.php?u=http://volly.it&t=Help Change the World!"><img src="../images/facebook.png" width="62" height="22" alt="Facebook" /></a>
+
+
+<a href="https://twitter.com/intent/tweet?text=@<?php echo $_SESSION['ORG_NAME'];?> posted a new volunteer opportunity on Volly.it.  Check it out bit.ly">
+<img src="../images/twittershare.png" width="62" height="22" alt="Twitter" /></a>
+
+
+
 	
-		echo '';
-	}
-	else
-	{
-		echo '<center>You Have No Upcoming Programs! <br> <br><a href="create-org-programs.php"><img src="../images/createprograms.jpg"></a></center>';
-	}
-	?>
-</div>
-</div>
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
+<!--/div-->
 
+</div>
+<div id="popup6" class="popup_block">
+	<h2 style=" padding:0px 0 0 30px!important; float:none; text-align: center;">Post Message</h2><br>
+	<p id="contactArea" style=" padding:0px 0 0 0px!important; float:none; text-align: center;">
+	
+
+Program Name
 <div class="clear"></div>
-<!--This is used for the programs part 3-->
-<div class="programCoordsBox2">
-<div class="box3">
-<br>
-</div>
-</div>
 
 
-
-<br>
+<input id="Field1" name="Field1" type="text" class="field text large" maxlength="255" tabindex="1" value="Subject" onfocus="this.value = this.value=='Subject' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Subject' : this.value; this.value=='Subject' ? this.style.color='#999' : this.style.color='#000'" />
 <div class="clear"></div>
-<br>
 
 
+Program Description
+<div class="clear"></div>
+<div style="">
+<textarea id="Field3" 
+name="Field3" 
+class="field textarea medium" 
+spellcheck="true" 
+rows="10" cols="30" 
+tabindex="2" 
+style="resize: none;"
+ ></textarea>
+</div>
+<div class="clear"></div>
+<div id="emailNot" name="emailNot" style="float:left;">
+<input type="checkbox" name="emailNot" value="emailNotification" id="emailNot" tabindex="3"/> Send e-mail notification<br/>
+</div>
+<div id="postFb" name="postFb" style="float:left;">
+<input type="checkbox" name="postFb" value="postToFB" id="postFb" tabindex="4"/> Post To Facebook<br/>
+</div>
+<div id="postT" name="postT" style="float:left;">
+<input type="checkbox" name="postT" value="postToT" id="postT" tabindex="5"/>  Post To Twitter<br/>
+</div></p>
+<div class="clear"></div>
+
+
+
+	
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
+<!--/div-->
+
+</div>
 </div>
 </div>
 <div id="footerclear"></div><?php include "footer.php";?>
 </body>
 </html>
-
-
+<script type="text/javascript" src="../js/populateProgramCoords.js"></script>
+<script type="text/javascript" src="../js/customPopupBox.js"></script>
 
 
 

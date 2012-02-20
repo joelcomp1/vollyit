@@ -34,7 +34,6 @@ $max_file_size = 3000000; // size in bytes
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
   <script src="../js/popup.js" type="text/javascript"></script>
   <script type="text/javascript" src="../js/characterCounter.js"></script>
-<link href="loginmodule.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>

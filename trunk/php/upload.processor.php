@@ -172,8 +172,8 @@ else if($submitButton == 'Upload Program Photo!')
 	if(isset($_SESSION['PROGRAM_IMAGE_PATH']))
 	{
 
-	$removeOldImage = 'uploaded_files/';
-	$removeOldImage .= $_SESSION['PROGRAM_IMAGE_PATH'];
+		$removeOldImage = 'uploaded_files/';
+		$removeOldImage .= $_SESSION['PROGRAM_IMAGE_PATH'];
 		unlink($removeOldImage);
 		unset($_SESSION['PROGRAM_IMAGE_PATH']);
 	}

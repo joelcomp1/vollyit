@@ -7,7 +7,6 @@ $_SESSION['ref'] = $_SERVER['SCRIPT_NAME'];?>
 <link href="../style.css" rel="stylesheet" type="text/css">
 <script type="../text/javascript" src="../js/jquery.js"></script>
 <script type="../text/javascript" src="../js/collection.js"></script>
-<link href="loginmodule.css" rel="stylesheet" type="text/css" />
 <script src="../js/jquery.ez-pinned-footer.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/programMgmt.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="../js/jquery-1.2.1.pack.js"></script>

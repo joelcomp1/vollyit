@@ -22,8 +22,8 @@
 	
 	//Sanitize the POST values
 	$login = clean($_SESSION['SESS_MEMBER_ID']);
-	$loginRequest = clean($_SESSION['ORG_NAME']);
-	$zip = clean($_SESSION['ORG_ZIPCODE']);
+	$loginRequest = clean($_SESSION['ORG_NAME_VIEW']);
+	$zip = clean($_SESSION['ORG_ZIPCODE_VIEW']);
 	
 	$todaysDate = date("m/d/Y h:i:s A");
 
