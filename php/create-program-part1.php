@@ -3,6 +3,117 @@
 	
 	include "header-org.php";
 	include "navigation.php";
+	session_start(); 
+	if($_GET['name'] != '')
+	{
+		$_SESSION['PROGRAM_NAME_TEMP'] = $_GET['name'];
+	}
+	if($_GET['image'] != '')
+	{
+		$_SESSION['PROGRAM_IMAGE_PATH'] = $_GET['image'];
+	}
+	if($_GET['address'] != '')
+	{
+		$_SESSION['PROGRAM_ADDRESS_TEMP'] =  $_GET['address'];
+	}
+	if($_GET['city'] != '')
+	{
+		$_SESSION['PROGRAM_CITY_TEMP'] =  $_GET['city'];
+	}
+	if($_GET['state'] != '')
+	{
+		$_SESSION['PROGRAM_STATE_TEMP'] =  $_GET['state'];
+	}
+	if($_GET['zip'] != '')
+	{
+		$_SESSION['PROGRAM_ZIP_TEMP'] =  $_GET['zip'];
+	}
+	if($_GET['descrip'] != '')
+	{
+		$_SESSION['TEMP_PROGRAM_DESCRIPTION'] =  $_GET['descrip'];
+	}
+	if($_GET['startDate'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_TEMP'] =  $_GET['startDate'];
+	}
+	if($_GET['enddate'] != '')
+	{
+		$_SESSION['PROGRAM_END_DATE_TEMP'] =  $_GET['enddate'];
+	}
+	if($_GET['startTime'] != '')
+	{
+		$_SESSION['PROGRAM_START_TIME_TEMP'] =  $_GET['startTime'];
+	}
+	if($_GET['endtime'] != '')
+	{
+		$_SESSION['PROGRAM_END_TIME_TEMP'] =  $_GET['endtime'];
+	}
+	if($_GET['recurring'] != '')
+	{
+		$_SESSION['PROGRAM_RECURRING_TEMP'] = $_GET['recurring'];
+	}
+	if($_GET['repeats'] != '')
+	{
+		$_SESSION['PROGRAM_REPEATS_TEMP'] = $_GET['repeats'];
+	}
+	if($_GET['sunday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_SUNDAY_TEMP'] = $_GET['sunday'];
+	}
+	if($_GET['monday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_MONDAY_TEMP'] = $_GET['monday'];
+	}
+	if($_GET['tuesday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_TUESDAY_TEMP'] = $_GET['tuesday'];
+	}
+	if($_GET['wednesday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_WEDNESDAY_TEMP'] = $_GET['wednesday'];
+	}
+	if($_GET['thursday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_THURSDAY_TEMP'] = $_GET['thursday'];
+	}
+	if($_GET['friday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_FRIDAY_TEMP'] = $_GET['friday'];
+	}
+	if($_GET['saturday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_SATURDAY_TEMP'] = $_GET['saturday'];
+	}
+	if($_GET['noend'] != '')
+	{
+		$_SESSION['PROGRAM_NO_END_TEMP'] = $_GET['noend'];
+	}
+	if(isset($_SESSION['PROGRAM_IMAGE_PATH']))
+	{
+		$_SESSION['PROGRAM_IMAGE'] = 'true';
+	}	
+	if($_GET['reset'] != '')
+	{
+	        unset($_SESSION['PROGRAM_NAME_TEMP']);
+			unset($_SESSION['PROGRAM_NAME']);
+	        unset($_SESSION['PROGRAM_ADDRESS_TEMP']);
+			unset($_SESSION['PROGRAM_CITY_TEMP']);
+			unset($_SESSION['PROGRAM_STATE_TEMP']);
+			unset($_SESSION['PROGRAM_ZIP_TEMP']);
+	        unset($_SESSION['TEMP_PROGRAM_DESCRIPTION']);
+			unset($_SESSION['TEMP_PROGRAM_IMAGE']);
+			unset($_SESSION['TEMP_PROGRAM_NAME']);
+			unset($_SESSION['TEMP_PROGRAM_PARENT_NAME']);
+			unset($_SESSION['TEMP_PROGRAM_PARENT_IMAGE']);
+			unset($_SESSION['TEMP_ORG_IMAGE']);
+			unset($_SESSION['TEMP_ORG_PRGORAM_NAME']);
+			unset($_SESSION['TEMP_ORG_PROGRAM_CITY']);
+			unset($_SESSION['TEMP_ORG_PROGRAM_STATE']);		
+			unset($_SESSION['TEMP_PROGRAM_TAGS']);	
+			unset($_SESSION['PROGRAM_IMAGE_PATH']);
+	}
+	
+	
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -13,11 +124,14 @@
 <title>Volly.it: <?php echo $_SESSION['ORG_NAME'];?>'s Profile</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
 <link href="../css/liveQuery.css" rel="stylesheet" type="text/css">
-<link href="loginmodule.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="../form.css" type="text/css" />
+
+
+
 </head>
 
 <body>
+
 <div id="wrap">
 <div id="mainnavuser">
 <div class="clear"></div>
@@ -71,15 +185,35 @@ Easy as 1.. 2.. 3..
 	<div id="backgroundPopup3"></div>
 	
 	
-<div id="popupContact4">
-	<a id="popupContactClose4">x</a>
+
+	
+<div id="popup4" class="popup_block">
+Help info here about Program coordinators
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Go Back</a>
+</div>
+<div id="popup5" class="popup_block">
+	<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Go Back</a>
 	<p id="contactArea">
-		Help info here about Program coordinators
+
+<form id="Upload" action="upload.processor.php" enctype="multipart/form-data" method="post">
+		<p>
+			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size ?>">
+			<div id="imageUpload" style="text-align:center">
+	
+			<label for="file">Upload a Picture!</label>
+			<br>
+			<br>
+			<input id="file" type="file" name="file">
+				<br>
+			
+<br>
+			<input id="submit" type="submit" name="submit" value="Upload Program Photo!">
+				</div>
 		</p>
-	</div>
-	<div id="backgroundPopup4"></div>
-	
-	
+	</form>
+		</p>
+</div>
+
 <div id="popupContact5">
 	<a id="popupContactClose5">x</a>
 	<p id="contactArea">
@@ -125,26 +259,21 @@ Easy as 1.. 2.. 3..
 		echo '</ul>';
 		unset($_SESSION['ERRMSG_ARR']);
 	}
-	else
-	{
-		//These were used for error detection, clear them if got to the page another way
-	    unset($_SESSION['PROGRAM_NAME_TEMP']);
-	    unset($_SESSION['PROGRAM_LOCATION_TEMP']);
-	    unset($_SESSION['PROGRAM_DESCRIPTION_TEMP']);
-	}
+
 ?>
 <div class="thumbnailProgram">
 	<?php
 	if(($_SESSION['PROGRAM_IMAGE']) == 'true') {
 	
-		echo '<div id="orgLogo" style="float:left;"><img src="uploaded_files/',$_SESSION['PROGRAM_IMAGE_PATH'],'" alt="Program Picture" width="200" height="200">
+		echo '<div id="orgLogo"';
+		?>
+		onclick="popup(350, 'popup5');" class="poplight"
+		<?php echo 'style="float:left;"><img src="uploaded_files/',$_SESSION['PROGRAM_IMAGE_PATH'],'" alt="Program Picture" width="200" height="200">
 		 <br><I> Click Image to Add or Change Photo</I></div>';
 	}
 	else
 	{//This name is decieving, i am using the orgLogo pop up for the image upload of the Program.....
-		echo '<div id="orgLogo" style="float:left;">
-<img src="../images/nophoto.png" width="200" height="200" alt="header image2""> <br><I> Click Image to Add or Change Photo</I>
-</div>';
+		echo '<div id="orgLogo" style="float:left;"><img src="../images/nophoto.png" width="200" height="200" alt="header image2""> <br><I> Click Image to Add or Change Photo</I></div>';
 	}
 	?>
 	
@@ -258,7 +387,7 @@ style="resize: none;"
 </div>
 <div class="clear"></div>
 <br>
-<div id="tags" style="float:left; padding: 0px;">
+<!--div id="tags" style="float:left; padding: 0px;">
 <div class="tagsStyle" >
 Tags: How would you like this program to be searched?
 </div>
@@ -277,7 +406,7 @@ This helps volunteers find your organization.  Just start <br>typing words that 
 	</div>
 	</div>
 </div>
-</div>
+</div-->
 
 
 <div id="programCoords" style="float:left; padding: 0px">
@@ -286,17 +415,25 @@ This helps volunteers find your organization.  Just start <br>typing words that 
 Program Coordinators
 </div>
 <div id="programCoordsRight" style="float:left;">
- <img src="../images/help.png" width="20" height="20" id="helpEventCoords" style="padding: 0px 0px 0px 50px;">
+<img src="../images/help.png" width="20" height="20" onclick="popup(350, 'popup4');" class="poplight" >
+
 </div>
 </div>
-<script src="../js/addInputs.js" language="Javascript" type="text/javascript"></script>
+<div class="clear"></div>
 <div id="dynamicProgramCoords">
-<span>
-<input id="Field16" name="Field16" type="text" spellcheck="false" class="field text medium" value="Start Typing Name" maxlength="255" tabindex="8" required /> 
-</span>
+<input name="tags"  type="text" size="60" id="inputString2" onkeyup="lookupTags(this.value);" value="Start Typing Name" onfocus="this.value = this.value=='Start Typing Name' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Start Typing Name' : this.value; this.value=='Start Typing Name' ? this.style.color='#999' : this.style.color='#000'"/>
+<div class="suggestionsBox2" id="suggestions2" style="display: none; text: font:bold 0.4em 'TeXGyreAdventor', Arial, sans-serif!important;">
+	<img src="../images/upArrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
+<div class="suggestionList2" id="autoSuggestionsList2">
+		&nbsp;
+	</div>
+	</div>
+<input type="button" value="Add Program Coordinator" onClick="unhideInput();">
+<div id='results'>
+</div>
 </div>
 
-<input type="button" value="Add" onClick="addInput('dynamicProgramCoords');">
+
 
 </div>
 
@@ -311,10 +448,13 @@ $(function() {    // Makes sure the code contained doesn't run until
     });
 
 });
+
 </Script>
+<script type="text/javascript" src="../js/customPopupBox.js"></script>
+
 <div class="clear"></div>
 <br>
-<div class="programType">
+<!--div class="programType">
 <h4 id="title1">Program Type</h4>
 <img src="../images/help.png" width="20" height="20" id="helpCoolab" style="padding: 0px 0px 0px 10px;">
 </div>
@@ -326,7 +466,7 @@ $(function() {    // Makes sure the code contained doesn't run until
                     <option value="collabEvent" <?php if(isset($_SESSION['TEMP_ORG_IMAGE'])){ echo 'selected="yes"';}?>>Collaborative Program</option>
                     <option value="parentProgram" <?php if(isset($_SESSION['TEMP_PROGRAM_PARENT_IMAGE'])){ echo 'selected="yes"';}?>>Parent Program</option>
                     <option value="childProgram" <?php if(isset($_SESSION['TEMP_PROGRAM_IMAGE'])){ echo 'selected="yes"';}?>>Child Program</option>
-		</select>
+		</select-->
 <div class="clear"></div>
 <br>
 <div id="collabEvent" class="selectColabOption" style="float:left; <?php if(!isset($_SESSION['TEMP_ORG_IMAGE'])){ echo 'display:none;';}?>">
@@ -338,7 +478,7 @@ Collaborative <img src="../images/help.png" width="20" height="20" id="helpColla
 Who would you like to collaborate with?</div>
 <div class="clear"></div>
 <br>
-<script src="../js/addInputs.js" language="Javascript" type="text/javascript"></script>
+
 <div id="dynamicCollabOrgs" style="margin: 0px 0px 0px 0px;">
 
 <input name="inputString3" type="text" size="30" id="inputString3" onkeyup="lookupOrgs(this.value);" onblur="fillOrgs();" value="Type Organization Name" onfocus="this.value = this.value=='Type Organization Name' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Type Organization Name' : this.value; this.value=='Type Organization Name' ? this.style.color='#999' : this.style.color='#000'"/>
@@ -373,7 +513,7 @@ Parent Program <img src="../images/help.png" width="20" height="20" id="emailAcc
 Add Child Programs(s)</div>
 <div class="clear"></div>
 <br>
-<script src="../js/addInputs.js" language="Javascript" type="text/javascript"></script>
+
 <div id="dynamicCollabOrgs" style="margin: 0px 0px 0px 0px;">
 <input name="inputString2" type="text" size="30" id="inputString2" onkeyup="lookupPrograms(this.value);" onblur="fillPrograms();" value="Type Program Name" onfocus="this.value = this.value=='Type Program Name' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Type Program Name' : this.value; this.value=='Type Program Name' ? this.style.color='#999' : this.style.color='#000'"/>
 <div class="suggestionsBox2" id="suggestions2" style="display: none; text: font:bold 0.4em 'TeXGyreAdventor', Arial, sans-serif!important;">
@@ -408,7 +548,7 @@ Child Program <img src="../images/help.png" width="20" height="20" id="phoneAcco
 Add Parent Program</div>
 <div class="clear"></div>
 <br>
-<script src="../js/addInputs.js" language="Javascript" type="text/javascript"></script>
+
 <div id="dynamicCollabOrgs" style="margin: 0px 0px 0px 0px;">
 <input name="inputString4" type="text" size="30" id="inputString4" onkeyup="lookupPrograms2(this.value);" onblur="fillPrograms2();" value="Type Program Name" onfocus="this.value = this.value=='Type Program Name' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Type Program Name' : this.value; this.value=='Type Program Name' ? this.style.color='#999' : this.style.color='#000'"/>
 <div class="suggestionsBox4" id="suggestions4" style="display: none; text: font:bold 0.4em 'TeXGyreAdventor', Arial, sans-serif!important;">
@@ -459,11 +599,12 @@ Add Parent Program</div>
 </div>
 </div>
 <div id="footerclear"></div><?php include "footer.php";?>
+
 </body>
-</html>
-<script src="../js/popup.js" type="text/javascript"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
 <script type="text/javascript" src="../js/createProgramPart1.js"></script>
-
-
-
+<script type="text/javascript" src="../js/searchProgCoord.js"></script>
+<script src="../js/addInputs.js" language="Javascript" type="text/javascript"></script>
+<script type="text/javascript" src="../js/populateProgramCoords.js"></script>
 

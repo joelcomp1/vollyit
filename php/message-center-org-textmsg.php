@@ -15,7 +15,6 @@
 <link href="../style.css" rel="stylesheet" type="text/css">
 <link href="../css/liveQuery.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="../js/jquery.js"></script>
-<link href="loginmodule.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../js/jquery-1.2.1.pack.js"></script>
 <script LANGUAGE="JavaScript" src="../js/textMsg.js"></script>
 </head>

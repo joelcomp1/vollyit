@@ -2,6 +2,89 @@
 	require_once('auth.php');
 	include "header-org.php";
 	include "navigation.php";
+	if($_GET['startDate'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_TEMP'] = $_GET['startDate'];
+	}
+	if($_GET['enddate'] != '')
+	{
+		$_SESSION['PROGRAM_END_DATE_TEMP'] = $_GET['enddate'];
+	}
+	if($_GET['startTime'] != '')
+	{
+		$_SESSION['PROGRAM_START_TIME_TEMP'] = $_GET['startTime'];
+	}
+	if($_GET['endtime'] != '')
+	{
+		$_SESSION['PROGRAM_END_TIME_TEMP'] = $_GET['endtime'];
+	}
+	if($_GET['recurring'] != '')
+	{
+		$_SESSION['PROGRAM_RECURRING_TEMP'] = $_GET['recurring'];
+	}
+	if($_GET['repeats'] != '')
+	{
+		$_SESSION['PROGRAM_REPEATS_TEMP'] = $_GET['repeats'];
+	}
+	if($_GET['sunday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_SUNDAY_TEMP'] = $_GET['sunday'];
+	}
+	if($_GET['monday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_MONDAY_TEMP'] = $_GET['monday'];
+	}
+	if($_GET['tuesday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_TUESDAY_TEMP'] = $_GET['tuesday'];
+	}
+	if($_GET['wednesday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_WEDNESDAY_TEMP'] = $_GET['wednesday'];
+	}
+	if($_GET['thursday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_THURSDAY_TEMP'] = $_GET['thursday'];
+	}
+	if($_GET['friday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_FRIDAY_TEMP'] = $_GET['friday'];
+	}
+	if($_GET['saturday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_SATURDAY_TEMP'] = $_GET['saturday'];
+	}
+	if($_GET['noend'] != '')
+	{
+		$_SESSION['PROGRAM_NO_END_TEMP'] = $_GET['noend'];
+	}
+	if($_GET['name'] != '')
+	{
+		$_SESSION['PROGRAM_NAME_TEMP'] = $_GET['name'];
+	}
+	if($_GET['image'] != '')
+	{
+		$_SESSION['PROGRAM_IMAGE_PATH'] = $_GET['image'];
+	}
+	if($_GET['address'] != '')
+	{
+		$_SESSION['PROGRAM_ADDRESS_TEMP'] =  $_GET['address'];
+	}
+	if($_GET['city'] != '')
+	{
+		$_SESSION['PROGRAM_CITY_TEMP'] =  $_GET['city'];
+	}
+	if($_GET['state'] != '')
+	{
+		$_SESSION['PROGRAM_STATE_TEMP'] =  $_GET['state'];
+	}
+	if($_GET['zip'] != '')
+	{
+		$_SESSION['PROGRAM_ZIP_TEMP'] =  $_GET['zip'];
+	}
+	
+
+	
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -50,14 +133,7 @@ Easy as 1.. 2.. 3..
 		echo '</ul>';
 		unset($_SESSION['ERRMSG_ARR']);
 	}
-	else
-	{
-		//These were used for error detection, clear them here if we came to the page another way
-	    unset($_SESSION['PROGRAM_DATE_TEMP']);
-	    unset($_SESSION['PROGRAM_START_TIME_TEMP']);
-	    unset($_SESSION['PROGRAM_END_TIME_TEMP']);
-		unset($_SESSION['PROGRAM_END_DATE_TEMP']);
-	}
+
 ?>
 <div class="programOutStyle">
 <div class="boxCreateProgram">
@@ -96,8 +172,13 @@ Easy as 1.. 2.. 3..
 </div>
 <div style="float:left; padding: 0px 30px 0px 0px;">
         <input type="text" style="width: 70px" name="timepicker_end" id="timepicker_end" tabindex="3" value="<?php echo $_SESSION['PROGRAM_END_TIME_TEMP'];?>" />
-</div>
-		<input id="Field6" name="Field6" type="checkbox" value="Recurring" tabindex="4" onclick="$('.repeatsChecker').toggle();" />
+</div> <?php if($_SESSION['PROGRAM_RECURRING_TEMP'] == 'Recurring') { 
+echo "<script type='text/javascript'>$(document).ready(function() {";
+echo '$(".repeatsChecker").show();';
+echo '})</script>'; } ?>
+		<input id="Field6" name="Field6" type="checkbox" value="Recurring" tabindex="4" onclick="$('.repeatsChecker').toggle();"  <?php if($_SESSION['PROGRAM_RECURRING_TEMP'] == 'Recurring')
+																																				{ echo 'checked="yes"'; } ?>
+																																				 />
 <div style="float:left; font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important; padding: 0px 30px 0px 0px;">
 		Recurring Program:
 </div>
@@ -225,20 +306,20 @@ Repeats:
 </div>
 <div>
 
-<select id="Field106" name="Field106" class="field select small" tabindex="5" > 
-<option value="Daily" selected="selected" >
+<select id="Field106" name="Field106" class="field select small" tabindex="5"  > 
+<option value="Daily" <?php if($_SESSION['PROGRAM_REPEATS_TEMP'] == 'Daily'){ echo 'selected="yes"';}?>>
 Daily
 </option>
-<option value="Weekly" >
+<option value="Weekly" <?php if($_SESSION['PROGRAM_REPEATS_TEMP'] == 'Weekly'){ echo 'selected="yes"';}?>>
 Weekly
 </option>
-<option value="Bi-Weekly">
+<option value="Bi-Weekly" <?php if($_SESSION['PROGRAM_REPEATS_TEMP'] == 'Bi-Weekly'){ echo 'selected="yes"';}?>>
 Bi-Weekly
 </option>
-<option value="Monthly" >
+<option value="Monthly" <?php if($_SESSION['PROGRAM_REPEATS_TEMP'] == 'Monthly'){ echo 'selected="yes"';}?>>
 Monthly
 </option>
-<option value="Yearly" >
+<option value="Yearly" <?php if($_SESSION['PROGRAM_REPEATS_TEMP'] == 'Yearly'){ echo 'selected="yes"';}?>>
 Yearly
 </option>
 </select>
@@ -249,25 +330,25 @@ Yearly
 Every:
 </div>
 <div id="Sunday" name="Sunday" style="float:left;">
-<input type="checkbox" name="Sunday" value="Sunday" id="Sunday" tabindex="6"/>  Sunday<br/>
+<input type="checkbox" name="Sunday" value="Sunday" id="Sunday" tabindex="6" <?php if($_SESSION['PROGRAM_DATE_SUNDAY_TEMP'] != ''){ echo 'checked="yes"'; } ?>/>  Sunday<br/>
 </div>
 <div id="Monday" name="Monday" style="float:left; padding: 0px 0px 0px 10px;">
-<input type="checkbox" name="Monday" value="Monday"  id="Monday" tabindex="7"/>  Monday<br/>
+<input type="checkbox" name="Monday" value="Monday"  id="Monday" tabindex="7" <?php if($_SESSION['PROGRAM_DATE_MONDAY_TEMP'] != ''){ echo 'checked="yes"'; } ?>/>  Monday<br/>
 </div>
 <div id="Tuesday" name="Tuesday"  style="float:left; padding: 0px 0px 0px 10px;">
-<input type="checkbox" name="Tuesday" value="Tuesday"  id="Tuesday" name="Tuesday" tabindex="8"/>  Tuesday<br/>
+<input type="checkbox" name="Tuesday" value="Tuesday"  id="Tuesday" name="Tuesday" tabindex="8" <?php if($_SESSION['PROGRAM_DATE_TUESDAY_TEMP'] != ''){ echo 'checked="yes"'; } ?>/>  Tuesday<br/>
 </div>
 <div id="Wednesday" name="Wednesday"  style="float:left; padding: 0px 0px 0px 10px;">
-<input type="checkbox" name="Wednesday" value="Wednesday"id="Wednesday" name="Wednesday"  tabindex="9" />  Wednesday<br/>
+<input type="checkbox" name="Wednesday" value="Wednesday"id="Wednesday" name="Wednesday"  tabindex="9" <?php if($_SESSION['PROGRAM_DATE_WEDNESDAY_TEMP'] != ''){ echo 'checked="yes"'; } ?>/>  Wednesday<br/>
 </div>
 <div id="Thursday" name="Thursday" style="float:left; padding: 0px 0px 0px 10px;">
-<input type="checkbox" name="Thursday" value="Thursday" id="Thursday" name="Thursday"  tabindex="10"/>  Thursday<br/>
+<input type="checkbox" name="Thursday" value="Thursday" id="Thursday" name="Thursday"  tabindex="10" <?php if($_SESSION['PROGRAM_DATE_THURSDAY_TEMP'] != ''){ echo 'checked="yes"'; } ?>/>  Thursday<br/>
 </div>
 <div id="Friday" name="Friday"  style="float:left; padding: 0px 0px 0px 10px;">
-<input type="checkbox" name="Friday" value="Friday" id="Friday" name="Friday"  tabindex="11"/>  Friday<br/>
+<input type="checkbox" name="Friday" value="Friday" id="Friday" name="Friday"  tabindex="11" <?php if($_SESSION['PROGRAM_DATE_FRIDAY_TEMP'] != ''){ echo 'checked="yes"'; } ?>/>  Friday<br/>
 </div>
 <div id="Saturday" name="Saturday"  style="float:left; padding: 0px 0px 0px 10px;">
-<input type="checkbox" name="Saturday" value="Saturday" id="Saturday" name="Saturday"  tabindex="12"/>  Saturday<br/>
+<input type="checkbox" name="Saturday" value="Saturday" id="Saturday" name="Saturday"  tabindex="12" <?php if($_SESSION['PROGRAM_DATE_SATURDAY_TEMP'] != ''){ echo 'checked="yes"'; } ?>/>  Saturday<br/>
 </div>
 <div class="clear"></div>
 <br>
@@ -287,7 +368,7 @@ Date Ending:
 OR		
 </div>
 <div style="float:left; font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important; padding: 0px 10px 0px 0px;">
-		<input id="Field16" name="Field16" type="checkbox" value="No End Date" tabindex="14"  />
+		<input id="Field16" name="Field16" type="checkbox" value="No End Date" tabindex="14" <?php if($_SESSION['PROGRAM_NO_END_TEMP'] != ''){ echo 'checked="yes"'; } ?> />
 </div>
 
 <div style="float:left; font:bold 1.3em 'TeXGyreAdventor', Arial, sans-serif!important; padding: 0px 30px 0px 0px;">

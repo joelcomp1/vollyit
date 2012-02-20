@@ -3,6 +3,63 @@
 	
 	include "header-org.php";
 	include "navigation.php";
+	
+	if($_GET['startDate'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_TEMP'] = $_GET['startDate'];
+	}
+	if($_GET['enddate'] != '')
+	{
+		$_SESSION['PROGRAM_END_DATE_TEMP'] = $_GET['enddate'];
+	}
+	if($_GET['startTime'] != '')
+	{
+		$_SESSION['PROGRAM_START_TIME_TEMP'] = $_GET['startTime'];
+	}
+	if($_GET['endtime'] != '')
+	{
+		$_SESSION['PROGRAM_END_TIME_TEMP'] = $_GET['endtime'];
+	}
+	if($_GET['recurring'] != '')
+	{
+		$_SESSION['PROGRAM_RECURRING_TEMP'] = $_GET['recurring'];
+	}
+	if($_GET['repeats'] != '')
+	{
+		$_SESSION['PROGRAM_REPEATS_TEMP'] = $_GET['repeats'];
+	}
+	if($_GET['sunday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_SUNDAY_TEMP'] = $_GET['sunday'];
+	}
+	if($_GET['monday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_MONDAY_TEMP'] = $_GET['monday'];
+	}
+	if($_GET['tuesday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_TUESDAY_TEMP'] = $_GET['tuesday'];
+	}
+	if($_GET['wednesday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_WEDNESDAY_TEMP'] = $_GET['wednesday'];
+	}
+	if($_GET['thursday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_THURSDAY_TEMP'] = $_GET['thursday'];
+	}
+	if($_GET['friday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_FRIDAY_TEMP'] = $_GET['friday'];
+	}
+	if($_GET['saturday'] != '')
+	{
+		$_SESSION['PROGRAM_DATE_SATURDAY_TEMP'] = $_GET['saturday'];
+	}
+	if($_GET['noend'] != '')
+	{
+		$_SESSION['PROGRAM_NO_END_TEMP'] = $_GET['noend'];
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -13,8 +70,36 @@
 <title>Volly.it: <?php echo $_SESSION['ORG_NAME'];?>'s Profile</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="../form.css" type="text/css" />
+<script type="text/javascript">
+$(function(){
+		
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "populate-program-positions.php",
+			success: function(msg)
+				{
+				$("#results").html(msg);
+				$("#results").fadeIn();
+				}
+		});
+		
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "org-volunteer-images.php",
+			success: function(msg)
+				{
+				$("#results2").html(msg);
+				$("#results2").fadeIn();
+				}
+		});
+});	
+</script>
 </head>
 <body>
+
+
 
 <div id="wrap">
 <div id="mainnavuser">
@@ -38,13 +123,7 @@ Easy as 1.. 2.. 3..
 	</div>
 	<div id="backgroundPopup7"></div>
 	
-<div id="popupContact8">
-	<a id="popupContactClose8">x</a>
-	<p id="contactArea">
-		Help info here about creating positions
-		</p>
-	</div>
-	<div id="backgroundPopup8"></div>
+
 
 <div class="clear"></div>
 <div class="programHeading">
@@ -72,24 +151,33 @@ Easy as 1.. 2.. 3..
 ?>
 <div class="programType">
 <h4 id="title1">Create Positions</h4>
-<img src="../images/help.png" width="20" height="20" id="phoneAccountSettings">
+<img src="../images/help.png" width="20" height="20" onclick="popup(350, 'popup4');" class="poplight" >
 </div>
 <div class="clear"></div>
 <br>
+<?php if($_SESSION['PROGRAM_GENERAL_POSITIONS'] == 'true') { 
+echo "<script type='text/javascript'>$(document).ready(function() {";
+echo '$("#programcoord").hide();';
+echo '})</script>'; } ?>
 <div style="float:left; padding: 0px 30px 0px 0px;">
-<input id="Field6" name="Field6" type="checkbox" value="Recurring" tabindex="4"  /> </div>
+<input id="Field6" name="Field6" type="checkbox" value="General" tabindex="4"  onclick="$('#programcoord').toggle(); " <?php if($_SESSION['PROGRAM_GENERAL_POSITIONS'] == 'true')
+																																				{ echo 'checked="yes"'; } ?>
+																																				 /> </div>
 <div style="float:left; font: 1.3em ; padding: 0px 30px 0px 0px;">
 General Positions Only (no specific positions)</div>
 <div class="clear"></div>
 <br>
-
+<div id="programcoord">
 <li id="foli1" class="posName      ">
 <label class="desc" id="title8" for="Field8">
 Position Name
 </label>
-<div>
-<input id="Field8" name="Field8" type="text" class="field text medium" value="" maxlength="255" tabindex="1" onkeyup="" />
+
+<input id="Field8" name="Field8" type="text" class="field text medium" value="" maxlength="255" tabindex="1" onKeyUp="toCount('Field8','sBann2','{CHAR} characters left',50);" />
+<div id="aboutMeRight" style="float:right;">
+  <span id="sBann2" class="text">50 characters left.</span>
 </div>
+
 </li>
 
 
@@ -105,9 +193,11 @@ class="field textarea medium"
 spellcheck="true" 
 rows="10" cols="50" 
 tabindex="2" 
-onkeyup=""
+onKeyUp="toCount('Field9','sBann','{CHAR} characters left',500);"
  ></textarea>
-
+<div id="aboutMeRight" style="float:right;">
+  <span id="sBann" class="text">500 characters left.</span>
+</div>
 </div>
 </li>
 
@@ -121,11 +211,19 @@ Number of Open Positions
 <input type="button" value=" /\ " onclick="this.form.Field11.value++;" style="font-size:6px;margin:0;padding:0;width:20px;height:11px;" ><br>
 <input type="button" value=" \/ " onclick="this.form.Field11.value--;" style="font-size:6px;margin:0;padding:0;width:20px;height:10px;" >
 </div>
-<div style="float: left; margin-left:500px">
-<input id="createPosition" name="Submit" class="btTxt submit" type="submit" value="Create Position"/>
-</div>
+
 </div>
 </li>
+
+<div style="float: left; margin-left:500px">
+<input id="addPosButton" type="button" value="Add Position" onClick="addInput('programcoord', document.createProgramForm.Field8.value,document.createProgramForm.Field11.value,document.createProgramForm.Field9.value);">
+
+
+
+
+</div>
+
+
 
 <div id="positions">
 <div id="position">
@@ -139,67 +237,116 @@ Actions
 </div>
 <div class="clear"></div>
 
-
-
-<?php
-
-	for($i = 1; $i <= $_SESSION['POSITIONS_CREATED']; $i++)
-	{
-		$posName = 'POSITION_NAME';
-		$posName .= $i;
-	
-		$numOpen = 'NUM_OPEN';
-		$numOpen .= $i;
-		
-		$remove = 'REMOVE';
-		$remove .= $i;
-		if( isset($_SESSION[$posName]) && isset($_SESSION[$numOpen])) {
-		echo '<div id="position">';
-		echo $_SESSION[$posName];
-		echo '</div>';
-		echo '<div id="positionsOpen">';
-		echo $_SESSION[$numOpen];
-		echo '</div>';
-		echo '<div id="actions">';
-		echo '<input type="image" name="Submit" value="',$remove,'"  src="../images/remove.png" height="25" width="50"/>';
-		echo '</div>';		
-		
-		echo '<div class="clear"></div>';
-		
-		
-		}
-	}
-?>
- </div>
+<div id='results'>
+</div>
+</div>
  
- 
- 
+</div>
 <div class="clear"></div>
-<br>
+<div id="assignPositions" style="float:left;">
+<h4 id="title1">Assign Positions</h4>
+<img src="../images/help.png" width="20" height="20" onclick="popup(350, 'popup6');" class="poplight" >
+<div class="clear"></div>
+You've got volunteers.  You've got open positions.  Simple select and assign!
+
+<div class="yourprogramsViews">
+<div class="leftLinks" style="float:left;">
+
+
+</div>
+
+</div>
+
+<div id="yourVolunteers" style="float:left; width: 500px;">
+<h4 id="title1">Your Volunteers</h4>
+<div class="clear"></div>
+<!--form class="searchform" method="post" action="org-volunteer-mgmt.php" >
+<table bgcolor="#FFFFFF" cellpadding="0px" cellspacing="0px" style="float:left">
+<tr>
+<td style="border-style:none; font:'TeXGyreAdventor', Arial, sans-serif!important;">
+Search Volunteers
+<div style="background: url(../images/roundbox.gif) no-repeat left top; padding: 0px; height: 22px;">
+
+<input type="text" name="zoom_query" style="border: none; background-color: transparent; width: 90px; padding-left: 5px; padding-right: 5px;" value="Start Typing..." onfocus="this.value = this.value=='Start Typing...' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Start Typing...' : this.value; this.value=='Start Typing...' ? this.style.color='#999' : this.style.color='#000'"> 
+</div>
+</td>
+<td style="border-style:none; "> 
+<input type="submit" value="" style="border-style: none; background: url('../images/searchbutton1.gif') no-repeat; width: 24px; height: 22px;">
+</td>
+</tr>
+</table>
+</form-->
+<div id='results2'>
+</div>
+</div>
+<div id="openPositions" style="float:left;">
+<h4 id="title1">Open Positions</h4>
+<div class="clear"></div>
+<div id="positionsOpenOrg">
+<div id="positionAvailable">
+Position
+</div>
+<div id="positionsOpen">
+Positions Still Open
+</div>
+<div class="clear"></div>
+
+<div id='resultsOpen'>
+</div>
+</div>
+</div>
+
+</div>
+
+
 <div class="clear"></div>
 
  <div id="bottomProgram">
 <div id="saveDraft" style="float:left;">
-<input type="image" name="Submit" src="../images/saveDraft.png" height="80" width="150" value="Draft" tabindex="21" /></td>
+<input type="image" name="Submit" src="../images/saveDraft.png" height="80" width="150" value="Draft" tabindex="21" />
 </div>
 
 <div id="publish" style="float:left; padding: 0px 0px 0px 150px">
-<input type="image" name="Submit" src="../images/Previous.png" height="80" width="150" value="Previous" tabindex="22" /></td>
+<input type="image" name="Submit" src="../images/Previous.png" height="80" width="150" value="Previous" tabindex="22" />
  </div>
 <div id="publish" style="float:left; padding: 0px 0px 0px 10px">
-<input type="image" name="Submit" src="../images/publish.png" height="80" width="150" value="Submit" tabindex="22" /></td>
+<a href="#" onclick="popup(350, 'popup5');" class="poplight" ><img src="../images/publish.png" height="80" width="150" ></a>   
+
  </div>
 
 
+<div id="popup5" class="popup_block">
+	<h2 style=" padding:0px 0 0 30px!important; float:none; text-align: center;">No One Likes Suprises</h2><br>
+	<p id="contactArea" style=" padding:0px 0 0 30px!important; float:none; text-align: center;">
+			Ok, some people might.  But let's not do it here! If your volunteers DON'T KNOW they are volunteering for this program, please don't suprise them.  Make sure they know.</p>
+
+
+<input type="submit" name="Submit" value="Submit" tabindex="23" />
+
+	
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Go Back</a>
+<!--/div-->
+
 </div><!--container-->
+<div id="popup4" class="popup_block">
+help info here about creating positions
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Go Back</a>
+</div>
 
-
+<div id="popup6" class="popup_block">
+help info here about assigning positions
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Go Back</a>
+</div>
 </form> 
 </div>
 </div>
+
+
 </div>
 </div>
 <div id="footerclear"></div><?php include "footer.php";?>
 </body>
 </html>
-<script src="../js/popup.js" type="text/javascript"></script>
+<script src="../js/addInputs.js" language="Javascript" type="text/javascript"></script>
+<script type="text/javascript" src="../js/characterCounter.js"></script>
+<script type="text/javascript" src="../js/customPopupBox.js"></script>

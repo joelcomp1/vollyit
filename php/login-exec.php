@@ -203,6 +203,11 @@
 				$qry="SELECT * FROM vols WHERE login='$login'";
 				$result8 =mysql_query($qry);
 				$volInfo = mysql_fetch_assoc($result8);
+				$shareLink = 'http://joelcomp1.no-ip.org/php/invitation.php?userid=';
+				$shareLink .= $member['userid'];
+				$_SESSION['USER_INVITE_LINK'] = $shareLink;
+				
+				
 				$_SESSION['IMAGE_PATH'] = $volInfo['userimage'];
 				$_SESSION['VOL_CITY'] = $volInfo['city'];
 				$_SESSION['VOL_STATE'] = $volInfo['state'];

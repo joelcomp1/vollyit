@@ -22,7 +22,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Volly.it: <?php echo $_SESSION['ORG_NAME_VIEW'];?>'s Profile</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
-<link href="loginmodule.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../js/jquery-1.2.1.pack.js"></script>
 <!-- Moving Box CSS/JS -->
 <link href="../css/movingboxes.css" media="screen" rel="stylesheet">

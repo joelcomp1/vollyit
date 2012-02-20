@@ -4,6 +4,7 @@
 	
 	//Include database connection details
 	require_once('config.php');
+	require_once('upsaddress.php');
 	
 	//Array to store validation errors
 	$errmsg_arr = array();
@@ -76,6 +77,37 @@
 	    	$errflag = true;
 	    }	
 	    
+		if(($city != '') && ($state != ''))
+		{
+			$ups = new upsaddress("CC90B3C39836BC10", "joelcomp1", "Coolenungames!2");
+			$ups->setCity($city);
+			$ups->setState($state);
+			$response = $ups->getResponse();
+			
+			
+			if($response->list[0]->quality == 1.0)
+			{
+				//We have a good address!
+			}
+			else
+			{
+				//We didn't have a exact match...
+				if((ucwords(strtolower($response->list[0]->city)) == $city) &&  ($response->list[0]->state == $state))
+				{//if this all matches we are still OK
+
+				}
+				else if((ucwords(strtolower($response->list[1]->city == $city))) &&  ($response->list[1]->state == $state))
+				{//if this all matches we are still OK
+
+				}
+				else
+				{
+					$errmsg_arr[] = "We couldn't confirm your Address are you sure its correct?";
+					$errflag = true;
+				}
+			}
+		}
+		
 	    //If there are input validations, redirect back to the login form
 	    if($errflag) {
 	    	//These will be reset later

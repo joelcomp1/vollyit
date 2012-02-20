@@ -82,7 +82,6 @@
  <script type="../text/javascript" src="../js/jquery.js"></script>
   <script type="../text/javascript" src="../js/collection.js"></script>
   <script src="../js/popup.js" type="../text/javascript"></script>
-<link href="loginmodule.css" rel="stylesheet" type="text/css" />
 <script src="../js/jquery.ez-pinned-footer.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/jquery-1.5.1.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/programMgmt.js" type="text/javascript" charset="utf-8"></script>
