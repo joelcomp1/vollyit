@@ -50,6 +50,20 @@
 	padding:20px;
 	margin-top:10px;
 }
+.slidingDiv5 {
+	text-align:center;
+	height:300px;
+	padding:20px;
+	margin-top:10px;
+}
+
+.slidingDiv6 {
+	text-align:center;
+	height:300px;
+	padding:20px;
+	margin-top:10px;
+}
+
 .show_hide {
 	display:none;
 }
@@ -59,11 +73,48 @@
 .show_hide4 {
 	display:none;
 }
+.show_hide5 {
+	display:none;
+}
+.show_hide6 {
+	display:none;
+}
 .calendar {
 		width: 900px;
 		margin: 0 auto;
 
 }
+	
+
+
+	.suggestionsBox, .suggestionsBox2{
+		position: relative;
+		left: 30px;
+		margin: 10px 0px 0px 0px;
+		width: 200px;
+		background-color: #212427;
+		-moz-border-radius: 7px;
+		-webkit-border-radius: 7px;
+		border: 2px solid #000;	
+		color: #fff;
+	}
+	
+	.suggestionList, .suggestionList2  {
+		margin: 0px;
+		padding: 0px;
+	}
+	
+	.suggestionList li, .suggestionList2 li{
+		
+		margin: 0px 0px 3px 0px;
+		padding: 3px;
+		cursor: pointer;
+	}
+	
+	.suggestionList li:hover, .suggestionList2 li:hover {
+		background-color: #659CD8;
+	}
+	
 	
 .calendarView
 {
@@ -1342,9 +1393,9 @@ text-align:center;
 .thumbnailAdmin
 {
 width: 200px;
-height: 10px;
+height: 60px;
 padding: 20px 0px 0px 700px;
-font:1.3em 'TeXGyreAdventor', Arial, sans-serif!important;
+font:1.2em 'TeXGyreAdventor', Arial, sans-serif!important;
 text-align:center;
 }
 
@@ -1399,7 +1450,7 @@ font:bold 1.5em 'TeXGyreAdventor', Arial, sans-serif!important;
 .formToProcessOrgChanges
 {
 float:left;
-padding: 50px 0 0 40px;
+padding: 0px 0 0 0px;
 text-align:left;
 font:1.5em 'TeXGyreAdventor', Arial, sans-serif!important;
 }
@@ -1605,7 +1656,7 @@ display:block;
 	z-index: 10;
 	width: 100%; height: 100%;
 	opacity: .80;
-	z-index: 9999;
+	z-index: 1;
 }
 .popup_block{
 	display: none;
@@ -1616,7 +1667,7 @@ display:block;
 	font-size: 1.2em;
 	position: fixed;
 	top: 50%; left: 50%;
-	z-index: 99999;
+	z-index: 10;
 	text-align:center;
 	-webkit-box-shadow: 0px 0px 20px #000;
 	-moz-box-shadow: 0px 0px 20px #000;

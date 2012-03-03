@@ -6,8 +6,8 @@ $(document).ready(function(){
 	$(".wrapLanding").hide();
 	$(".learnAboutVolly").hide();
 	$(".slidingDiv4").show();
-		
-
+	$(".slidingDiv5").hide();	
+	$(".slidingDiv6").hide();
 
 
 });

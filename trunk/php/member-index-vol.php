@@ -1,4 +1,5 @@
 <?php
+
 	require_once('auth.php');
 	
 // make a note of the current working directory relative to root.
@@ -50,7 +51,7 @@ include 'navigation-vol.php';
 <div class="boxFormat">
 <div class="box1">
 <div class="leftText" style="float: left;">
-<a href="view-all-vol-programs.php">Your Upcoming Vollys</a>
+<a href="#" onclick="popup(250, 'popup6');" class="poplight">Your Upcoming Vollys</a>
 </div>
 <div class="rightText"  style="float: right;">        
 </div>
@@ -60,16 +61,8 @@ include 'navigation-vol.php';
 
 <div class="boxFormat2">
 <div class="box2">
-	<?php
-	if(($_SESSION['VOL_PROGRAMS']) == true) {
-	
-		echo '';
-	}
-	else
-	{
-		echo '<div id="upcomingPrograms" style="text-align:center;">No Upcoming Vollys! Lets get moving!<br> <br><a href="search-vol.php"><img src="../images/findvolly.png"></a></div>';
-	}
-	?>
+<div id='results5'>
+</div>
 </div>
 </div>
 
@@ -109,11 +102,7 @@ A Dolphin will smile if you do
 <!--This is used for the upcoming vollys box-->
 
 
-<div class="boxFormat2">
-<div class="box1">
-<br>
-</div>
-</div>
+
 
 <!--This is used for the snapshot box-->
 <div class="boxFormat3">
@@ -139,14 +128,14 @@ Friends
 </div>
 <div class="pastProgramsSnapshot" style="float: left; font:bold 0.8em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 5px;">
 <center>
-<a href="upcoming-vols.php"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a>
+<a href="#" onclick="popup(250, 'popup6');" class="poplight"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a>
 <br>
 Upcoming Vollys
 </center>
 </div>
 <div class="collabSnapshot" style="float: left; font:bold 0.8em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 5px;">
 <center>
-<a href="vollys.php?state=past"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a>
+<a href="#" onclick="popup(250, 'popup7');" class="poplight"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a>
 <br>
 Past Vollys
 </center>
@@ -269,6 +258,18 @@ onKeyUp="toCount('eBann','sBann','{CHAR} characters left',500);">
 <a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
 </div>
 
+<div id="popup6" class="popup_block">
+<div id='results6'>
+</div>
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
+</div>
+
+<div id="popup7" class="popup_block">
+<div id='results7'>
+</div>
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
+</div>
+
 
 
 <!--POPUP to finish registration if needed-->
@@ -348,10 +349,7 @@ onKeyUp="toCount('eBann','sBann','{CHAR} characters left',500);">
                     <option value="WV" <?php if($_SESSION['VOL_STATE'] == 'WV'){ echo 'selected="yes"';}?>>West Virginia</option>
                     <option value="WY" <?php if($_SESSION['VOL_STATE'] == 'WY'){ echo 'selected="yes"';}?>>Wyoming</option>
 		</select>
-<br><b>E-Mail</b>
-
-<input name="email" type="text" class="textfield" tabindex="5" id="email" style="color:#0000;" value="<?php echo $_SESSION['VOL_EMAIL'];?>" onfocus="this.value = this.value=='E-Mail' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'E-Mail' : this.value; this.value=='E-Mail' ? this.style.color='#999' : this.style.color='#000'" /></td>
-  <br>
+<br>
 <input id="radioDefault_134" name="Field134" type="hidden" value="" />
 <span>
 <input id="Field134_0" name="Field134" type="radio" class="field radio" value="Public" tabindex="21" <?php if($_SESSION['VOL_PRIVACY'] == 'Public'){ echo 'checked="checked"'; } ?>

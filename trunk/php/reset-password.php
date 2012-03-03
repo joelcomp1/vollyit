@@ -40,8 +40,8 @@
 	$email = clean($_POST['email']);
 	
 	
-	define('GUSER', 'joelcomp1@gmail.com'); // GMail username
-	define('GPWD', 'Coolenungames!2'); // GMail password
+		define('GUSER', 'info@volly.it'); // GMail username
+		define('GPWD', 'VollyIt920470'); // GMail password
 		  
 	function smtpmailer($to, $from, $from_name, $subject, $body) { 
 	global $error;
@@ -108,7 +108,7 @@
 	
 
    mysql_close($link);
-   smtpmailer($email, 'support@volly.it', 'Volly.it', 'Volly.It - Reset Password Request', $message);
+   smtpmailer($email, 'info@volly.it', 'Volly.it', 'Volly.It - Reset Password Request', $message);
    
    
    header("location: ../index.php");

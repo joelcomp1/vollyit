@@ -39,31 +39,12 @@
 <?php echo $_SESSION['ORG_ZIPCODE_VIEW'];?> -
 <a target="_blank" href="http://maps.google.com/?q=<?php echo $_SESSION['ORG_ADDRESS_VIEW']; echo ','; echo $_SESSION['ORG_CITY_VIEW']; echo ','; echo $_SESSION['ORG_STATE_VIEW']; echo ','; echo $_SESSION['ORG_ZIPCODE_VIEW'];?>">Map It</a>
 <?php 
-	if(isset($_SESSION['FACEBOOK_LINK_VIEW'])) 
-	{
-		if(substr($_SESSION['FACEBOOK_LINK_VIEW'], 0, 4) == 'http')
-		{
-			echo '<a href="',$_SESSION['FACEBOOK_LINK_VIEW'],'"><img src="../images/facebook.png" width="62" height="22" alt="Facebook" /></a>';
-		}
-		else
-		{	
-			echo '<a href="http://',$_SESSION['FACEBOOK_LINK_VIEW'],'"><img src="../images/facebook.png" width="62" height="22" alt="Facebook" /></a>';	
-		}
-	}
 
-	if(isset($_SESSION['TWITTER_LINK_VIEW'])) 
-	{
-		if(substr($_SESSION['TWITTER_LINK_VIEW'], 0, 4) == 'http')
-		{
-			echo '<a href="',$_SESSION['TWITTER_LINK_VIEW'],'"><img src="../images/twittershare.png" width="62" height="22" alt="Twitter" /></a>';
-		}
-		else
-		{	
-			echo '<a href="http://',$_SESSION['TWITTER_LINK_VIEW'],'"><img src="../images/twittershare.png" width="62" height="22" alt="Twitter" /></a>';	
-		}
-		
-	}
-	echo '  ';
+			echo '<a href="https://www.facebook.com/sharer/sharer.php?u=http://volly.it&t=Help Change the World!"><img src="../images/facebook.png" width="62" height="22" alt="Facebook" /></a>';	
+
+	
+			echo '<a href="https://twitter.com/intent/tweet?text=I think you should help me change the world! I am Volunteering with ',$_SESSION['ORG_NAME_VIEW'],' and you should too!"><img src="../images/twittershare.png" width="62" height="22" alt="Twitter" /></a>';	
+	
 	?>
 	
 <a href="#"><img src="../images/message.png" width="99" height="34"></a>
@@ -81,7 +62,7 @@ as a regular volunteer.	<br>
 
 <a id="popupContactClose2" style="right:0px; top: 0px; position:relative;">Close</a>
 Please Note: You are sharing your information with this organization.  This organization may use your shared information to contact you.
-By continuing, you are accepting the Volly It <a href="legalstuff.php">Terms of Use</a> and <a href="legalstuff.php">Privacy Policy</a>
+By continuing, you are accepting the Volly It <a href="legalstuff.php#description-tab">Terms of Use</a> and <a href="legalstuff.php#usage-tab">Privacy Policy</a>
 		</p>
 	 
 	</div>
@@ -179,11 +160,11 @@ Upcoming Programs
 <br>
 Past Programs
 </div>
-<div class="collabSnapshot" style="float: left; font:bold 0.6em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 9px; text-align:center;">
+<!--div class="collabSnapshot" style="float: left; font:bold 0.6em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 9px; text-align:center;">
 <a href="#"><img src="../images/emptyIcon.jpg" width="30" height="40" ></a>
 <br>
 Collaborations
-</div>
+</div-->
 </div>
 </div>
 
@@ -333,7 +314,7 @@ as a regular volunteer.	<br>
 <br>
 <a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Cancel </a><br><br>
 Please Note: You are sharing your information with this organization.  This organization may use your shared information to contact you.
-By continuing, you are accepting the Volly It <a href="legalstuff.php">Terms of Use</a> and <a href="legalstuff.php">Privacy Policy</a>
+By continuing, you are accepting the Volly It <a href="legalstuff.php#description-tab">Terms of Use</a> and <a href="legalstuff.php#usage-tab">Privacy Policy</a>
 		</p>
 </div>
 <div id="entryPage2" style="display:none;">

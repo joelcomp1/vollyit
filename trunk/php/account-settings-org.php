@@ -12,6 +12,8 @@ $max_file_size = 3000000; // size in bytes
 include "header-org.php";
 include "navigation.php";
 
+$state = $_GET['state'];
+
 session_start();
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -30,19 +32,61 @@ session_start();
 </head>
 
 <body>
-<script language="javascript">
+
+<script type="text/javascript" src="../js/jquery-1.2.1.pack.js"></script>
+<script type="text/javascript">
+	function lookup(inputString) {
+		if(inputString.length == 0) {
+			// Hide the suggestion box.
+			$('#suggestions').hide();
+		} else {
+			$.post("search-keywords-tags.php", {queryString: ""+inputString+""}, function(data){
+				if(data.length >0) {
+					$('#suggestions').show();
+					$('#autoSuggestionsList').html(data);
+				}
+			});
+		}
+	} // lookup
+	
+	function fillTags(thisValue) {
+		$('#inputString').val(thisValue);
+		setTimeout("$('#suggestions').hide();", 200);
+	}
+	
+	
+
+
 function autotab(current,to){
     if (current.getAttribute && 
       current.value.length==current.getAttribute("maxlength")) {
         to.focus() 
         }
 }
+
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "populate-org-staff.php",
+			success: function(msg)
+				{
+				$("#results9").html(msg);
+				
+				}
+		});
+
+
+  function addHidden(positionName, divName)
+  {
+	 positionSelected.value = positionName;
+  
+  }
+  
+
+		
 </script>
 
 <div id="wrap">
-
-
-
 <div id="mainnavuser">
 
 
@@ -54,7 +98,7 @@ function autotab(current,to){
 
 Account Settings
 <br>
-<a href="account-settings-org.php">Organization Account Settings</a> | <a href="account-settings-org-admin.php">Your User Account Settings</a>
+<a href="#" onclick="$('#accountSettingsOrg').show(); $('#accountSettingsForm').hide();">Organization Account Settings</a> | <a href="#" onclick="$('#accountSettingsOrg').hide(); $('#accountSettingsForm').show();">Your User Account Settings</a>
 
 </h3>
 <div class="clear"></div>
@@ -68,7 +112,11 @@ Account Settings
 		unset($_SESSION['ERRMSG_ARR']);
 	}
 	?>
-
+<div id="popup7" class="popup_block">
+Help info on admins/staff
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
+</div>	
+	
 <div id="popupContact10">
 	<a id="popupContactClose10">x</a>
 	<p id="contactArea">
@@ -86,6 +134,194 @@ Account Settings
 	<div id="backgroundPopup11"></div>
 
 <br>
+<div id="popupContact2">
+	<a id="popupContactClose2">x</a>
+	<center>
+	<p id="contactArea">
+
+<form id="Upload" action="upload.processor.php" enctype="multipart/form-data" method="post">
+		<p>
+			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size ?>">
+
+		<center>
+			<label for="file">Upload a Admin Picture</label>
+			<br>
+			<br>
+			<input id="file" type="file" name="file">
+				<br>
+<br>
+			<input id="submit" type="submit" name="submit" value="Upload a Admin Picture">
+				</center>
+		</p>
+	</form></center>
+		</p>
+	
+	</div>
+	<div id="backgroundPopup2"></div>
+
+
+<form id="accountSettingsForm" name="accountSettingsForm" method="post" action="complete-reg-exec-vol.php" style="display:none;">
+<div class="thumbnail">
+		<?php
+	if(($_SESSION['VOL_IMAGE']) == true) {
+	
+		echo '<div id="login"><img src="uploaded_files/',$_SESSION['VOL_IMAGE_PATH'],'" alt="User Picture" width="320" height="240"></div>';
+	}
+	else
+	{//This name is decieving, i am using the login pop up for the image upload.....
+		echo '<div id="login">
+<img src="../images/nophoto.png" width="320" height="240" alt="header image2""> 
+</div>';
+	}
+	?>
+<br>
+<I> Click Image to Change Photo</I><br><br>
+</div>
+
+
+
+<div class="formToProcessChanges">
+ <b>First Name</b><br>
+ <input name="firstName" type="text" class="field text large" id="login" tabindex="1" style="color:#0000;" value="<?php echo $_SESSION['VOL_FIRST_NAME'];?>" onfocus="this.value = this.value=='First Name' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'First Name' : this.value; this.value=='First Name' ? this.style.color='#999' : this.style.color='#000'"/>
+<br><br>
+ <b>Last Name</b><br>
+ <input name="lastName" type="text" class="field text large" id="login2" tabindex="2" style="color:#0000;" value="<?php echo $_SESSION['VOL_LAST_NAME'];?>" onfocus="this.value = this.value=='First Name' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'First Name' : this.value; this.value=='First Name' ? this.style.color='#999' : this.style.color='#000'"/>
+<br><br><b>E-Mail</b><br>
+
+<input name="email" type="text" class="field text large" tabindex="3" id="email" style="color:#0000;" value="<?php echo $_SESSION['VOL_EMAIL'];?>" onfocus="this.value = this.value=='E-Mail' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'E-Mail' : this.value; this.value=='E-Mail' ? this.style.color='#999' : this.style.color='#000'" /></td>
+<img src="../images/help.png" width="20" height="20" id="emailAccountSettings" style="padding: 0px 0px 0px 50px;"><br><br><b>Phone Number</b><br>
+
+
+<span>
+<input type="tel" id="phone1" name="phone1" 
+    size="4" onKeyup="autotab(this, document.accountSettingsForm.phone2)" class="field text" size="3" tabindex="4"  maxlength=3 value="<?php echo $_SESSION['VOL_PHONE_PART_1'];?>">
+</span>
+<span class="symbol">-</span>
+<span>
+<input type="tel" id="phone2" name="phone2" 
+    size="4" onKeyup="autotab(this, document.accountSettingsForm.phone3)" class="field text" size="3"  tabindex="5" maxlength=3 value="<?php echo $_SESSION['VOL_PHONE_PART_2'];?>"> 
+</span>
+<span class="symbol">-</span>
+<span>
+<input type="tel" id="phone3" name="phone3" size="4" maxlength="4" class="field text" tabindex="6" value="<?php echo $_SESSION['VOL_PHONE_PART_3'];?>"><img src="../images/help.png" width="20" height="20" id="phoneAccountSettings" style="padding: 0px 0px 0px 50px;">
+</span>
+<br>
+</div>
+<div class="clear"></div>
+<div class="leftForm" style="float:left">
+<div class="formChangesPrivacy">
+<div class="box1">
+<div class="leftText" style="float: left;">
+Privacy Settings
+</div>
+</div>
+</div>
+<input id="radioDefault_134" name="Field134" type="hidden" value="" />
+<div class="clear"></div>
+<div class="aboutUsBox">
+<div class="box2">
+
+<span>
+<input id="Field134_0" name="Field134" type="radio" class="field radio" value="Public" tabindex="7" <?php if($_SESSION['VOL_PRIVACY'] == 'Public'){ echo 'checked="checked"'; } ?>
+/>
+</span>
+<label class="choice" for="Field134_0" >
+Public Profile</label>
+
+<br>
+<br>
+<div id="fontSize" style="font:0.8em 'TeXGyreAdventor', Arial, sans-serif!important;">
+Your profile is viewable and searchable on the volly.it site by all users</div>
+</div>
+</div>
+<div class="clear"></div>
+<div class="aboutUsBox">
+<div class="smallbox1">
+<br>
+</div>
+</div>
+<div class="clear"></div>
+<div class="aboutUsBox">
+<div class="box2">
+<span>
+<input id="Field134_1" name="Field134" type="radio" class="field radio" value="Private" tabindex="8"  <?php if($_SESSION['VOL_PRIVACY'] == 'Private'){ echo 'checked="checked"'; } ?>/>
+<label class="choice" for="Field134_1" >
+Private Profile</label>
+<br>
+<br>
+<div id="fontSize" style="font:0.8em 'TeXGyreAdventor', Arial, sans-serif!important;">
+Your limited profile is viewable and searchable on the volly.it site by all users.  Only volly.it friends and organizations, who you have chosen to share your profile information with, can view your full profile.
+</div>
+</span>
+</div>
+</div>
+<div class="clear"></div>
+<div class="aboutUsBox">
+<div class="smallbox1">
+<br>
+</div>
+</div>
+<div class="clear"></div>
+<div class="aboutUsBox">
+<div class="box2">
+<span>
+<input id="Field134_2" name="Field134" type="radio" class="field radio" value="Hidden" tabindex="9" <?php if($_SESSION['VOL_PRIVACY'] == 'Hidden'){ echo 'checked="checked"'; } ?>/>
+<label class="choice" for="Field134_2" >
+Hidden Profile</label>
+<br>
+<br><div id="fontSize" style="font:0.8em 'TeXGyreAdventor', Arial, sans-serif!important;">
+Your profile is completly hidden and does not show up in search results.  Only volly it friends and organizations, who you have chosen to share your profile information wiht, can view your profile.
+</div>
+</span>
+</div>
+</div>
+<div class="clear"></div>
+<div class="aboutUsBox">
+<div class="box1">
+<br>
+</div>
+</div>
+</div>
+<div class="rightform" style="float:right; padding: 50px 0px 0px 0px">
+<div class="pwHeading" style="font: bold 1.5em 'TeXGyreAdventor', Arial, sans-serif!important;">
+Change Password
+</div>
+<br>
+<div class="chagnePassword" style="font: 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;">
+<div class="box1ChangePass" style="font: 1.3em 'TeXGyreAdventor', Arial, sans-serif!important;">
+<br>
+<label for="Field1">Old Password</label>
+<input id="Field1" name="oldpassword" type="password" class="field text fn" value="" size="20" tabindex="10" />
+<br>
+
+<br>
+<label for="Field1">New Password</label>
+<input id="Field2" name="newpassword" type="password" class="field text fn" value="" size="20" tabindex="11" />
+<br>
+
+<br>
+<label for="Field1">Confirm Password</label>
+<input id="Field3" name="cpassword" type="password" class="field text ln" value="" size="30" tabindex="12" />
+<br>
+
+<br>
+<div id="publish" style=" padding: 70px 0px 0px 0px">
+<input type="image" name="Submit" src="../images/savechanges.png" height="120" width="200"  tabindex="13" value="Save Changes from Org" />
+ </div>
+</div>
+</div>
+</div>
+</form>
+
+
+
+
+
+
+
+
+
+
 
 <form id="accountSettingsOrg" name="accountSettingsOrg" method="post" action="complete-reg-exec.php">
 <div class="orgaccountsettings">
@@ -98,18 +334,23 @@ Account Settings
 <br>
 <div class="thumbnail">
 	<?php
-	if(($_SESSION['ORG_IMAGE']) == true) {
+	if(($_SESSION['ORG_IMAGE']) ==  true) {
 	
-		echo '<div id="login"><img src="uploaded_files/',$_SESSION['IMAGE_PATH'],'" alt="Organization Picture" width="320" height="240"></div>';
+		echo '<div id="orgLogo"><img src="uploaded_files/',$_SESSION['IMAGE_PATH'],'" alt="Org Logo Picture" width="320" height="240"></div>';
 	}
 	else
 	{//This name is decieving, i am using the login pop up for the image upload.....
-		echo '<div id="login">
-<img src="../images/noorglogo.png" width="320" height="240" alt="header image2""> 
+		echo '<div id="orgLogo">
+<img src="../images/noorglogo.png" width="320" height="240" alt="header image2"> 
 </div>';
 	}
 	?>
+
+<br>
+<I> Click above to Add or Change Photo the Organization Logo</I>
+<br>
 </div>
+
 <div class="formToProcessOrgChanges">
  <b>Organization Name</b><br>
  <input name="Field121" type="text" class="field text medium" id="Field121" tabindex="1" style="color:#0000;" value="<?php echo $_SESSION['ORG_NAME'];?>" onfocus="this.value = this.value=='First Name' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'First Name' : this.value; this.value=='First Name' ? this.style.color='#999' : this.style.color='#000'"/>
@@ -117,12 +358,12 @@ Account Settings
 
 <span class="full addr1">
 <label for="Field126">Street Address</label>
-<input id="Field126" name="Field126" type="text" class="field text addr large" value="<?php echo $_SESSION['ORG_ADDRESS']; ?>" tabindex="11" required />
+<input id="Field126" name="Field126" type="text" class="field text addr large" value="<?php echo $_SESSION['ORG_ADDRESS']; ?>" tabindex="11" />
 </span>
 <br>
 <span class="left city" style="margin: 0px 10px 0px 0px;">
 <label for="Field128">City</label>
-<input id="Field128" name="Field128" type="text" class="field text addr" value="<?php echo $_SESSION['ORG_CITY']; ?>" tabindex="12" required />
+<input id="Field128" name="Field128" type="text" class="field text addr" value="<?php echo $_SESSION['ORG_CITY']; ?>" tabindex="12" />
 </span>
 <span class="left state">
 <label for="Field129">State  </label>
@@ -186,7 +427,7 @@ Account Settings
 <br>
 <span class="left zip">
 Postal / Zip Code
-<input id="Field130" name="Field130" type="text" class="field text addr" value="<?php echo $_SESSION['ORG_ZIPCODE']; ?>" maxlength="15" tabindex="14" required />
+<input id="Field130" name="Field130" type="text" class="field text addr" value="<?php echo $_SESSION['ORG_ZIPCODE']; ?>" maxlength="15" tabindex="14"  />
 </span>
 <br>
 
@@ -196,16 +437,16 @@ Postal / Zip Code
 
 <span>
 <input type="tel" id="phone1" name="phone1" 
-    size=4 onKeyup="autotab(this, document.accountSettingsOrg.phone2)" class="field text" size="3" tabindex="18"  maxlength=3 value="<?php echo $_SESSION['ORG_PHONE_PART_1']; ?>" required>
+    size=4 onKeyup="autotab(this, document.accountSettingsOrg.phone2)" class="field text" size="3" tabindex="18"  maxlength=3 value="<?php echo $_SESSION['ORG_PHONE_PART_1']; ?>" >
 </span>
 <span class="symbol">-</span>
 <span>
 <input type="tel" id="phone2" name="phone2" 
-    size=4 onKeyup="autotab(this, document.accountSettingsOrg.phone3)" class="field text" size="3"  tabindex="19" maxlength=3 value="<?php echo $_SESSION['ORG_PHONE_PART_2']; ?>"required> 
+    size=4 onKeyup="autotab(this, document.accountSettingsOrg.phone3)" class="field text" size="3"  tabindex="19" maxlength=3 value="<?php echo $_SESSION['ORG_PHONE_PART_2']; ?>"> 
 </span>
 <span class="symbol">-</span>
 <span>
-<input type="tel" id="phone3" name="phone3" size=4 maxlength=4 class="field text" tabindex="20" value="<?php echo $_SESSION['ORG_PHONE_PART_3']; ?>" required>
+<input type="tel" id="phone3" name="phone3" size=4 maxlength=4 class="field text" tabindex="20" value="<?php echo $_SESSION['ORG_PHONE_PART_3']; ?>" >
 </span>
 <br>
 <br><b>
@@ -217,69 +458,37 @@ Organization E-mail
 <br><br><b>
 Primary Organization Type
 </b>
-<select id="Field159" name="Field159"  class="field text addr" tabindex="16" value="">
+<select id="Field159" name="Field159"  class="field text addr" tabindex="16" value=""> 
                     <option value="" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == ''){ echo 'selected="yes"';}?>>Organization Type</option>
-                    <option value="1" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 1){ echo 'selected="yes"';}?>>Advocacy & Human Rights</option>
-                    <option value="2" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 2){ echo 'selected="yes"';}?>>Animals</option>
-                    <option value="3" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 3){ echo 'selected="yes"';}?>>Arts & Culture</option>
-                    <option value="4" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 4){ echo 'selected="yes"';}?>>Children & Youth</option>
-                    <option value="5" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 5){ echo 'selected="yes"';}?>>Church</option>
-                    <option value="6" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 6){ echo 'selected="yes"';}?>>Community</option>
-                    <option value="7" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 7){ echo 'selected="yes"';}?>>Company & Corporations</option>
-                    <option value="8" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 8){ echo 'selected="yes"';}?>>Computers & Technology</option>
-                    <option value="9" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 9){ echo 'selected="yes"';}?>>Crisis Support</option>
-                    <option value="10" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 10){ echo 'selected="yes"';}?>>Disabled </option>
-                    <option value="11" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 11){ echo 'selected="yes"';}?>>Disaster Relief</option>
-                    <option value="12" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 12){ echo 'selected="yes"';}?>>Domestic Aid</option>
-                    <option value="13" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 13){ echo 'selected="yes"';}?>>Education </option>
-                    <option value="14" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 14){ echo 'selected="yes"';}?>>Emergency & Safety</option>
-                    <option value="15" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 15){ echo 'selected="yes"';}?>>Environment</option>
-                    <option value="16" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 16){ echo 'selected="yes"';}?>>Faith-Based</option>
-                    <option value="17" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 17){ echo 'selected="yes"';}?>>Health & Medicine</option>
-                    <option value="18" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 18){ echo 'selected="yes"';}?>>Homeless & Housing</option>
-                    <option value="19" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 19){ echo 'selected="yes"';}?>>Hunger</option>
-                    <option value="20" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 20){ echo 'selected="yes"';}?>>Immigration & Refugees</option>
-                    <option value="21" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 21){ echo 'selected="yes"';}?>>International Aid</option>
-                    <option value="22" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 22){ echo 'selected="yes"';}?>>Justice & Legal</option>
-                    <option value="23" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 23){ echo 'selected="yes"';}?>>Media & Broadcasting</option>
-                    <option value="24" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 24){ echo 'selected="yes"';}?>>Politics</option>
-                    <option value="25" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 25){ echo 'selected="yes"';}?>>Seniors</option>
-                    <option value="26" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 26){ echo 'selected="yes"';}?>>Sports & Recreation</option>
-                    <option value="27" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 27){ echo 'selected="yes"';}?>>Veterans & Military Family</option>
-		</select>
-<br><br><b>
-Secondary Organization Type
-</b>
-<select id="Field160" name="Field160"  class="field text addr" tabindex="17" value="">
-                    <option value="" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == ''){ echo 'selected="yes"';}?>>Organization Type</option>
-                    <option value="1" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 1){ echo 'selected="yes"';}?>>Advocacy & Human Rights</option>
-                    <option value="2" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 2){ echo 'selected="yes"';}?>>Animals</option>
-                    <option value="3" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 3){ echo 'selected="yes"';}?>>Arts & Culture</option>
-                    <option value="4" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 4){ echo 'selected="yes"';}?>>Children & Youth</option>
-                    <option value="5" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 5){ echo 'selected="yes"';}?>>Church</option>
-                    <option value="6" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 6){ echo 'selected="yes"';}?>>Community</option>
-                    <option value="7" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 7){ echo 'selected="yes"';}?>>Company & Corporations</option>
-                    <option value="8" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 8){ echo 'selected="yes"';}?>>Computers & Technology</option>
-                    <option value="9" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 9){ echo 'selected="yes"';}?>>Crisis Support</option>
-                    <option value="10" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 10){ echo 'selected="yes"';}?>>Disabled </option>
-                    <option value="11" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 11){ echo 'selected="yes"';}?>>Disaster Relief</option>
-                    <option value="12" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 12){ echo 'selected="yes"';}?>>Domestic Aid</option>
-                    <option value="13" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 13){ echo 'selected="yes"';}?>>Education </option>
-                    <option value="14" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 14){ echo 'selected="yes"';}?>>Emergency & Safety</option>
-                    <option value="15" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 15){ echo 'selected="yes"';}?>>Environment</option>
-                    <option value="16" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 16){ echo 'selected="yes"';}?>>Faith-Based</option>
-                    <option value="17" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 17){ echo 'selected="yes"';}?>>Health & Medicine</option>
-                    <option value="18" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 18){ echo 'selected="yes"';}?>>Homeless & Housing</option>
-                    <option value="19" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 19){ echo 'selected="yes"';}?>>Hunger</option>
-                    <option value="20" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 20){ echo 'selected="yes"';}?>>Immigration & Refugees</option>
-                    <option value="21" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 21){ echo 'selected="yes"';}?>>International Aid</option>
-                    <option value="22" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 22){ echo 'selected="yes"';}?>>Justice & Legal</option>
-                    <option value="23" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 23){ echo 'selected="yes"';}?>>Media & Broadcasting</option>
-                    <option value="24" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 24){ echo 'selected="yes"';}?>>Politics</option>
-                    <option value="25" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 25){ echo 'selected="yes"';}?>>Seniors</option>
-                    <option value="26" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 26){ echo 'selected="yes"';}?>>Sports & Recreation</option>
-                    <option value="27" <?php if($_SESSION['ORG_TYPE_SECONDARY'] == 27){ echo 'selected="yes"';}?>>Veterans & Military Family</option>
-		</select>
+                    <option value="Advocacy & Human Rights" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Advocacy & Human Rights'){ echo 'selected="yes"';}?>>Advocacy & Human Rights</option>
+                    <option value="Animals" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Animals'){ echo 'selected="yes"';}?>>Animals</option>
+                    <option value="Arts & Culture" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Arts & Culture'){ echo 'selected="yes"';}?>>Arts & Culture</option>
+                    <option value="Children & Youth" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Children & Youth'){ echo 'selected="yes"';}?>>Children & Youth</option>
+                    <option value="Church" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Church'){ echo 'selected="yes"';}?>>Church</option>
+                    <option value="Community" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Community'){ echo 'selected="yes"';}?>>Community</option>
+                    <option value="Company & Corporations" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Company & Corporations'){ echo 'selected="yes"';}?>>Company & Corporations</option>
+                    <option value="Computers & Technology" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Computers & Technology'){ echo 'selected="yes"';}?>>Computers & Technology</option>
+                    <option value="Crisis Support" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Crisis Support'){ echo 'selected="yes"';}?>>Crisis Support</option>
+                    <option value="Disabled" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Disabled'){ echo 'selected="yes"';}?>>Disabled </option>
+                    <option value="Disaster Relief" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Disaster Relief'){ echo 'selected="yes"';}?>>Disaster Relief</option>
+                    <option value="Domestic Aid" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Domestic Aid'){ echo 'selected="yes"';}?>>Domestic Aid</option>
+                    <option value="Education" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Education'){ echo 'selected="yes"';}?>>Education </option>
+                    <option value="Emergency & Safety" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Emergency & Safety'){ echo 'selected="yes"';}?>>Emergency & Safety</option>
+                    <option value="Environment" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Environment'){ echo 'selected="yes"';}?>>Environment</option>
+                    <option value="Faith-Based" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Faith-Based'){ echo 'selected="yes"';}?>>Faith-Based</option>
+                    <option value="Health & Medicine" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Health & Medicine'){ echo 'selected="yes"';}?>>Health & Medicine</option>
+                    <option value="Homeless & Housing" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Homeless & Housing'){ echo 'selected="yes"';}?>>Homeless & Housing</option>
+                    <option value="Hunger" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Hunger'){ echo 'selected="yes"';}?>>Hunger</option>
+                    <option value="Immigration & Refugees" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Immigration & Refugees'){ echo 'selected="yes"';}?>>Immigration & Refugees</option>
+                    <option value="International Aid" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'International Aid'){ echo 'selected="yes"';}?>>International Aid</option>
+                    <option value="Justice & Legal" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Justice & Legal'){ echo 'selected="yes"';}?>>Justice & Legal</option>
+                    <option value="Media & Broadcasting" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Media & Broadcasting'){ echo 'selected="yes"';}?>>Media & Broadcasting</option>
+                    <option value="Politics" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Politics'){ echo 'selected="yes"';}?>>Politics</option>
+                    <option value="Seniors" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Seniors'){ echo 'selected="yes"';}?>>Seniors</option>
+                    <option value="Sports & Recreation" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Sports & Recreation'){ echo 'selected="yes"';}?>>Sports & Recreation</option>
+                    <option value="Veterans & Military Family" <?php if($_SESSION['ORG_TYPE_PRIMARY'] == 'Veterans & Military Family'){ echo 'selected="yes"';}?>>Veterans & Military Family</option>		</select>
+<br>
+
 </li>
 </div>
 </div>
@@ -287,6 +496,124 @@ Secondary Organization Type
 <br>
 <br>
 <br>
+<div id="accountSettinGHeading" style="float:left">
+<br>
+<h2>Organization Admins & Staff</h2>
+</div><a href="#">add another</a>
+<div class="clear"></div><br><br>
+<!--This populates the staff, same query as on org page-->
+<div id='results9'>
+</div>
+<a href="#" onclick="popup(250, 'popup7');" class="poplight"><img src="../images/help.png" width="20" height="20" style="padding: 0px 0px 0px 50px;"></a>
+
+<div class="clear"></div><br><br>
+<div id="accountSettinGHeading" style="float:left">
+<br>
+<h2>Organization Privacy Settings</h2>
+</div>
+<div class="clear"></div><br>
+
+
+
+
+<input id="radioDefault_134" name="Field134" type="hidden" value="" />
+
+
+<input id="Field134_0" name="Field134" type="radio" class="field radio" value="Public" tabindex="21" <?php if($_SESSION['ORG_PRIVACY'] == 'Public'){ echo 'checked="checked"'; } ?>
+/>
+<label class="choice" for="Field134_0">
+Public Profile</label>
+Your full profile is viewable and searchable on the volly.it site by all users. Full profiles include your organizations information,your programs and your list of volunteers with public profiles.
+
+<div class="clear"></div><br>
+<div style="padding: 0 0 0 00px; float:left;">
+
+<input id="Field134_1" name="Field134" type="radio"  class="field radio" value="Private" tabindex="22" <?php if($_SESSION['ORG_PRIVACY'] == 'Private'){ echo 'checked="checked"'; } ?>/>
+<label class="choice" for="Field134_1" >
+Private Profile </label> 
+Your limited profile is viewable and searchable on the volly.it site by all users.  Limited profiles include only your organizations information and program list.
+</div>
+
+<div class="clear"></div><br><br>
+<div id="accountSettinGHeading" style="float:left">
+<br>
+<h2>Connetions</h2>
+</div>
+<div class="clear"></div><br>
+<div class="clear"></div>
+<div style="float:left;">
+WebSite
+</div>
+<div style="float:left; padding: 0px 0px 0px 99px;">
+<input id="orgwebsite" name="orgwebsite" type="text" spellcheck="false" class="field text large" value="<?php echo $_SESSION['ORG_WEBSITE'];?>" size=50 maxlength="255" tabindex="2"  /> 
+</div>
+<div class="clear"></div>
+<div style="float:left;">
+Facebook
+</div>
+<div style="float:left; padding: 0px 0px 0px 91px;">
+<input id="orgfacebook" name="orgfacebook" type="text" spellcheck="false" class="field text large" value="<?php echo $_SESSION['FACEBOOK_LINK'];?>" size=50 maxlength="255" tabindex="3"  /> 
+</div>
+<div class="clear"></div>
+<div style="float:left;">
+Twitter
+</div>
+<div style="float:left; padding: 0px 0px 0px 106px;">
+<input id="orgtwitter" name="orgtwitter" type="text" spellcheck="false" class="field text large" value="<?php echo $_SESSION['TWITTER_LINK'];?>"  size=50maxlength="255" tabindex="4"  /> 
+</div>
+<div class="clear"></div>
+<div style="float:left;">
+LinkedIn
+</div>
+<div style="float:left; padding: 0px 0px 0px 100px;">
+<input id="orglinkedin" name="orglinkedin" type="text" spellcheck="false" class="field text large" value="<?php echo $_SESSION['LINKEDIN_LINK'];?>" size=50 maxlength="255" tabindex="5"  /> 
+</div>
+<div class="clear"></div>
+ <div style="float:left;">
+Blog
+</div>
+<div style="float:left; padding: 0px 0px 0px 127px;">
+<input id="orgblog" name="orgblog" type="text" spellcheck="false" class="field text large" value="<?php echo $_SESSION['BLOG_LINK'];?>"  size=50 maxlength="255" tabindex="6"  /> 
+</div>
+<div class="clear"></div>
+ <div style="float:left;">
+YouTube
+</div>
+<div style="float:left; padding: 0px 0px 0px 96px;">
+<input id="orgyoutube" name="orgyoutube" type="text" spellcheck="false" class="field text large" value="<?php echo $_SESSION['YOUTUBE_LINK'];?>" size=50  maxlength="255" tabindex="7"  /> 
+</div>
+
+<div class="clear"></div><br><br>
+<div id="accountSettinGHeading" style="float:left">
+<br>
+<h2>Tags & Keywords</h2>
+</div>
+<div class="clear"></div><br>
+
+<div class="volSearchRightInnter" style="float:left;">
+This is what determines how you pop up on search results.  Make sure your tags are relevant to your organization.
+</div>
+<div class="clear"></div><br>
+<div class="volSearchLeftInnter" style="float:left; padding: 0px 20px 0px 0px;">
+<input name="inputString" type="text" size="30" id="inputString" autocomplete="off" onkeyup="lookup(this.value);" onblur="fillTags();" <?php if(isset($_SESSION['ORG_TAG']))
+{	echo 'value="';
+	echo $_SESSION['ORG_TAG'];
+	echo '"';
+	}
+	else
+	echo 'value="Start Typing Keywords here..."';
+?>	onfocus="this.value = this.value=='Start Typing Keywords here...' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Start Typing Keywords here...' : this.value; this.value=='Start Typing Keywords here...' ? this.style.color='#999' : this.style.color='#000'"/>
+<div class="suggestionsBox" id="suggestions" style="display: none; text: font:bold 0.4em 'TeXGyreAdventor', Arial, sans-serif!important;">
+	<img src="../images/upArrow.png" style="position: relative; top: -12px; left: 30px;" alt="upArrow" />
+<div class="suggestionList" id="autoSuggestionsList">
+		&nbsp;
+	</div>
+	</div>
+</div>
+
+
+
+
 <div class="orgaccountsettingsplanOuter">
 <div class="orgaccountsettingsplan">
 <div id="accountSettinGHeading" style="float:left; padding: 10px 0px 0px 00px;">
@@ -299,38 +626,38 @@ Secondary Organization Type
 <div class="pricingPlansOuterBoxSettings">
 <div class="pricingPlansAcctSettingsChange">
 <div class="plan1" style="float:left; padding: 70px 0px 0px 0px; width: 150px; height:30px; text-align:center;">
-<?php if($_SESSION['ORG_PLAN_TYPE'] == 'The Free Plan'){ echo '<b>Your Current Plan:</b><br><br>';}?>
+<?php if($_SESSION['ORG_PLAN'] == 'free'){ echo '<b>Your Current Plan:</b><br><br>';}?>
 The Free Plan<br>
-$0 Always<br>
-100 Volunteers
-<?php if($_SESSION['ORG_PLAN_TYPE'] != 'The Free Plan'){ echo '<br><a href="change-org-plan.php"><img src="../images/changeplan.png" width="90" height="40"></a>';}?>
+50 Volunteers
+<?php if($_SESSION['ORG_PLAN'] != 'free'){ ?>
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=DLCCFCXLJ39N2">
+<img src="../images/changeplan.png" width="90" height="40">
+</A>
+<?php
+}
+?>
 </div>
 <div class="plan2" style="float:left; padding: 70px 0px 0px 70px; width: 150px; height:30px; text-align:center;">
-<?php if($_SESSION['ORG_PLAN_TYPE'] == 'The Basic'){ echo '<b>Your Current Plan:</b><br>';}?>
+<?php if($_SESSION['ORG_PLAN'] == 'pro'){ echo '<b>Your Current Plan:</b><br>';}?>
 <br>
-The Basic<br>
-$49/month<br>
-500 Volunteers<br>
-Messaging Center
-<?php if($_SESSION['ORG_PLAN_TYPE'] != 'The Basic'){ echo '<br><a href="change-org-plan.php"><img src="../images/changeplan.png" width="90" height="40"></a>';}?>
+The Pro<br>
+$49.95/month<br>
+250 Volunteers<br>
+1,000 Messages/month
+<?php if($_SESSION['ORG_PLAN'] != 'pro'){ echo '<br><a href="#" onclick="';
+											echo "popup(250, 'popup3'); planSelected.value = 'pro'";
+							echo ' " class="poplight"><img src="../images/changeplan.png" width="90" height="40"></a>';}?>
 </div>
-<div class="plan3" style="float:left; padding: 70px 0px 0px 70px; width: 150px; height:30px; text-align:center;">
-<?php if($_SESSION['ORG_PLAN_TYPE'] == 'The Works'){ echo '<b>Your Current Plan:</b><br>';}?>
-<br>
-The Works <br>
-$99/month<br>
-1500 Volunteers<br>
-Messaging Center
-<?php if($_SESSION['ORG_PLAN_TYPE'] != 'The Works'){ echo '<br><a href="change-org-plan.php"><img src="../images/changeplan.png" width="90" height="40"></a>';}?>
-</div>
-<div class="plan4" style="float:left; padding: 70px 0px 100px 70px; width: 170px; height:30px; text-align:center;">
-<?php if($_SESSION['ORG_PLAN_TYPE'] == 'The Supreme'){ echo '<b>Your Current Plan:</b><br>';}?>
+<div class="plan3" style="float:left; padding: 70px 0px 100px 70px; width: 170px; height:30px; text-align:center;">
+<?php if($_SESSION['ORG_PLAN'] == 'supreme'){ echo '<b>Your Current Plan:</b><br>';}?>
 <br>
 The Supreme<br>
-$149/month<br>
+$249.95/month<br>
 Unlimated Volunteers<br>
-Messaging Center
-<?php if($_SESSION['ORG_PLAN_TYPE'] != 'The Supreme'){ echo '<br><a href="change-org-plan.php"><img src="../images/changeplan.png" width="90" height="40"></a>';}?>
+Unlimated Messages
+<?php if($_SESSION['ORG_PLAN'] != 'supreme'){ echo '<br><a href="#" onclick="';
+											echo "popup(250, 'popup3'); planSelected.value = 'supreme'";
+							echo ';" class="poplight"><img src="../images/changeplan.png" width="90" height="40"></a>';}?>
 </div>
 </div>
 </div>
@@ -342,174 +669,45 @@ Messaging Center
 <br>
 
 
-<div id="accountSettinGHeading" style="float:left; padding: 0px 0px 0px 200px;">
-<br>
-<h2>Organization Admins & Staff</h2>
-</div>
-<div class="clear"></div>
-<div class="pricingPlansOuterBoxSettings">
-<div class="pricingPlansAcctSettings">
-</div>
-</div>
 
 
 
-<li id="foli126" class="section      ">
-<section>
-<h2 id="title126">4. Advanced Form</h2>
-</section>
-</li>
-
-<li id="foli127" class="section      ">
-<section>
-<h3 id="title127">Link Your Profile</h3>
-</section>
-</li><li id="foli135" class="      ">
-<label class="desc" id="title135" for="Field135">
-Choose Type of Link
-</label>
-<script src="../js/addInputs.js" language="Javascript" type="text/javascript"></script>
-     <div id="dynamicInput">
-<div class = "f1">
-<span>
-<select id="Field1335" name="Field13351" class="field select medium" tabindex="25" > 
-<option value="Website" selected="selected">
-Website
-</option>
-<option value="Facebook" >
-Facebook
-</option>
-<option value="Twitter" >
-Twitter
-</option>
-<option value="LinkedIn" >
-LinkedIn
-</option>
-<option value="Blog" >
-Blog
-</option>
-<option value="YouTube" >
-YouTube
-</option>
-</select>
-</span>
-</div>
-<div class = "f2">
-<span>
-<input id="Field1116" name="Field11161" type="text" spellcheck="false" class="field text medium" value="Link" maxlength="255" tabindex="26" required /> 
-</span>
-</div>
-</div>
-<input type="button" value="Add another link" onClick="addInput('dynamicInput');">
 
 
-</li><li id="foli124" class="section      ">
-<section>
-<h3 id="title124">Tags</h3>
-</section>
-</li><li id="foli11" class=" twoColumns     ">
-<fieldset>
-<![if !IE | (gte IE 8)]>
-<legend id="title11" class="desc">
-What is your Organization involved with?
-<span id="req_11" class="req">*</span>
-</legend>
-<![endif]>
-<!--[if lt IE 8]>
-<label id="title11" class="desc">
-What is your Organization involved with?
-<span id="req_11" class="req">*</span>
-</label>
-<![endif]-->
 
-<div>
-<span>
-<input id="Field11" name="Field11" type="checkbox" class="field checkbox" value="Animal" tabindex="27" />
-<label class="choice" for="Field11">Animal</label>
-</span>
-<span>
-<input id="Field12" name="Field12" type="checkbox" class="field checkbox" value="Community Development" tabindex="28" />
-<label class="choice" for="Field12">Community Development</label>
-</span>
-<span>
-<input id="Field13" name="Field13" type="checkbox" class="field checkbox" value="Athletics" tabindex="29" />
-<label class="choice" for="Field13">Athletics</label>
-</span>
-<span>
-<input id="Field14" name="Field14" type="checkbox" class="field checkbox" value="Community Service" tabindex="30" />
-<label class="choice" for="Field14">Community Service</label>
-</span>
-<span>
-<input id="Field15" name="Field15" type="checkbox" class="field checkbox" value="Children" tabindex="31" />
-<label class="choice" for="Field15">Children</label>
-</span>
-<span>
-<input id="Field16" name="Field16" type="checkbox" class="field checkbox" value="Corporate Event" tabindex="32" />
-<label class="choice" for="Field16">Corporate Event</label>
-</span>
-<span>
-<input id="Field17" name="Field17" type="checkbox" class="field checkbox" value="Church" tabindex="33" />
-<label class="choice" for="Field17">Church</label>
-</span>
-<span>
-<input id="Field18" name="Field18" type="checkbox" class="field checkbox" value="Disaster Relief" tabindex="34" />
-<label class="choice" for="Field18">Disaster Relief</label>
-</span>
-<span>
-<input id="Field19" name="Field19" type="checkbox" class="field checkbox" value="College or University" tabindex="35" />
-<label class="choice" for="Field19">College or University</label>
-</span>
-<span>
-<input id="Field20" name="Field20" type="checkbox" class="field checkbox" value="Emergency Management" tabindex="36" />
-<label class="choice" for="Field20">Emergency Management</label>
-</span>
-</div>
-</fieldset>
-</li>
 
-<li id="foli137" class="section      ">
-<section>
-<h3 id="title137">Additional Admins</h3>
-</section>
-</li>
-Type in the e-mail address(es) and we'll send the info!
-<script src="../js/addInputs.js" language="Javascript" type="text/javascript"></script>
 
-     <div id="dynamicInputAdmins">
-<input id="Field261" name="Field261" type="email" spellcheck="false" class="field text medium" value="E-Mail" maxlength="255" tabindex="37" required /> 
-     </div>
-     <input type="button" value="Add another" onClick="addInput('dynamicInputAdmins');">
 
+<A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=DLCCFCXLJ39N2">
+<IMG SRC="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</A>
 
 <br>
-</li><li id="foli135" class="     ">
-<fieldset>
-<![if !IE | (gte IE 8)]>
-<legend id="title135" class="desc">
-</legend>
-<![endif]>
-<!--[if lt IE 8]>
-<label id="title135" class="desc">
-Check All That Apply
-</label>
-<![endif]-->
-<div>
-<span>
-<input id="Field13511" name="Field13511" type="checkbox" class="field checkbox" value="Volunteers must be invited or approved by organization in order to join" tabindex="38" />
-<label class="choice" for="Field13511">I agree to the Volly.it <a href="/termsofuse"> Terms of Use </a> and <a href="/privacypolicy"> Privacy Policy</a></label>
-</span>
-</div>
-</fieldset>
-</li>
+<div id="publish" style=" padding: 0px 0px 0px 0px; float:right;">
+<input type="image" name="Submit" src="../images/savechanges.png" height="120" width="200"  tabindex="13" value="Save Changes" />
+ </div>
 
-    <tr>
-      <td>&nbsp;</td>
-      <td><input type="submit" name="Submit" tabindex="39" value="Create Organization" /></td>
-	  <center>
-	  </center>
-    </tr>
-	</ul>
 </form> 
+
+
+<div id="popup3" class="popup_block">
+
+
+	Click "Submit Payment" to upgrade your plan!
+
+
+<form class="paypal" action="change-subscription.php" method="post" id="paypal_form" target="_blank">    
+	<input type="hidden" name="cmd" value="_xclick-subscriptions" /> 
+    <input id="planSelected" type="hidden" name="item_number" value="none"/ >
+	<input type="hidden" name="modify" value="2">
+	<div class="clear"></div><br>
+    <input type="submit"  value="Submit Payment"/>
+</form>
+
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
+</div>
+
+
 <div id="popupContact3">
 	<a id="popupContactClose3">x</a>
 	<center>
@@ -525,7 +723,7 @@ Check All That Apply
 			<input id="file" type="file" name="file">
 				<br>
 <br>
-			<input id="submit" type="submit" name="submit" value="Upload Organization Image!">
+			<input id="submit" type="submit" name="submit" value="Upload Organization Logo!">
 				</center>
 		</p>
 	</form></center>
@@ -533,8 +731,25 @@ Check All That Apply
 	
 	</div>
 	<div id="backgroundPopup3"></div>
+	
+	
+
+	<?php
+
+if($state == 'vol')
+{
+?>
+<script type="text/javascript">
+$('#accountSettingsOrg').hide(); $('#accountSettingsForm').show();
+</script>
+
+<?php
+}
+?>
+	
 </div><!--container-->
 </div>
 <div id="footerclear"></div><?php include "footer.php";?>
 </body>
 </html>
+<script type="text/javascript" src="../js/customPopupBox.js"></script>

@@ -12,21 +12,6 @@
 	//Validation error flag
 	$errflag = false;
 	
-	//Connect to pg server
-	$link = mysql_connect("localhost:3306", "root", "coolguy1");
-	if(!$link) {
-		die('Failed to connect to server: ' . mysql_error());
-	}
-	else
-	{
-		$db_select = mysql_select_db("volly", $link);
-		
-		if(!$db_select)
-		{
-			die('Failed to connect to database: ' . mysql_error());
-		}
-	}
-	
 
 	//Function to sanitize values received from the form. Prevents SQL injection
 	function clean($str) {
@@ -62,10 +47,6 @@
 	    }
 	    if(($lastName == '') || ($lastName == 'Last Name')) {
 	    	$errmsg_arr[] = 'Last Name Missing';
-	    	$errflag = true;
-	    }
-	    if(($email == '') || ($email == 'E-Mail')) {
-	    	$errmsg_arr[] = 'E-mail Missing';
 	    	$errflag = true;
 	    }
 	    if(($city == '') || ($city == 'City')) {
@@ -114,7 +95,6 @@
 	    	$_SESSION['VOL_CITY'] = $city;
 	    	$_SESSION['VOL_FIRST_NAME'] = $firstName;
 	    	$_SESSION['VOL_LAST_NAME'] = $lastName;	
-	    	$_SESSION['VOL_EMAIL'] = $email;	
 			$_SESSION['VOL_STATE'] = $state;
 			$_SESSION['VOL_PRIVACY'] = $privacySetting;
 	    	
@@ -125,7 +105,7 @@
 	    	exit();
 	    }
 	}
-	if($submit == 'Save Changes')
+	if($submit == 'Save Changes' || $submit == 'Save Changes from Org')
 	{
 		if( strcmp($newpassword, $cpassword) != 0 ) 
 		{
@@ -152,7 +132,12 @@
 	
 
 	if($submit == 'Finish')
-	{
+	{ 	
+		//we need to get the login
+		$qry = "select * from members where login='$login'";
+		$result = @mysql_query($qry);
+		$memberInfo = mysql_fetch_assoc($result);
+		$email = $memberInfo['email'];
 		//Create INSERT query
 		$qry = "INSERT INTO vols(login, firstname, lastname, city, state, aboutme, email, interests, userimage, privacy, phonenumber) 
 						VALUES('$login','$firstName','$lastName', '$city', '$state', ' ', '$email', '','', '$privacySetting' ,'')";
@@ -161,7 +146,7 @@
 		
 
 	}
-	if($submit == 'Save Changes')
+	if($submit == 'Save Changes' || $submit == 'Save Changes from Org')
 	{
 		//Concatenate Phone number
 		$entirePhone = $phoneAreaCode;
@@ -224,6 +209,11 @@
 			else if($submit == 'Save Changes')
 			{
 				header("location: account-settings-vol.php");
+			}
+			else if($submit == 'Save Changes from Org')
+			{
+			
+				header("location: account-settings-org.php?state=vol");
 			}
 			
 			exit();

@@ -4,22 +4,7 @@
 	
 	//Include database connection details
 	require_once('config.php');
-
-	//Connect to mysql server
-	$link = mysql_connect("localhost:3306", "root", "coolguy1");
-	if(!$link) {
-		die('Failed to connect to server: ' . mysql_error());
-	}
-	else
-	{
-		$db_select = mysql_select_db("volly", $link);
-		
-		if(!$db_select)
-		{
-			die('Failed to connect to database: ' . mysql_error());
-		}
-	}
-	
+	require_once('bitly-api.php');
 	//Function to sanitize values received from the form. Prevents SQL injection
 	function clean($str) {
 		$str = @trim($str);
@@ -35,7 +20,15 @@
 	$programsCreated = clean($_SESSION['PROGRAMS_CREATED']);
 	$programName .= $programsCreated;
 	$programName = clean($_SESSION[$programName]);
+	$qry = "select * from programs where orgname='$orgName' and programname='$programName'";
+	$result = @mysql_query($qry);
+	$progInfo = mysql_fetch_assoc($result);
 	
+	$shareLink = 'http://joelcomp1.no-ip.org/php/program-manager.php?progid=';
+	$shareLink .= $progInfo['progid'];
+	$short_url = get_bitly_short_url($shareLink,'joelcomp1','R_b2b6743ff66fe6821031f375af4e7ced');
+	$_SESSION['PROGRAM_SHARE_LINK'] = rtrim($short_url);
+	$_SESSION['PROGRAM_PUBLISHED'] = 'true';
 	$qry = "update programs set draft='Published' where orgname='$orgName' and programname='$programName'";
 	$result = @mysql_query($qry);
 	

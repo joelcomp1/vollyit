@@ -327,7 +327,7 @@ else
 
 				while($positions = mysql_fetch_assoc($r2))
 				{
-					$totalOpenPositions += ($positions['numavail'] - $$positions['numtaken']);
+					$totalOpenPositions += ($positions['numavail'] - $positions['numtaken']);
 			
 				}
 				$numPrograms = mysql_num_rows($r2);

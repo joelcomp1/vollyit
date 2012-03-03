@@ -41,13 +41,13 @@ $(document).ready(function(){
 	$('a.poplight[href=#?w=350]').popOpen(); //Run popOpen function once on load
 	
 	//Close Popups and Fade Layer
-	$('#fade').click( function() { //When clicking on the close or fade layer...
+/*	$('#fade').click( function() { //When clicking on the close or fade layer...
 	  	$('#fade , .popup_block').fadeOut(); //fade them both out
 		$('#fade').remove();
 		return false;
 	});
 
-
+*/
 	popOpen
 	
 });

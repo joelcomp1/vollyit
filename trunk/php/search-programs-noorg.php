@@ -12,7 +12,7 @@
 	$errflag = false;
 	
 	//Connect to pg server
-	
+	$orgname = $_SESSION['ORG_NAME'];
 
 		// Is there a posted query string?
 		if(isset($_POST['queryString'])) {
@@ -32,16 +32,22 @@
 				// eg: SELECT yourColumnName FROM yourTable WHERE yourColumnName LIKE '$queryString%' LIMIT 25
 				
 				
-				$query = mysql_query("SELECT * FROM programs WHERE programname LIKE '$queryString%' LIMIT 25");
+				$query = mysql_query("SELECT * FROM programs WHERE draft='Published' and orgname='$orgname' and programname LIKE '$queryString%' LIMIT 25");
 				if($query) {
 					// While there are results loop through them - fetching an Object (i like PHP5 btw!).
 					while ($result = mysql_fetch_object($query)) {
-	
+			
 						// Format the results, im using <li> for the list, you can change it.
 						// The onClick function fills the textbox with the result.
-						
+
+						$programName = $result->programname;
+						$query2 = mysql_query("SELECT * FROM programvol WHERE orgname='$orgname' and programname='$programName'");
+
+						echo $result->recurring;
+						$numberVols = mysql_num_rows($query2);
 						// YOU MUST CHANGE: $result->value to $result->your_colum
-	         			echo '<li onClick="fillPrograms(\''.$result->programname.'\');">'.$result->programname.'</li>';
+	         			echo '<li onClick="fillPrograms(\''.$result->programname.'\', \''.$numberVols.'\', \''.$result->recurring.'\');">'.$result->programname.'</li>';
+
 	         		}
 				} else {
 					echo 'ERROR: There was a problem with the query.';

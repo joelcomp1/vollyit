@@ -88,7 +88,9 @@ $r = mysql_query($q);
 <div style="vertical-align:top; float:right;">
 <select name="profileSelect" onchange="redirectMe(this)">
   <option value="member-index-org.php"><?php echo $_SESSION['SESS_MEMBER_ID'];?></option>
+  <option value="pricing-plan.php" <?php if($_SESSION['ref'] == "/php/pricing-plan.php") { echo 'selected=true'; } ?>>Plan Info</option>
   <option value="account-settings-org.php" <?php if($_SESSION['ref'] == "/php/account-settings-org.php") { echo 'selected=true'; } ?>>Account Settings</option>
+  <option value="switch-mode.php" <?php if($_SESSION['ref'] == "/php/switch-mode.php") { echo 'selected=true'; } ?>>Switch to Volunteer View</option>
   <option value="logout.php">Logout</option>
 </select>
 </div>
