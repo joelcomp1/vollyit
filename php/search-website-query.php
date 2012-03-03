@@ -109,6 +109,11 @@ echo '<div class="orgProgHeadingPrograms" style="float:left;"><div class="box9">
 		echo '</div></div><div class="clear"></div><br>';
 		$counter = 0;
 		$displayPrograms = 0;
+		$closestDate = '';
+		$programName = $row['programname'];
+		$q = "SELECT * FROM programrepeats WHERE programname='$programName'";
+		$r = mysql_query($q);
+		$repeats = mysql_fetch_assoc($r);
 		while($row = mysql_fetch_assoc($rProg))
 		{
 			$totalOpenPositions = 0;
@@ -118,9 +123,242 @@ echo '<div class="orgProgHeadingPrograms" style="float:left;"><div class="box9">
 			$r2 = mysql_query($q1);
 			while($positions = mysql_fetch_assoc($r2))
 			{
-				$totalOpenPositions += ($positions['numavail'] - $$positions['numtaken']);
+				$totalOpenPositions += ($positions['numavail'] - $positions['numtaken']);
 			
 			}
+			
+			
+			$todaysDate = date("m/d/Y");
+			$today = strtotime($todaysDate);
+			$closestDate = '';
+			$indexClosest = '';
+			$counter = 0;
+			$display = 0;
+			$upcomingCounter = 0;
+			$closestDate = '';
+
+				if($row['enddate'] != '')
+				{
+					$dateToIterate =  $row['date'];
+					while(strtotime($dateToIterate) < strtotime($row['enddate']))
+					{
+						if($repeats['repeats'] == 'Bi-Weekly')
+						{
+							$dateToIterate = date("m/d/Y",strtotime(date("m/d/Y", strtotime($dateToIterate)) . " +1 week"));
+						}
+						else if($repeats['repeats'] == 'Monthly')
+						{
+							$dateToIterate = date("m/d/Y",strtotime(date("m/d/Y", strtotime($dateToIterate)) . " +1 month"));
+							$dateToIterate = date("m/d/Y",strtotime(date("m/d/Y", strtotime($dateToIterate)) . " -1 week"));
+						}				
+						else if($repeats['repeats'] == 'Yearly')
+						{
+							$dateToIterate = date("m/d/Y",strtotime(date("m/d/Y", strtotime($dateToIterate)) . " +1 year"));
+							$dateToIterate = date("m/d/Y",strtotime(date("m/d/Y", strtotime($dateToIterate)) . " -1 week"));
+						}
+					
+						if($repeats['everysun'] != '')
+						{
+							$index += 1;
+							$nextSun = strtotime('next sunday',strtotime($dateToIterate));
+							$dateToIterate = date("m/d/Y", $nextSun);
+						}
+						if($repeats['everymon'] != '')
+						{
+							$index += 1;
+							$nextMon = strtotime('next monday',strtotime($dateToIterate));
+							$dateToIterate = date("m/d/Y", $nextMon);
+						}
+						if($repeats['everytues'] != '')
+						{
+							$index += 1;
+							$nextTue = strtotime('next tuesday',strtotime($dateToIterate));
+							$dateToIterate = date("m/d/Y", $nextTue);
+						}
+						if($repeats['everywed'] != '')
+						{
+							$index += 1;
+							$nextWed = strtotime('next wednesday',strtotime($dateToIterate));
+							$dateToIterate = date("m/d/Y", $nextWed);
+						}
+						if($repeats['everythurs'] != '')
+						{
+							$index += 1;
+							$nextThurs = strtotime('next thursday',strtotime($dateToIterate));
+							$dateToIterate = date("m/d/Y", $nextThurs);
+						}
+						if($repeats['everyfri'] != '')
+						{
+							$index += 1;
+							$nextFri = strtotime('next friday',strtotime($dateToIterate));
+							$dateToIterate = date("m/d/Y", $nextFri);
+						}
+						if($repeats['everysat'] != '')
+						{
+							$index += 1;
+							$nextSat = strtotime('next saturday',strtotime($dateToIterate));
+							$dateToIterate = date("m/d/Y", $nextSat);
+						}
+					
+						$programStartDate = strtotime($dateToIterate);
+						if(($programStartDate >= $today) && ($programStartDate != ''))
+						{	
+							$tempCounter = 0;
+							while($closetPrograms[$tempCounter]['closestDate'] != '')
+							{
+								if(($programStartDate < strtotime($closetPrograms[$tempCounter]['closestDate'])))
+								{
+									$closetPrograms[$tempCounter + 1]['closestDate'] = $closetPrograms[$tempCounter]['closestDate'];
+									$closetPrograms[$tempCounter + 1]['programname'] = $closetPrograms[$tempCounter]['programname'];
+									$closetPrograms[$tempCounter]['closestDate'] = $dateToIterate;
+									$closetPrograms[$tempCounter]['programname'] = $row['programname'];
+									break;
+								}
+								$tempCounter++;
+							}
+							if($closetPrograms[$tempCounter]['closestDate'] == '')
+							{
+								$closetPrograms[$tempCounter]['closestDate'] = $dateToIterate;
+								$closetPrograms[$tempCounter]['programname'] = $row['programname'];
+								break;
+							}
+							else
+							{
+								break;
+							}
+						}
+
+					}	
+				}
+				else if(($row['enddate'] == '') && ($repeats['repeats'] != ''))//Recurring and no end date, goes forever
+				{
+					$dateToIterate =  $row['date'];
+					
+					while((strtotime($dateToIterate)) < strtotime('12/31/2030'))
+					{
+						
+						if($repeats['repeats'] == 'Bi-Weekly')
+						{
+							$dateToIterate = date("m/d/Y",strtotime(date("m/d/Y", strtotime($dateToIterate)) . " +2 week"));
+						}
+						else if($repeats['repeats'] == 'Monthly')
+						{
+							$dateToIterate = date("m/d/Y",strtotime(date("m/d/Y", strtotime($dateToIterate)) . " +1 month"));
+						}				
+						else if($repeats['repeats'] == 'Yearly')
+						{
+							$dateToIterate = date("m/d/Y",strtotime(date("m/d/Y", strtotime($dateToIterate)) . " +1 year"));
+						}
+						
+						if($repeats['everysun'] != '')
+						{
+							$index += 1;
+							$nextSun = strtotime('next sunday',strtotime($dateToIterate));
+							$dateToIterate = date("m/d/Y", $nextSun);
+						}
+						if($repeats['everymon'] != '')
+						{
+							$index += 1;
+							$nextMon = strtotime('next monday',strtotime($dateToIterate));
+							$dateToIterate = date("m/d/Y", $nextMon);
+						}
+						if($repeats['everytues'] != '')
+						{
+							$index += 1;
+							$nextTue = strtotime('next tuesday',strtotime($dateToIterate));
+							$dateToIterate = date("m/d/Y", $nextTue);
+						}
+						if($repeats['everywed'] != '')
+						{
+							$index += 1;
+							$nextWed = strtotime('next wednesday',strtotime($dateToIterate));
+							$dateToIterate = date("m/d/Y", $nextWed);
+						}
+						if($repeats['everythurs'] != '')
+						{
+							$index += 1;
+							$nextThurs = strtotime('next thursday',strtotime($dateToIterate));
+							$dateToIterate = date("m/d/Y", $nextThurs);	
+						}
+						if($repeats['everyfri'] != '')
+						{
+							$index += 1;
+							$nextFri = strtotime('next friday',strtotime($dateToIterate));
+							$dateToIterate = date("m/d/Y", $nextFri);
+						}
+						if($repeats['everysat'] != '')
+						{
+							$index += 1;
+							$nextSat = strtotime('next saturday',strtotime($dateToIterate));
+							$dateToIterate = date("m/d/Y", $nextSat);	
+						}
+						
+						$programStartDate = strtotime($dateToIterate);
+						if(($programStartDate >= $today) && ($programStartDate != ''))
+						{		
+								$tempCounter = 0;
+							while($closetPrograms[$tempCounter]['closestDate'] != '')
+							{
+								if(($programStartDate < strtotime($closetPrograms[$tempCounter]['closestDate'])))
+								{
+									$closetPrograms[$tempCounter + 1]['closestDate'] = $closetPrograms[$tempCounter]['closestDate'];
+									$closetPrograms[$tempCounter + 1]['programname'] = $closetPrograms[$tempCounter]['programname'];
+									$closetPrograms[$tempCounter]['closestDate'] = $dateToIterate;
+									$closetPrograms[$tempCounter]['programname'] = $row['programname'];
+									break;
+								}
+								$tempCounter++;
+							}
+							if($closetPrograms[$tempCounter]['closestDate'] == '')
+							{
+								$closetPrograms[$tempCounter]['closestDate'] = $dateToIterate;
+								$closetPrograms[$tempCounter]['programname'] = $row['programname'];
+								break;
+							}
+							else
+							{
+								break;
+							}
+						}
+						
+					}	
+				}
+					else if(($row['enddate'] == '') && ($repeats['repeats'] == '')) //only one day
+					{
+						$dateToIterate =  $row['date'];
+						$programStartDate = strtotime($dateToIterate);
+						if(($programStartDate >= $today) && ($programStartDate != ''))
+						{	
+							$tempCounter = 0;
+							while($closetPrograms[$tempCounter]['closestDate'] != '')
+							{
+								if(($programStartDate < strtotime($closetPrograms[$tempCounter]['closestDate'])))
+								{
+									$closetPrograms[$tempCounter + 1]['closestDate'] = $closetPrograms[$tempCounter]['closestDate'];
+									$closetPrograms[$tempCounter + 1]['programname'] = $closetPrograms[$tempCounter]['programname'];
+									$closetPrograms[$tempCounter]['closestDate'] = $dateToIterate;
+									$closetPrograms[$tempCounter]['programname'] = $row['programname'];
+									break;
+								}
+								$tempCounter++;
+							}
+							if($closetPrograms[$tempCounter]['closestDate'] == '')
+							{
+								$closetPrograms[$tempCounter]['closestDate'] = $dateToIterate;
+								$closetPrograms[$tempCounter]['programname'] = $row['programname'];
+								break;
+							}
+							else
+							{
+								break;
+							}
+						}
+					}
+					
+			
+			
+			//if(strtotime($closetPrograms[$upcomingCounter]['closestDate']) >  $today)
+		//	{
 			$numPrograms = mysql_num_rows($r2);
 			if(($counter % 5) == 0)
 			{	
@@ -147,14 +385,14 @@ echo '<div class="orgProgHeadingPrograms" style="float:left;"><div class="box9">
 				</div>
 				<br><br>
 				<div id="orgInfoForDisplay">
-				<?php echo date('l, F jS Y',strtotime($row['date'])); echo '    -    '; echo $row['starttime']; echo '    -    '; echo $totalOpenPositions; echo ' More Volunteers Needed';?>
+				<?php echo date('l, F jS Y',strtotime($closetPrograms[$upcomingCounter]['closestDate'])); echo '    -    '; echo $row['starttime']; echo '    -    '; echo $totalOpenPositions; echo ' More Volunteers Needed';?>
 				</div>
 				
 				<br><br>
 				<div class="clear"></div>
 				<br>
-				
-<?php		
+					
+<?php	//}	
 		}
 			echo '</div>';
 			echo '<script>	$("#page1").show();</script>';
@@ -164,6 +402,7 @@ echo '<div class="orgProgHeadingPrograms" style="float:left;"><div class="box9">
 				<a href="#" onclick="showAllPrograms()">View All The Programs Matching Your Search Criteria</a>
 				</div><br>';
 			}
+	
 	}
 	echo '<div class="orgProgHeadingPeople" style="float:left;"><div class="box9">';
 	if(mysql_num_rows($rVols)==0)//no result found

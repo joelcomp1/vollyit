@@ -293,7 +293,7 @@ else if($state  == 'Drafts')
 				$r2 = mysql_query($q1);
 				while($positions = mysql_fetch_assoc($r2))
 				{
-					$totalOpenPositions += ($positions['numavail'] - $$positions['numtaken']);
+					$totalOpenPositions += ($positions['numavail'] - $positions['numtaken']);
 			
 				}
 				$numPrograms = mysql_num_rows($r2);
@@ -391,9 +391,10 @@ else if($state  == 'Drafts')
 				$tempOrgName = $row['orgname'];
 				$q1 = "SELECT * FROM programpositions where orgname='$tempOrgName' and programname='$tempProgramName'";
 				$r2 = mysql_query($q1);
+				$totalOpenPositions = 0;
 				while($positions = mysql_fetch_assoc($r2))
 				{
-					$totalOpenPositions += ($positions['numavail'] - $$positions['numtaken']);
+					$totalOpenPositions += ($positions['numavail'] - $positions['numtaken']);
 			
 				}
 				$numPrograms = mysql_num_rows($r2);

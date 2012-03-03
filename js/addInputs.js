@@ -8,6 +8,8 @@ var counter4 = 1;
 var limit4 = 20;
 var counter5 = 1;
 var limit5 = 10;
+var volCounter = 1;
+
 function removeEmailOpen(parentDiv, childDiv , childDiv2)
 {
           parentDiv.removeChild(childDiv);
@@ -49,7 +51,7 @@ function editPositions(parentDiv, childDiv, number)
 		  secondParent.removeChild(document.getElementById(secondChild));
 }
 
-function addInput(divName, value, value2, value3){
+function addInput(divName, value, value2, value3, counterPass){
 	if(divName == "dynamicInput")
 	{
 		if (counter == limit)  {
@@ -64,15 +66,10 @@ function addInput(divName, value, value2, value3){
 	}
 	if(divName == "dynamicInputAdmins")
 	{
-		if (counter2 == limit2)  {
-			alert("You have reached the limit of adding " + counter2 + " Admins");
-		}
-		else {
 			var newdiv = document.createElement('div');
-			newdiv.innerHTML = "<input id='Field26" + counter2 + "' name='Field26" + counter2 +"' type='email' spellcheck='false' class='field text medium' value='E-Mail' maxlength='255' tabindex='1' required /> ";
+			newdiv.innerHTML = "<div class='clear'></div><input style='float:left;' id='Field261a" + counter2 + "' name='Field261a" + counter2 + "' type='text' spellcheck='false' class='field text small' value='First Name' maxlength='255' onfocus='this.value = this.value=='First Name' ? '' : this.value; this.style.color='#000';' onfocusout='this.value = this.value == '' ? this.value = 'First Name' : this.value; this.value=='First Name' ? this.style.color='#999' : this.style.color='#000''/> <input id='Field262a" + counter2 + "' name='Field262a" + counter2 + "' type='text' spellcheck='false' class='field text small' value='Last Name' maxlength='255' tabindex='37' onfocus='this.value = this.value=='Last Name' ? '' : this.value; this.style.color='#000';' onfocusout='this.value = this.value == '' ? this.value = 'Last Name' : this.value; this.value=='Last Name' ? this.style.color='#999' : this.style.color='#000''/><input style='float:left;' id='Field260a" + counter2 + "' name='Field260a" + counter2 + "' type='email' spellcheck='false' class='field text small' value='E-mail Address' maxlength='255' tabindex='37' onfocus='this.value = this.value=='E-mail Address' ? '' : this.value; this.style.color='#000';' onfocusout='this.value = this.value == '' ? this.value = 'E-mail Address' : this.value; this.value=='E-mail Address' ? this.style.color='#999' : this.style.color='#000''  />";
 			document.getElementById(divName).appendChild(newdiv);
 			counter2++;
-		}
 	}
 	if(divName == "emailAdd")
 	{
@@ -127,12 +124,13 @@ function addInput(divName, value, value2, value3){
 			}
 			newdiv.innerHTML = "<div id=" + positionNameGive + " style='margin-right: 300px; float:left;'>" + value + "</div><div style='margin-right: 200px; float:left;' id='numPosGiven'>" + value2 + "</div><div style='float:left;'><a href='#' onClick='editPositions(" + parentdiv + comma + divNameChild + comma + counter5 +"); '>Edit</a></div><div style='float:left;  margin-left: 20px;'><a href='#' onClick='removePosition(" + parentdiv + comma + divNameChild +");'>Remove</a></div><input id=" + positionNameGive + " name=" + positionNameGive + " value=" + value + " type='hidden'><input id=" + numPosGiven + " name=" + numPosGiven + " value=" + value2 + " type='hidden'><input id=" + positionDescrip + " name=" + positionDescrip + " value=" + value3 + " type='hidden'><div id='positionDescrip' style='display:none'>" + value3 + "</div>";
 			document.getElementById('results').appendChild(newdiv);
-			newdiv2.innerHTML = "<div id='positionNameGiven' style='margin-right: 100px; float:left;'><input type='button' onclick='addVols(" + divOpen + comma + divNameChild2 + comma + quotes + value + quotes +");' value='+'>" + value + "</div><div id='numPosGiven'>" + value2 + "</div>";
+			newdiv2.innerHTML = "<div id='positionNameGiven' style='margin-right: 100px; float:left;'><input type='button' onclick='addVols(" + divOpen + comma + divNameChild2 + comma + quotes + value + quotes + comma + 0 + comma + 0 + comma + divNameChild +");' value='+'>" + value + "</div><div id='numPosGiven'>" + value2 + "</div>";
 			document.getElementById('resultsOpen').appendChild(newdiv2);
 
 			document.getElementById("Field8").value = "";
 			document.getElementById("Field9").value = "";
 			document.getElementById("Field11").value = "1";
+			counterPass = counter5;
 			counter5++;
 			
 		}
@@ -140,10 +138,10 @@ function addInput(divName, value, value2, value3){
 	
 	
 }
-function addVols(parentDiv, childDiv, positionName)
+function addVols(parentDiv, childDiv, positionName, namePass, loginPass, upperParent)
 {
-			var maxVols = '10';
-			for(loop = 1; loop <= 3;loop = loop + 1)
+			var maxVols = '1000'; //make this dynamic
+			for(loop = 1; loop <= maxVols;loop = loop + 1)
 			{
 				var divNameChild = "userImage" + loop;
 				var checkbox = document.getElementById(divNameChild).childNodes[0].childNodes[0];
@@ -152,40 +150,75 @@ function addVols(parentDiv, childDiv, positionName)
 					if(document.getElementById(childDiv.name).childNodes[1].innerHTML != 'Filled')
 					{
 						var newdiv = document.createElement('div');
-						var newChild = 'positionTakenDiv' + loop;
-						var hiddenNameElement = 'positionTaken' + loop;
-						var hiddenPositionName = 'positionName' + loop;
+						var newChild = 'positionTakenDiv' + volCounter;
+						var hiddenNameElement = 'positionTaken' + volCounter;
+						var hiddenPositionName = 'positionName' + volCounter;
 						newdiv.id = newChild;
 						newdiv.name = newChild;
 						var comma = ',';
 						var name = document.getElementById(divNameChild).childNodes[1].childNodes[0].innerHTML; //get the name of the user we are adding
 						var login = document.getElementById(divNameChild).childNodes[1].childNodes[1].value; //get the login of the user we are adding
-						newdiv.innerHTML = "<div id='positionNameTaken' style='margin-left: 2px; float:left;'><input id=" + hiddenNameElement + " name=" + hiddenNameElement + " value=" + login + " type='hidden'><input id=" + hiddenPositionName + " name=" + hiddenPositionName + " value=" + positionName + " type='hidden'><input type='button' onclick='removeVols(" + childDiv.name + comma + newChild + ");' value='X'>" + name + "</div>";
+						newdiv.innerHTML = "<div id='positionNameTaken' style='margin-left: 2px; float:left;'><input id=" + hiddenNameElement + " name=" + hiddenNameElement + " value=" + login + " type='hidden'><input id=" + hiddenPositionName + " name=" + hiddenPositionName + " value=" + positionName + " type='hidden'><input type='button' onclick='removeVols(" + childDiv.name + comma + newChild + comma + upperParent.name +");' value='X'>" + name + "</div>";
 						document.getElementById(childDiv.name).appendChild(newdiv);
 						var modifyCount = document.getElementById(childDiv.name);
 						var currentCount = parseInt(modifyCount.childNodes[1].innerHTML);
 						var currentCount = currentCount - 1;
+						volCounter++;
 						if(currentCount == 0)
 						{
 							document.getElementById(childDiv.name).childNodes[1].innerHTML = 'Filled';
+							document.getElementById(upperParent.name).childNodes[1].innerHTML = 'Filled';
 						}	
 						else
 						{
 							document.getElementById(childDiv.name).childNodes[1].innerHTML = currentCount;
+							document.getElementById(upperParent.name).childNodes[1].innerHTML = currentCount;
 						}
 					}
 					
 				}
+				else if(namePass != '0' && loginPass != '0') 
+				{	
+						var newdiv = document.createElement('div');
+						var newChild = 'positionTakenDiv' + volCounter; //aribtrary offset
+						var hiddenNameElement = 'positionTaken' + volCounter;
+						var hiddenPositionName = 'positionName' + volCounter;
+						newdiv.id = newChild;
+						newdiv.name = newChild;
+						var comma = ',';
+						var name = namePass;
+						var login = loginPass;
+						newdiv.innerHTML = "<div id='positionNameTaken' style='margin-left: 2px; float:left;'><input id=" + hiddenNameElement + " name=" + hiddenNameElement + " value=" + login + " type='hidden'><input id=" + hiddenPositionName + " name=" + hiddenPositionName + " value=" + positionName + " type='hidden'><input type='button' onclick='removeVols(" + childDiv.name + comma + newChild + comma + upperParent.name +");' value='X'>" + name + "</div>";
+						document.getElementById(childDiv.name).appendChild(newdiv);
+						var modifyCount = document.getElementById(childDiv.name);
+						var currentCount = parseInt(modifyCount.childNodes[1].innerHTML);
+						currentCount = currentCount - 1;
+						if(currentCount == 0)
+						{
+							document.getElementById(childDiv.name).childNodes[1].innerHTML = 'Filled';
+							document.getElementById(upperParent.name).childNodes[1].innerHTML = 'Filled';
+						}	
+						else
+						{
+							document.getElementById(childDiv.name).childNodes[1].innerHTML = currentCount;
+							document.getElementById(upperParent.name).childNodes[1].innerHTML = currentCount;
+						}
+						volCounter++;
+						break;
+					
+				}
+				
 			}
 }
 
 
-function removeVols(parentDiv, childDiv)
+function removeVols(parentDiv, childDiv, upperParent)
 {
 	parentDiv.removeChild(childDiv);
 	if(document.getElementById(parentDiv.name).childNodes[1].innerHTML == 'Filled')
 	{
 		document.getElementById(parentDiv.name).childNodes[1].innerHTML = '1';
+		document.getElementById(upperParent.name).childNodes[1].innerHTML = '1';
 	}	
 	else
 	{
@@ -193,5 +226,7 @@ function removeVols(parentDiv, childDiv)
 		var currentCount = parseInt(modifyCount.childNodes[1].innerHTML);
 		var currentCount = currentCount + 1;
 		document.getElementById(parentDiv.name).childNodes[1].innerHTML = currentCount;
+		document.getElementById(upperParent.name).childNodes[1].innerHTML = currentCount;
 	}
+	volCounter--;
 }

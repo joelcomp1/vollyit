@@ -4,6 +4,7 @@
 	
 	//Include database connection details
 	require_once('config.php');
+	require_once('bitly-api.php');
 	
 	//Array to store validation errors
 	$errmsg_arr = array();
@@ -12,19 +13,6 @@
 	$errflag = false; 
 	
 	//Connect to mysql server
-	$link = mysql_connect("localhost:3306", "root", "coolguy1");
-	if(!$link) {
-		die('Failed to connect to server: ' . mysql_error());
-	}
-	else
-	{
-		$db_select = mysql_select_db("volly", $link);
-		
-		if(!$db_select)
-		{
-			die('Failed to connect to database: ' . mysql_error());
-		}
-	}
 		
 	//Function to sanitize values received from the form. Prevents SQL injection
 	function clean($str) {
@@ -34,11 +22,23 @@
 		}
 		return  mysql_escape_string($str);
 	}
+	function checkEmail($emailPass)
+	{
 	
+		if (!preg_match("/^( [a-zA-Z0-9] )+( [a-zA-Z0-9\._-] )*@( [a-zA-Z0-9_-] )+( [a-zA-Z0-9\._-] +)+$/" , $emailPass))
+		{
+			return false;
+		}
+		return true;
+	}		
+
+	
+
 	//Sanitize the POST values
 	$login = clean($_POST['login']);
 	$password = clean($_POST['password']);
 	$cpassword = clean($_POST['cpassword']);
+	$email = clean($_POST['email']);
 
 	if($login == '') {
 		$errmsg_arr[] = 'Login ID missing';
@@ -52,9 +52,29 @@
 		$errmsg_arr[] = 'Confirm password missing';
 		$errflag = true;
 	}
+	if($email == '') {
+		$errmsg_arr[] = 'E-mail missing';
+		$errflag = true;
+	}
+	if($email != '')
+	{
+		if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		} else {
+			$errmsg_arr[] = 'E-mail Invalid';
+			$errflag = true;
+		}
+	}
 	if( strcmp($password, $cpassword) != 0 ) {
 		$errmsg_arr[] = 'Passwords do not match';
 		$errflag = true;
+	}
+	else
+	{
+		if(strlen($password) <= 6)
+		{
+			$errmsg_arr[] = 'Password is too short!';
+			$errflag = true;
+		}
 	}
 	
 	//Check for duplicate login ID
@@ -64,6 +84,7 @@
 		if($result) {
 			if(mysql_num_rows($result) > 0) {
 				$errmsg_arr[] = 'Login ID already in use';
+				$loginInvalid = 'true';
 				$errflag = true;
 			}
 			@mysql_free_result($result);
@@ -76,14 +97,24 @@
 	//If there are input validations, redirect back to the registration form
 	if($errflag) {
 		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-		session_write_close();
-		header("location: ../index.php");
+			unset($_SESSION['VOL_EMAIL_TEMP']);
+			unset($_SESSION['VOL_LOGIN_TEMP']);
+			$header = "location: ../index.php?volerror=true";
+			$_SESSION['VOL_EMAIL_TEMP'] = $email;
+	
+			if($loginInvalid != 'true')
+			{
+				$_SESSION['VOL_LOGIN_TEMP'] = 	$login;	
+			}
+				session_write_close();
+			header($header);
+
 		exit();
 	}
 	
 	//Create INSERT query
-		$qry = "INSERT INTO members(login, passwd, orgorvol) 
-	VALUES('$login','".md5($_POST['password'])."', 'VOL')";
+		$qry = "INSERT INTO members(login, passwd, orgorvol, email) 
+	VALUES('$login','".md5($_POST['password'])."', 'VOL', '$email')";
 	$result = @mysql_query($qry);
 	
 	$found = false;
@@ -96,22 +127,26 @@
 		$result = @mysql_query($qry);
 		$found = true;
 	  }
-	}	
+	}
 	
 	//Check whether the query was successful or not
 	if($result) {
     $qry="SELECT * FROM members WHERE login='$login' AND passwd='".md5($_POST['password'])."'";
 	$result=mysql_query($qry);
+
 		if(mysql_num_rows($result) == 1) {
 			//Login Successful
 			session_regenerate_id();
+			unset($_SESSION['VOL_EMAIL_TEMP']);
+			unset($_SESSION['VOL_LOGIN_TEMP']);
 			$member = mysql_fetch_assoc($result);
 			$_SESSION['SESS_MEMBER_ID'] = $member['login'];
 			$_SESSION['SESS_ORG_OR_VOL'] = $member['orgorvol'];
 			$_SESSION['SESS_FIRST_TIME'] = 'true';
-			$shareLink = 'http://joelcomp1.no-ip.org/php/invitation.php?userid=';
+			$shareLink = 'http://joelcomp1.no-ip.org/php/vol-manager.php?userid=';
 			$shareLink .= $member['userid'];
-			$_SESSION['USER_INVITE_LINK'] = $shareLink;
+			$short_url = get_bitly_short_url($shareLink,'joelcomp1','R_b2b6743ff66fe6821031f375af4e7ced');
+			$_SESSION['USER_INVITE_LINK'] = rtrim($short_url);
 			session_write_close();
 			header("location: member-index-vol.php");
 			exit();

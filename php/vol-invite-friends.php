@@ -45,10 +45,10 @@ Share Link
 <div class="socialInner">
 <div class="inviteFriendsBox">
 
-<a href="https://www.facebook.com/sharer/sharer.php?u=http://volly.it&t=Help Change the World!"><img src="../images/facebook.png" width="62" height="22" alt="Facebook" /></a>
+<a href="https://www.facebook.com/sharer/sharer.php?u=http://volly.it&t=Help Change the World! <?php echo $_SESSION['USER_INVITE_LINK']; ?>"   target="_blank"><img src="../images/facebook.png" width="62" height="22" alt="Facebook" /></a>
 
 
-<a href="https://twitter.com/intent/tweet?text=I think you should help me change the world! I am on Volly.it and you should be to!  Hop onto Volly.it today and start Volunteering!">
+<a href="https://twitter.com/intent/tweet?text=I think you should help me change the world! I am on Volly.it and you should be to!  Hop onto Volly.it today and start Volunteering! <?php echo $_SESSION['USER_INVITE_LINK']; ?>"  target="_blank" >
 <img src="../images/twittershare.png" width="62" height="22" alt="Twitter" /></a>
 
 
@@ -59,7 +59,7 @@ Share Link
 <div class="boxFormat2">
 <div class="inviteFriendsBox">
 <div class="leftText" style="float: left; padding: 0px 0px 0px 10px">
-<input id="Field1" name="Field1" type="text" class="field text large" value="<?php echo $_SESSION['USER_INVITE_LINK']; ?>" size="50" tabindex="5" required />
+<input id="Field1" name="Field1" type="text" class="field text large" value="<?php echo $_SESSION['USER_INVITE_LINK']; ?>" size="50" tabindex="5"  />
 
 
 

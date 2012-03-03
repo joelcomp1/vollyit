@@ -1,11 +1,11 @@
 
 <?php
 include("config.php");
-session_start();
+	session_start();
 
 
 	$orgname = $_SESSION['ORG_NAME'];
-$script = clean($_SESSION['ref']);
+	$script = clean($_SESSION['ref']);
 	function clean($str) {
 		$str = @trim($str);
 		if(get_magic_quotes_gpc()) {
@@ -27,6 +27,7 @@ $script = clean($_SESSION['ref']);
 		$qry .= $programName;
 		$qry .= '"';
 		$rProg  =mysql_query($qry);
+	
 		
 
 		while($row = mysql_fetch_assoc($rProg))
@@ -35,7 +36,7 @@ $script = clean($_SESSION['ref']);
 
 				
 					$login = $row['coord1'];
-				
+					
 					$rProg2 =mysql_query("SELECT * FROM vols WHERE login='$login'");
 					$vol = mysql_fetch_assoc($rProg2);
 				
@@ -43,8 +44,8 @@ $script = clean($_SESSION['ref']);
 					$name .= ' ';
 					$name .= $vol['lastname'];		
 
-
-					if($script == '/php/program-published.php' || $script == '/php/program-preview.php')
+				
+					if($script == '/php/program-published.php' || $script == '/php/program-preview.php' || $script == '/php/program-published-nonadmin.php')
 					{
 
 						echo "<div style='float:left;' ><img src='uploaded_files/",$vol['userimage'],"'alt='Volunteer Picture' width='50' height='50'><br><input value=" , $login, " type='hidden'>", $name, "</div>";

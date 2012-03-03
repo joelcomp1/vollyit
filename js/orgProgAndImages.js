@@ -39,5 +39,64 @@ $(function(){
 				});
 			}
 		});
+		
+		
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "populate-org-upcoming-programs.php",
+			success: function(msg)
+				{
+				$("#results6").html(msg);
+				
+				}
+		});
+		
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "populate-org-past-programs.php",
+			success: function(msg)
+				{
+				$("#results7").html(msg);
+				
+				}
+		});
 
+		
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "populate-org-volunteer-list.php",
+			success: function(msg)
+				{
+				$("#results8").html(msg);
+				
+				}
+		});
+		
+		
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "populate-org-staff.php",
+			success: function(msg)
+				{
+				$("#results9").html(msg);
+				
+				}
+		});
+				
+		
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "populate-org-staff-list.php",
+			success: function(msg)
+				{
+				$("#results10").html(msg);
+				
+				}
+		});
+		
 	});

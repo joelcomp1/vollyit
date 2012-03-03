@@ -1,12 +1,15 @@
 <?php
+	
 	require_once('auth.php');
 	
 	session_start();
-	
+	$successPayment = $_GET['success'];
 	$_SESSION['ref'] = $_SERVER['SCRIPT_NAME'];
 	
 	include "header-org.php";
 	include "navigation.php";
+	
+
 ?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -21,6 +24,19 @@
 
 <div id="wrap">
 <div id="mainnavuser">
+<?php
+	if($successPayment == 'true')
+	{
+		echo '<b>Payment Successful</b>';
+		$successPayment = '';
+	}
+	else if($successPayment == 'false')
+	{
+		echo '<b>Payment Failed</b>';
+		$successPayment = '';
+	}
+	?>
+
 
 <div class="clear"></div>
 <h3>
@@ -178,11 +194,7 @@ Phone Number
 </div>
 </div>
 </div>
-<div class="boxFormat2">
-<div class="box1">
-<br>
-</div>
-</div>
+<div class="clear"></div>
 
 <!--This is used for the  snapshot box-->
 <div class="boxFormat3">
@@ -272,16 +284,19 @@ rows="5" cols="37"
  Your Staff
 </div>
 <div class="rightText"  style="float: right;">        
-<a href="view-all-org-staff.php">View All</a> |  <a href="add-admins.php">Add Admins</a>
+<a href="#" onclick="popup(550, 'popup5');" class="poplight">Manage</a>
 </div>
 </div>
 </div>
+
+
 
 
 <!--This is used for the  your staff  box part 2-->
 <div class="yourStaffBox2">
-<div class="yourStaffboxContent">
-<br>
+<div class="yourStaffboxContent" style="overflow-y: scroll;">
+<div id='results9'>
+</div>
 </div>
 </div>
 
@@ -460,7 +475,14 @@ if(isset($_SESSION['SHOW_CALENDAR']))
 </div>
 </div>
 </div>
-
+<div id="popup5" class="popup_block">
+<form id="addAdmins" name="addAdmins" method="post" action="add-org-admins.php">
+<div id='results10' style="overflow-y: scroll;">
+</div>
+      <input type="submit" name="Submit" tabindex="6" value="Add Staff" />
+</form>
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
+</div>
 
 </div>
 
@@ -475,6 +497,7 @@ if(isset($_SESSION['SHOW_CALENDAR']))
 <script type="text/javascript" src="../js/orgProgAndImages.js"></script>
 <script type='text/javascript' src="../js/populateCalendar.js"></script>
 <script type='text/javascript' src="../js/fullcalendar.min.js"></script>
+<script type="text/javascript" src="../js/customPopupBox.js"></script>
 <script src="../js/programMgmt.js" type="text/javascript" charset="utf-8"></script>
 
 

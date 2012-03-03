@@ -41,31 +41,12 @@
 <?php echo $_SESSION['ORG_ZIPCODE_VIEW'];?> -
 <a target="_blank" href="http://maps.google.com/?q=<?php echo $_SESSION['ORG_ADDRESS_VIEW']; echo ','; echo $_SESSION['ORG_CITY_VIEW']; echo ','; echo $_SESSION['ORG_STATE_VIEW']; echo ','; echo $_SESSION['ORG_ZIPCODE_VIEW'];?>">Map It</a>
 <?php 
-	if(isset($_SESSION['FACEBOOK_LINK_VIEW'])) 
-	{
-		if(substr($_SESSION['FACEBOOK_LINK_VIEW'], 0, 4) == 'http')
-		{
-			echo '<a href="',$_SESSION['FACEBOOK_LINK_VIEW'],'"><img src="../images/facebook.png" width="62" height="22" alt="Facebook" /></a>';
-		}
-		else
-		{	
-			echo '<a href="http://',$_SESSION['FACEBOOK_LINK_VIEW'],'"><img src="../images/facebook.png" width="62" height="22" alt="Facebook" /></a>';	
-		}
-	}
 
-	if(isset($_SESSION['TWITTER_LINK_VIEW'])) 
-	{
-		if(substr($_SESSION['TWITTER_LINK_VIEW'], 0, 4) == 'http')
-		{
-			echo '<a href="',$_SESSION['TWITTER_LINK_VIEW'],'"><img src="../images/twittershare.png" width="62" height="22" alt="Twitter" /></a>';
-		}
-		else
-		{	
-			echo '<a href="http://',$_SESSION['TWITTER_LINK_VIEW'],'"><img src="../images/twittershare.png" width="62" height="22" alt="Twitter" /></a>';	
-		}
-		
-	}
-	echo '  ';
+			echo '<a href="https://www.facebook.com/sharer/sharer.php?u=http://volly.it&t=Help Change the World!"><img src="../images/facebook.png" width="62" height="22" alt="Facebook" /></a>';	
+
+	
+			echo '<a href="https://twitter.com/intent/tweet?text=I think you should help me change the world! I am Volunteering with ',$_SESSION['ORG_NAME_VIEW'],' and you should too!"><img src="../images/twittershare.png" width="62" height="22" alt="Twitter" /></a>';	
+	
 	?>
 	
 <a href="#"><img src="../images/message.png" width="99" height="34"></a>
@@ -115,8 +96,8 @@ else
 <div class="leftText" style="float: left;">
  Volunteer at our Next Program...
 </div>
-<div class="rightText"  style="float: right;">        
-<a href="program-.php?state=all">view all</a>
+<div class="rightText"  style="float: right;">  
+<a href="#" onclick="popup(250, 'popup6');" class="poplight">view all</a>
 </div>
 </div>
 </div>
@@ -127,12 +108,8 @@ else
 </div>
 </div>
 </div>
-<div class="boxFormat2">
-<div class="box1">
-<br>
-</div>
-</div>
 
+<div class="clear"></div>
 
 <!--This is used for the  snapshot box-->
 <div class="boxFormat3">
@@ -145,27 +122,25 @@ else
 <div class="boxFormat2">
 <div class="snapShotBox">
 <div class="volunteersSnapshot" style="float: left; font:bold 0.6em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 7px; text-align:center;">
-<a href="volunteers-in-org.php"><img src="../images/emptyIcon.jpg" width="30" height="40" ></a>
-<br>
+<a href="#" onclick="popup(250, 'popup8');" class="poplight"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a><br>
 Volunteers
 </div>
 <div class="upcomingSnapshot" style="float: left; font:bold 0.6em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 9px; text-align:center;">
+<a href="#" onclick="popup(250, 'popup6');" class="poplight"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a>
 
-<a href="program-manement-org.php?state=upcoming"><img src="../images/emptyIcon.jpg" width="30" height="40" ></a>
 <br>
 Upcoming Programs
 
 </div>
 <div class="pastProgramsSnapshot" style="float: left; font:bold 0.6em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 9px; text-align:center;">
-<a href="program-manament-org.php?state=past"><img src="../images/emptyIcon.jpg" width="30" height="40" ></a>
-<br>
+<a href="#" onclick="popup(250, 'popup7');" class="poplight"><img src="../images/emptyIcon.jpg" width="40" height="40" ></a><br>
 Past Programs
 </div>
-<div class="collabSnapshot" style="float: left; font:bold 0.6em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 9px; text-align:center;">
+<!--div class="collabSnapshot" style="float: left; font:bold 0.6em 'TeXGyreAdventor', Arial; padding: 0px 0px 0px 9px; text-align:center;">
 <a href="collaborations-org.php"><img src="../images/emptyIcon.jpg" width="30" height="40" ></a>
 <br>
 Collaborations
-</div>
+</div-->
 </div>
 </div>
 
@@ -212,8 +187,9 @@ Collaborations
 
 <!--This is used for the  your staff  box part 2-->
 <div class="yourStaffBox2">
-<div class="yourStaffboxContent">
-<br>
+<div class="yourStaffboxContent" style="overflow-y: scroll;">
+<div id='results9'>
+</div>
 </div>
 </div>
 
@@ -388,6 +364,27 @@ that you no longer wish to volunteer here.<br><br>
 <a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Cancel</a>
 </div>
 
+
+<div id="popup6" class="popup_block">
+<div id='results6'>
+</div>
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
+</div>
+
+<div id="popup7" class="popup_block">
+<div id='results7'>
+</div>
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
+</div>
+
+<div id="popup8" class="popup_block">
+<div id='results8'>
+</div>
+<a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
+</div>
+
+
+
 <div id="popup4" class="popup_block" style="text-align:center;">
 <div id="entryPage">
 	<h2 style=" padding:0px 0 0 30px!important; float:none; text-align: center;">Volly Here?</h2>
@@ -398,7 +395,7 @@ as a regular volunteer.	<br>
 <br>
 <a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Cancel </a><br><br>
 Please Note: You are sharing your information with this organization.  This organization may use your shared information to contact you.
-By continuing, you are accepting the Volly It <a href="legalstuff.php">Terms of Use</a> and <a href="legalstuff.php">Privacy Policy</a>
+By continuing, you are accepting the Volly It <a href="legalstuff.php#description-tab">Terms of Use</a> and <a href="legalstuff.php#usage-tab">Privacy Policy</a>
 		</p>
 </div>
 <div id="entryPage2" style="display:none;">
@@ -411,7 +408,7 @@ A volunteer request has been sent to <?php echo $_SESSION['ORG_NAME_VIEW'];?>.  
 </div>
 </div>
 <?php 
-if(($_SESSION['ORG_FRIEND_STATUS_VIEW'] == 'ACCEPTED'))
+if(($_SESSION['ORG_FRIEND_STATUS_VIEW'] == 'ACCEPTED') && ($_SESSION['VOLUNTEER_IS_ADMIN']	== 'false'))
 {?>
 	<a href="#" onclick="popup(350, 'popup5');" class="poplight" style="float:right; padding: 10px 10px 10px 10px;"><img src="../images/removeorg.png"></a>
 <?php

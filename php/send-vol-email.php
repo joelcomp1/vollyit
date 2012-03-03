@@ -22,8 +22,8 @@
 	
 	$content = clean($_POST['emailContent']);
 
-	define('GUSER', 'joelcomp1@gmail.com'); // GMail username
-	define('GPWD', 'Coolenungames!2'); // GMail password
+		define('GUSER', 'info@volly.it'); // GMail username
+		define('GPWD', 'VollyIt920470'); // GMail password
 		  
 	function smtpmailer($to, $names, $from, $from_name, $subject, $body) { 
 	global $error;

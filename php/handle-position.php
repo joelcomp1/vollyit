@@ -81,6 +81,9 @@
 			}while($_POST[$positionNameGive] != '');
 			
 			
+			$qry = "delete from programvol where programname='$programName' and orgname='$orgName'";
+			$result = @mysql_query($qry);
+			
 			$counter = 1;
 			//Now we need to handle assigning people to a position
 			do
@@ -93,6 +96,7 @@
 			$positionNameGive = "positionName";
 			$positionNameGive .= $counter;
 			$positionName = clean($_POST[$positionNameGive]);
+			
 			
 	
 			if($volLogin != '')
@@ -109,8 +113,8 @@
 				$currentCount = $position['numavail'];
 				$currentTaken = $position['numtaken'];
 				$currentTaken++;
-				$currentCount++; //This is to offset the fact that when we inserted we didn't have the full count
-				$qry = "update programPositions set , where orgname='$orgName' and programname='$programName' and positionname='$positionName'";
+				
+				$qry = "update programPositions set numavail='$currentCount',numtaken='$currentTaken' where orgname='$orgName' and programname='$programName' and positionname='$positionName'";
 
 				$result = @mysql_query($qry);
 			
@@ -119,14 +123,15 @@
 			$positionVolunteer = "positionTaken";
 			$positionVolunteer .= $counter;
 			$volLogin = clean($_POST[$positionVolunteer]);
-			}while($_POST[$positionVolunteer] != '' && $counter < 10);
+			}while($_POST[$positionVolunteer] != '' );
 			
-			echo $positionName;
-			exit();
+
 			//clear the general programs in case it was set
 			//Set the program to be general positions only
 			$qry = "update programs set generalprograms='false' where programname='$programName' and orgname='$orgName'";
 			$result = @mysql_query($qry);
+			
+
 		}
 		else
 		{
@@ -144,7 +149,11 @@
 			session_regenerate_id();
 			if($generalOnly == 'General')
 			{	
-				$_SESSION['PROGRAM_GENERAL_POSITIONS'] = 'true';
+				
+			}
+			else
+			{
+				$_SESSION['PROGRAM_GENERAL_POSITIONS'] = 'false';
 			}
 
 			session_write_close();

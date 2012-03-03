@@ -100,6 +100,9 @@ chmod( "$folder/" . basename( $_FILES['fieldname']['name']),0644);
 
 $submitButton = clean($_POST['submit']);//figure out what image we are uploading
 
+
+
+
 if(($_SESSION['SESS_ORG_OR_VOL'] == 'ORG') && ($submitButton == 'Upload Organization Image!'))
 {
 	if(isset($_SESSION['IMAGE_PATH']))
@@ -121,7 +124,7 @@ $_SESSION['test'] = $result;
 session_write_close();
 if(isset($_SESSION['ORG_WEBSITE']))
 {
-header("location: member-index-org.php");
+	header("location: member-index-org.php");
 }
 else
 {
@@ -129,6 +132,33 @@ header("location: member-reg-org.php");
 }
 
 }
+if(($_SESSION['SESS_ORG_OR_VOL'] == 'ORG') && ($submitButton == 'Upload Organization Logo!'))
+{
+	if(isset($_SESSION['IMAGE_PATH']))
+	{
+
+	$removeOldImage = 'uploaded_files/';
+	$removeOldImage .= $_SESSION['IMAGE_PATH'];
+		unlink($removeOldImage);
+		unset($_SESSION['IMAGE_PATH']);
+	}
+
+session_regenerate_id();
+$login = clean($_SESSION['SESS_MEMBER_ID']);
+$qry = "update orgs set orgImage='$fileNameForDisplay' where login='$login';";
+$result = @mysql_query($qry);
+$_SESSION['ORG_IMAGE'] = 'loaded';
+$_SESSION['IMAGE_PATH'] = $fileNameForDisplay;
+
+session_write_close();
+
+	header("location: account-settings-org.php");
+
+
+
+}
+
+
 else if(($_SESSION['SESS_ORG_OR_VOL'] == 'ORG')  && ($submitButton == 'Upload Admin Image!'))
 {
 	if(isset($_SESSION['ADMIN_IMAGE_PATH']))
@@ -145,6 +175,27 @@ $_SESSION['ADMIN_IMAGE_PATH'] = $fileNameForDisplay;
 session_write_close();
 header("location: member-reg-org.php");
 }
+else if(($_SESSION['SESS_ORG_OR_VOL'] == 'ORG')  && ($submitButton == 'Upload a Admin Picture'))
+{
+	if(isset($_SESSION['VOL_IMAGE_PATH']))
+	{
+
+		$removeOldImage = 'uploaded_files/';
+		$removeOldImage .= $_SESSION['VOL_IMAGE_PATH'];
+		unlink($removeOldImage);
+		unset($_SESSION['VOL_IMAGE_PATH']);
+	}
+
+session_regenerate_id();
+$login = clean($_SESSION['SESS_MEMBER_ID']);
+$qry = "update vols set userImage='$fileNameForDisplay' where login='$login';";
+$result = @mysql_query($qry);
+$_SESSION['VOL_IMAGE'] = 'true';
+$_SESSION['VOL_IMAGE_PATH'] = $fileNameForDisplay;
+session_write_close();
+header("location: account-settings-org.php?state=vol");
+}
+
 else if($_SESSION['SESS_ORG_OR_VOL'] == 'VOL')
 {
 

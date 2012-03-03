@@ -26,10 +26,42 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Volly.it: <?php echo $_SESSION['ORG_NAME'];?>'s Profile</title>
 <link href="../style.css" rel="stylesheet" type="text/css">
- <script type="text/javascript" src="../js/jquery.js"></script>
-  <script type="text/javascript" src="../js/collection.js"></script>
-
+<script type="text/javascript" src="../js/jquery-1.2.1.pack.js"></script>
+<!-- Moving Box CSS/JS -->
+<link href="../css/movingboxes.css" media="screen" rel="stylesheet">
+  <script type="text/javascript">
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "populate-program-vol-images.php",
+			success: function(msg)
+			{
+				$("#slider").html(msg);
+				$('#slider').movingBoxes({
+				startPanel   : 1,      // start with this panel
+				wrap         : true,   // if true, the panel will "wrap" (it really rewinds/fast forwards) at the ends
+				buildNav     : true,   // if true, navigation links will be added
+				navFormatter : function(){ return "&#9679;"; } // function which returns the navigation text for each panel
+				});
+			}
+		});
+		
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "posted-program-messages.php",
+			success: function(msg)
+				{
+				$("#results2").html(msg);
 	
+				}
+		});
+		
+function OpenWindow(info) {
+  window.open(info,'WinName','height=400,width=600,resizable=yes,scrollbars=yes');
+}
+		
+	</script>
 
 </head>
 <body>
@@ -58,9 +90,13 @@
 	$programZipSaved = 'PROGRAM_ZIP';
 	$programZipSaved .= $_SESSION['PROGRAMS_CREATED'];
 	
-	if(true) {
-		echo '<a href="#?w=350" rel="popup5" class="poplight"></a>';	
+	if($_SESSION['PROGRAM_PUBLISHED'] == 'true') {
+
+		echo '<a href="#?w=350" rel="popup5" class="poplight"></a>';
+		session_start();		
+		$_SESSION['PROGRAM_PUBLISHED'] = false;
 	}
+
 	?>
 <div id="wrap">
 <nav id="mainnavuser">
@@ -69,7 +105,7 @@
 
 <h3>
 <div class="publishProgram"  style="text-align:center;">
-Quick Tasks: <a href="create-program-part1.php?name=<?php echo $_SESSION['PROGRAM_NAME']; ?>&image=<?php echo $_SESSION['PROGRAM_IMAGE_PATH']; ?>&address=<?php echo $_SESSION[$programAddressSaved]; ?>&state=<?php echo $_SESSION[$programStateSaved]; ?>&city=<?php echo $_SESSION[$programCitySaved]; ?>&zip=<?php echo $_SESSION[$programZipSaved]; ?>&descrip=<?php echo $_SESSION['PROGRAM_DESCRIPTION']; ?>&startDate=<?php echo $_SESSION[$dateSaved]; ?>&enddate=<?php echo $_SESSION[$endDateSaved]; ?>&startTime=<?php echo $_SESSION[$timeStartSaved]; ?>&endtime=<?php echo $_SESSION[$endTimeSaved]; ?>"><img src="../images/editProgram.png" alt="edit program"  width="55" height="55"><a href="edit-volunteers.php"><img src="../images/editVolunteers.png" alt="edit program"  width="55" height="55"></a><a href="message-center-org-email.php"><img src="../images/emailProgram.png" width="55" height="55"></a><a href="message-center-org-voicemail.php"><img src="../images/voicemail.png" width="55" height="55"></a><a href="message-center-org-textmsg.php"><img src="../images/textmsg.png" width="55" height="55"></a><a href="#"  onclick="popup(350, 'popup6');" rel="popup6" class="poplight"><img src="../images/programmsg.png" width="55" height="55"></a><a href="#"><img src="../images/print.png" width="55" height="55"></a>
+Quick Tasks: <a href="create-program-part1.php?name=<?php echo $_SESSION['PROGRAM_NAME']; ?>&image=<?php echo $_SESSION['PROGRAM_IMAGE_PATH']; ?>&address=<?php echo $_SESSION[$programAddressSaved]; ?>&state=<?php echo $_SESSION[$programStateSaved]; ?>&city=<?php echo $_SESSION[$programCitySaved]; ?>&zip=<?php echo $_SESSION[$programZipSaved]; ?>&descrip=<?php echo $_SESSION['PROGRAM_DESCRIPTION']; ?>&startDate=<?php echo $_SESSION[$dateSaved]; ?>&enddate=<?php echo $_SESSION[$endDateSaved]; ?>&startTime=<?php echo $_SESSION[$timeStartSaved]; ?>&endtime=<?php echo $_SESSION[$endTimeSaved]; ?>"><img src="../images/editProgram.png" alt="edit program"  width="55" height="55"><a href="edit-volunteers.php"><img src="../images/editVolunteers.png" alt="edit program"  width="55" height="55"></a><a href="message-center-org-email.php?programname=<?php echo $_SESSION['PROGRAM_NAME'];?>&numvols=<?php echo $_SESSION['TOTAL_VOLUNTEERS'];?>"><img src="../images/emailProgram.png" width="55" height="55"></a><a href="message-center-org-voicemail.php?programname=<?php echo $_SESSION['PROGRAM_NAME'];?>&numvols=<?php echo $_SESSION['TOTAL_VOLUNTEERS'];?>"><img src="../images/voicemail.png" width="55" height="55"></a><a href="message-center-org-textmsg.php?programname=<?php echo $_SESSION['PROGRAM_NAME']; ?>&numvols=<?php echo $_SESSION['TOTAL_VOLUNTEERS'];?>"><img src="../images/textmsg.png" width="55" height="55"></a><a href="#"  onclick="popup(350, 'popup6');" rel="popup6" class="poplight"><img src="../images/programmsg.png" width="55" height="55"></a><a href="<?php echo $_SESSION['PROGRAM_FILE_PATH'];?>"><img src="../images/print.png" width="55" height="55"></a>
 </div>
 <div class="clear"></div>
 <div class="programNameTitle">
@@ -183,6 +219,7 @@ Quick Tasks: <a href="create-program-part1.php?name=<?php echo $_SESSION['PROGRA
 People Volunteering for This Program
 </div>
 </div>
+
 <div class="clear"></div>
 <br><br>
 <!-- MovingBoxes Slider -->
@@ -215,23 +252,25 @@ People Volunteering for This Program
 
 
 
-
 <!--This is used for the  open positions box-->
 <div class="openPositions">
 <div class="TextBox1">
+<?php if($_SESSION['GENERAL_PROGRAM'] == 'false')
+{
+?>
 <div class="leftText" style="float:left; font:bold 1.0em 'TeXGyreAdventor', Arial, sans-serif!important; padding: 0px 0px 0px 80px;">
 <?php echo $_SESSION['POSITIONS_CREATED'];?>  Open Positions
 </div>
 <div class="rightText"  style="float: right;">        
-<a href="create-program-part3.php">add positions</a>
+<a href="create-program-part3.php">edit positions</a>
 </div>
 </div>
 </div>
 
 
-<!--This is used for the Program Coordinators box part 2-->
+<!--This is used for the program Coordinators box part 2-->
 <div class="programCoordsBox2">
-<div class="snapShotBox">
+<div class="snapShotBox" style="overflow-y: scroll;">
 <div id='results'>
 </div>
 </div>
@@ -296,6 +335,42 @@ Filled
 ?>
 </div>
 </div>
+
+<?php }
+else
+{
+?>
+<div class="leftText" style="float:left; font:bold 1.0em 'TeXGyreAdventor', Arial, sans-serif!important; padding: 0px 0px 0px 80px;">
+ Open Positions
+</div>
+
+</div>
+</div>
+
+
+<!--This is used for the program Coordinators box part 2-->
+<div class="programCoordsBox2">
+<div class="snapShotBox" style="overflow-y: scroll;">
+<div id='results'>
+</div>
+</div>
+</div>
+
+
+<!--This is used for the  open positions box part 2-->
+<div class="boxFormat2">
+<div class="openPositionsAvail">
+<div class="clear"></div>
+
+
+</div>
+</div>
+
+
+<?php
+
+
+} ?>
 <div class="clear"></div>
 <!--This is used for the Program Coordinators box part 3-->
 <div class="programCoordsBox2">
@@ -323,26 +398,14 @@ Filled
  Program Messages...
 </div>
 <div class="rightText"  style="float: right;">        
-<a href="program-message.php">Post New Message</a>
+<a href="#"  onclick="popup(350, 'popup6');" rel="popup6" class="poplight">Post New Message</a>
 </div>
 </div>
 </div>
 <div class="clear"></div>
 
 <!--This is used for the  program msgs box part 2-->
-<div class="programMsgBox2">
-<div class="programMessages">
-	<?php
-	if(($_SESSION['PROGRAM_MSG']) == true) {
-	
-		echo '';
-	}
-	else
-	{
-		echo '<center>No Posted Messages <br> <br><a href="program-message.php"><img src="../images/programmsg.png"></a></center>';
-	}
-	?>
-</div>
+<div id="results2">
 </div>
 
 <div class="clear"></div>
@@ -364,35 +427,36 @@ Filled
 <br>
 <div id="popup5" class="popup_block">
 	<h2 style=" padding:0px 0 0 30px!important; float:none; text-align: center;">Your Program Has Published</h2><br>
-	<p id="contactArea" style=" padding:0px 0 0 30px!important; float:none; text-align: center;">
+	<p id="contactArea" style=" padding:0px 0 0 0px!important; float:none; text-align: center;">
 			An e-mail notification will be sent to your volunteers.  You can also:</p>
 <a href="https://www.facebook.com/sharer/sharer.php?u=http://volly.it&t=Help Change the World!"><img src="../images/facebook.png" width="62" height="22" alt="Facebook" /></a>
 
 
 <a href="https://twitter.com/intent/tweet?text=@<?php echo $_SESSION['ORG_NAME'];?> posted a new volunteer opportunity on Volly.it.  Check it out bit.ly">
+
 <img src="../images/twittershare.png" width="62" height="22" alt="Twitter" /></a>
 
 
-
+<input id="Field1" name="Field1" type="text" class="field text large" value="<?php echo $_SESSION['PROGRAM_SHARE_LINK']; ?>" size="55" tabindex="5" required />
 	
 <a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
 <!--/div-->
 
-</div>
+</div> <?php echo $_SESSION['PROGRAM_SHARE_LINK'];?>
 <div id="popup6" class="popup_block">
 	<h2 style=" padding:0px 0 0 30px!important; float:none; text-align: center;">Post Message</h2><br>
 	<p id="contactArea" style=" padding:0px 0 0 0px!important; float:none; text-align: center;">
 	
 
-Program Name
+
 <div class="clear"></div>
 
-
+<form id="programmessage" name="programmessage" method="post" action="add-program-message.php"">
 <input id="Field1" name="Field1" type="text" class="field text large" maxlength="255" tabindex="1" value="Subject" onfocus="this.value = this.value=='Subject' ? '' : this.value; this.style.color='#000';" onfocusout="this.value = this.value == '' ? this.value = 'Subject' : this.value; this.value=='Subject' ? this.style.color='#999' : this.style.color='#000'" />
 <div class="clear"></div>
 
 
-Program Description
+
 <div class="clear"></div>
 <div style="">
 <textarea id="Field3" 
@@ -409,14 +473,28 @@ style="resize: none;"
 <input type="checkbox" name="emailNot" value="emailNotification" id="emailNot" tabindex="3"/> Send e-mail notification<br/>
 </div>
 <div id="postFb" name="postFb" style="float:left;">
-<input type="checkbox" name="postFb" value="postToFB" id="postFb" tabindex="4"/> Post To Facebook<br/>
+<input type="checkbox" name="postFb" value="postToFB" id="postFb" tabindex="4" onclick="if(this.checked){window.open('https://www.facebook.com/sharer/sharer.php?u=http://volly.it&t=Help Change the World!');}"/> Post To Facebook<br/>
 </div>
 <div id="postT" name="postT" style="float:left;">
-<input type="checkbox" name="postT" value="postToT" id="postT" tabindex="5"/>  Post To Twitter<br/>
+
+
+
+<?php 
+$string = "https://twitter.com/intent/tweet?text=@";
+$string .= $_SESSION['ORG_NAME'];
+$string .= "posted a new message for ";
+$string .= $_SESSION['PROGRAM_NAME'];
+$string .= "on Volly.it.  Check it out ";
+$string .= $_SESSION['PROGRAM_SHARE_LINK'];
+
+
+?>
+<input type="checkbox" name="postT" value="postToT" id="postT" tabindex="5" 
+onclick="if(this.checked){window.open('<?php echo $string; ?>');}"/>  Post To Twitter<br/>
 </div></p>
 <div class="clear"></div>
-
-
+<input type="submit" name="Submit" tabindex="13" value="Post" />
+</form>
 
 	
 <a href="#" onclick="$('#fade , .popup_block').fadeOut(); $('#fade').remove();">Close</a>
@@ -430,6 +508,7 @@ style="resize: none;"
 </html>
 <script type="text/javascript" src="../js/populateProgramCoords.js"></script>
 <script type="text/javascript" src="../js/customPopupBox.js"></script>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+<script src="../js/jquery.movingboxes.js"></script>
 
 

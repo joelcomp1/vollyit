@@ -60,6 +60,12 @@
 	{
 		$_SESSION['PROGRAM_NO_END_TEMP'] = $_GET['noend'];
 	}
+	
+	if($_GET['edit'] != '')
+	{
+		$_SESSION['EDIT_PROGRAM']= $_GET['edit'];
+	
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -157,10 +163,10 @@ Easy as 1.. 2.. 3..
 <br>
 <?php if($_SESSION['PROGRAM_GENERAL_POSITIONS'] == 'true') { 
 echo "<script type='text/javascript'>$(document).ready(function() {";
-echo '$("#programcoord").hide();';
+echo '$("#programcoord").hide(); $("#openPositions").hide(); $("#generalPositions").hide();';
 echo '})</script>'; } ?>
 <div style="float:left; padding: 0px 30px 0px 0px;">
-<input id="Field6" name="Field6" type="checkbox" value="General" tabindex="4"  onclick="$('#programcoord').toggle(); " <?php if($_SESSION['PROGRAM_GENERAL_POSITIONS'] == 'true')
+<input id="Field6" name="Field6" type="checkbox" value="General" tabindex="4"  onclick="$('#programcoord').toggle(); $('#openPositions').toggle();  $('#generalPositions').toggle();" <?php if($_SESSION['PROGRAM_GENERAL_POSITIONS'] == 'true')
 																																				{ echo 'checked="yes"'; } ?>
 																																				 /> </div>
 <div style="float:left; font: 1.3em ; padding: 0px 30px 0px 0px;">
@@ -244,7 +250,7 @@ Actions
 </div>
 <div class="clear"></div>
 <div id="assignPositions" style="float:left;">
-<h4 id="title1">Assign Positions</h4>
+<h4 id="title1">Add Volunteers to Program</h4>
 <img src="../images/help.png" width="20" height="20" onclick="popup(350, 'popup6');" class="poplight" >
 <div class="clear"></div>
 You've got volunteers.  You've got open positions.  Simple select and assign!
@@ -280,7 +286,7 @@ Search Volunteers
 </div>
 </div>
 <div id="openPositions" style="float:left;">
-<h4 id="title1">Open Positions</h4>
+<h4 id="title1">Added Program Volunteers</h4>
 <div class="clear"></div>
 <div id="positionsOpenOrg">
 <div id="positionAvailable">
@@ -288,6 +294,19 @@ Position
 </div>
 <div id="positionsOpen">
 Positions Still Open
+</div>
+<div class="clear"></div>
+
+<div id='resultsOpen'>
+</div>
+</div>
+</div>
+<div id="generalPositions" style="float:left; display:none">
+<h4 id="title1">Open Positions</h4>
+<div class="clear"></div>
+<div id="positionsOpenOrg">
+<div id="positionAvailable">
+Volunteers
 </div>
 <div class="clear"></div>
 

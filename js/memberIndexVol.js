@@ -46,5 +46,41 @@ $(function(){
 				}
 		});
 		
+
+
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "populate-vol-page-programs.php",
+			success: function(msg)
+				{
+				$("#results5").html(msg);
+				
+				}
+		});
+		
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "populate-vol-upcoming-programs.php",
+			success: function(msg)
+				{
+				$("#results6").html(msg);
+				
+				}
+		});
+		
+		$.ajax({
+			type:"GET",
+			data: $(this).serialize(),
+			url: "populate-vol-past-programs.php",
+			success: function(msg)
+				{
+				$("#results7").html(msg);
+				
+				}
+		});
+		
+		
 });	
 	

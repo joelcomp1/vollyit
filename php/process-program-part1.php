@@ -238,6 +238,16 @@
 		if(mysql_num_rows($result) == 0)
 		{
 		
+			$found = false;
+			while(!$found) {
+			$uid = mt_rand(1,32000); // find random number betwen minimum and maximum
+			$qry = "SELECT * FROM programs WHERE progid='$uid'";
+			$result = mysql_query($qry);
+			if(mysql_num_rows($result) == 0) {
+				
+				$found = true;
+			}
+			}		
 			//Create INSERT query	
 		/*	if(isset($_SESSION['TEMP_PROGRAM_IMAGE']))
 			{	
@@ -262,8 +272,8 @@
 			}
 			else
 			{*/
-				$qry = "INSERT INTO programs(orgname, programimage, programdescrip, collaborative, parentprogram, childprogram, date, starttime, endtime, recurring, enddate, draft, programname, programnumber, address, city, state, zipcode, tag) 
-							VALUES('$orgName','$programPhoto','$programDiscription','','','','','','','','','$draft','$programName', '','$programAddress','$programCity','$programState','$programZip','$tags')";
+				$qry = "INSERT INTO programs(orgname, programimage, programdescrip, collaborative, parentprogram, childprogram, date, starttime, endtime, recurring, enddate, draft, programname, programnumber, address, city, state, zipcode, tag, noend, generalprograms, progid) 
+							VALUES('$orgName','$programPhoto','$programDiscription','','','','','','','','','$draft','$programName', '','$programAddress','$programCity','$programState','$programZip','$tags', '', '', $uid)";
 				$result = @mysql_query($qry);
 			//}
 		

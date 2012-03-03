@@ -166,6 +166,9 @@
 <!--This is used for the  open positions box-->
 <div class="openPositions">
 <div class="TextBox1">
+<?php if($_SESSION['GENERAL_PROGRAM'] == 'false')
+{
+?>
 <div class="leftText" style="float:left; font:bold 1.0em 'TeXGyreAdventor', Arial, sans-serif!important; padding: 0px 0px 0px 80px;">
 <?php echo $_SESSION['POSITIONS_CREATED'];?>  Open Positions
 </div>
@@ -178,7 +181,7 @@
 
 <!--This is used for the program Coordinators box part 2-->
 <div class="programCoordsBox2">
-<div class="snapShotBox">
+<div class="snapShotBox" style="overflow-y: scroll;">
 <div id='results'>
 </div>
 </div>
@@ -243,6 +246,42 @@ Filled
 ?>
 </div>
 </div>
+
+<?php }
+else
+{
+?>
+<div class="leftText" style="float:left; font:bold 1.0em 'TeXGyreAdventor', Arial, sans-serif!important; padding: 0px 0px 0px 80px;">
+ Open Positions
+</div>
+
+</div>
+</div>
+
+
+<!--This is used for the program Coordinators box part 2-->
+<div class="programCoordsBox2">
+<div class="snapShotBox" style="overflow-y: scroll;">
+<div id='results'>
+</div>
+</div>
+</div>
+
+
+<!--This is used for the  open positions box part 2-->
+<div class="boxFormat2">
+<div class="openPositionsAvail">
+<div class="clear"></div>
+
+
+</div>
+</div>
+
+
+<?php
+
+
+} ?>
 <div class="clear"></div>
 <!--This is used for the Program Coordinators box part 3-->
 <div class="programCoordsBox2">

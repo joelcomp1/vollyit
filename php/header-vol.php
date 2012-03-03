@@ -39,6 +39,11 @@ $_SESSION['ref'] = $_SERVER['SCRIPT_NAME'];?>
 <select name="profileSelect" onchange="redirectMe(this)">
   <option value="member-index-vol.php"><?php echo $_SESSION['SESS_MEMBER_ID'];?></option>
   <option value="account-settings-vol.php" <?php if($_SESSION['ref'] == "/php/account-settings-vol.php") { echo 'selected=true'; } ?>>Account Settings</option>
+  <?php if($_SESSION['VOLUNTEER_IS_ADMIN']	== 'true')
+  { ?>
+  
+    <option value="switch-mode.php" <?php if($_SESSION['ref'] == "/php/switch-mode.php") { echo 'selected=true'; } ?>>Switch to Organization View</option>
+  <?php }?>
   <option value="logout.php">Logout</option>
 </select>
 </div>
